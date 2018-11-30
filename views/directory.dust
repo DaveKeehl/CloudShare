@@ -1,4 +1,6 @@
+{# list}
 <div id="directories">
-	<img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.iconsdb.com%2Ficons%2Fpreview%2Fblack%2Fblank-file-xxl.png&f=1">
-	{name}
+	<img src="https://cdn2.iconfinder.com/data/icons/minimal-set-one/32/minimal-13-512.png">
+	{file}
 </div>
+{/ list}

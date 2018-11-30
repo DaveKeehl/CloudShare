@@ -14,7 +14,6 @@ const rootFolder = "test";
 module.exports = router;
 
 router.get('/', function(req, res){
-	res.render('index', {});
 	fs.readdirSync(rootFolder, 'utf8', true).forEach((file) => {
 		console.log(file);
 	});
