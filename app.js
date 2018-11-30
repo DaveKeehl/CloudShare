@@ -1,5 +1,4 @@
 const express = require('express');
-//const methodOverride = require('method-override');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
