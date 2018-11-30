@@ -25,13 +25,12 @@ app.use(express.static("./public"));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}))
-//app.use(methodOverride('_method'));
 
 // Initialize routers here
 const routers = require('./routes/routers');
 
 app.use('/', routers.root);
-//app.use('/favorites', routers.favorites);
-//app.use('/tests', routers.tests);
+//app.use('/upload', routers.upload);
+//app.use('/chat', routers.chat);
 
 module.exports = app;
