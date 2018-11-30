@@ -8,11 +8,11 @@ const mongoose = require('mongoose');
 const app = express();
 
 //configure database
-//mongoose.connect('mongodb://localhost/canvas-dev');
-//var db = mongoose.connection;
-//db.once('open', function() {
-//    console.log('Mongodb connection opened');
-//});
+mongoose.connect('mongodb://localhost/cloudshare-dev');
+var db = mongoose.connection;
+db.once('open', function() {
+    console.log('Mongodb connection opened');
+});
 
 //configure app
 app.use(logger('dev'));
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 const routers = require('./routes/routers');
 
 app.use('/', routers.root);
+app.use('/chat', routers.chat);
 //app.use('/upload', routers.upload);
-//app.use('/chat', routers.chat);
 
 module.exports = app;

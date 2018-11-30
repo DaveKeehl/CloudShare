@@ -10,8 +10,19 @@
 <body>
 
 <h1>CloudShare</h1>
+
+<hr>
+
+<div id="header">
+	
+</div>
+
 <div id="files">
     {> download /}
+</div>
+
+<div id="footer">
+	
 </div>    
 
 </body>
