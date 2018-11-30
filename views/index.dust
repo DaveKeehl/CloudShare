@@ -19,11 +19,11 @@
 </div>
 
 <div id="files">
-    {> download /}
+    {> directory /}
+    {> file /}
 </div>
 
 <div id="footer">
-	<a onclick="newPopup('facebook.com')">Chat Link</a>
 </div>    
 
 </body>
