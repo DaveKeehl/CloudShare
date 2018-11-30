@@ -4,6 +4,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const app = express();
 

@@ -3,7 +3,9 @@
 
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 
+const rootFolder = "test";
 //const mongoose = require('mongoose');
 //require('../../models/Favorites');
 //const Favorite = mongoose.model('Favorites');
