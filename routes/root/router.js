@@ -14,5 +14,12 @@ const rootFolder = "test";
 module.exports = router;
 
 router.get('/', function(req, res){
+	fs.readdirSync("../../" + rootFolder, true).forEach(file => {
+		if(file.isFile()){
+			res.render('file', {});
+		} else {
+			res.render('directory', {});
+		}
+	})
 	res.render('index', {});
 });
