@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CloudShare</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<h1>CloudShare</h1>
+<div id="files">
+    {> download /}
+</div>    
+
+</body>
+
+</html>
