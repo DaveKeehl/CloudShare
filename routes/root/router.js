@@ -4,6 +4,10 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const mongoose = require('mongoose');
+const File = mongoose.models('Files');
+
+
 
 const rootFolder = "test";
 //const mongoose = require('mongoose');
@@ -17,4 +21,4 @@ router.get('/', function(req, res){
 	fs.readdirSync(rootFolder, 'utf8', true).forEach((file) => {
 		console.log(file);
 	});
-});	
+});
