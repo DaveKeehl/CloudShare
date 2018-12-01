@@ -2,17 +2,56 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
-const mongoose = require('mongoose');
+const path = require('path');
 const fs = require('fs');
+const mongoose = require('mongoose');
+require('./models/Paths');
+const Path = mongoose.model('Paths');
 
 const app = express();
 
 //configure database
+
 mongoose.connect('mongodb://localhost/cloudshare-dev');
 var db = mongoose.connection;
 db.once('open', function() {
     console.log('Mongodb connection opened');
+	var walk = function(dir){
+	    var results = [];
+	    var list = fs.readdirSync(dir);
+	    list.forEach(function(file) {
+	        file = path.join(dir,file);
+	        var stat = fs.statSync(file);
+	        if (stat && stat.isDirectory()) { 
+	            /* Recurse into a subdirectory */
+	            results = results.concat(walk(file));
+	        } else { 
+	            /* Is a file */
+	            results.push(file);
+	        }
+    	});
+    	return results;
+	}
+	let paths = walk("test");
+	console.log("Initialising Database:") 
+    paths.forEach((result)=>{
+    	let filename = path.basename(result);
+    	let extension = path.extname(result);
+    	let form = {
+    		path: result,
+    		name: filename,
+    		extension: extension,
+    		size: fs.statSync(result).size
+    	}
+    	new Path(form).save().then(function(saved) {
+    		console.log("Saved: " + saved.path);
+    	}).catch(function(err){
+    		console.log(err);
+    	})
+    });
 });
+
+
 
 //configure app
 app.use(logger('dev'));
