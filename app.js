@@ -62,10 +62,11 @@ app.set('view engine', 'dust');
 app.set('views', './views');
 app.engine('dust', kleiDust.dust);
 
-app.use(express.static("./public"));
+app.use(express.static('./public'));
+app.use('/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Initialize routers here
 const routers = require('./routes/routers');

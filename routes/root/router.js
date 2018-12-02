@@ -14,21 +14,6 @@ const currentFolder = rootFolder;
 /** router for /root */
 module.exports = router;
 
-const preview_extensions = {
-	'.html': 'text/html',
-	'.css' : 'text/css',
-	'.txt' : 'text/plain',
-	'.mp4' : 'video/mp4',
-	'.ogv' : 'video/ogg',
-	'.gif' : 'image/gif',
-	'.jpg' : 'image/jpeg',
-	'.png' : 'image/png',
-	'.mp3' : 'audio/mpeg',
-	'.js'  : 'application/javascript',
-	'.json': 'application/json',
-	'.pdf' : 'application/pdf'
-}
-
 router.get('/', function(req, res){
 	res.redirect('/displaydir?path='+rootFolder);
 });
@@ -48,7 +33,7 @@ router.get('/displaydir', function(req, res){
 	});
 });
 
-router.post('/download', function(req, res){
+router.get('/download', function(req, res){
 	let filepath_query = req.query.path;
 	Path.find({path: filepath_query}).then(function(result){
 		res.status(202);
@@ -60,9 +45,12 @@ router.post('/download', function(req, res){
 	});
 });
 
-router.get('/preview', function(req, res){
+/*router.get('/preview', function(req, res){
 	let filepath_query = req.query.path;
-	Path.find({path: filepath_query}).then(function(_result){
-
+	Path.find({path: filepath_query}).then(function(result){
+		return fs.readFile(filepath_query, 'binary');
+	}).then(function(file){
+		res.write(file,'binary');
+		res.end();
 	});
-});
+});*/
