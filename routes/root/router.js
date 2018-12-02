@@ -27,9 +27,9 @@ router.get('/displaydir', function(req, res){
 		} else {
 			res.type('application/json').json(result);
 		}	
-	}).catch(function(err) {
-		res.status(500);
-		res.end("Internal Server Error: Server down!");
+	}).catch(function(err){
+		res.status(404);
+		res.end("Directory Not Found!");
 	});
 });
 
@@ -45,12 +45,25 @@ router.get('/download', function(req, res){
 	});
 });
 
-/*router.get('/preview', function(req, res){
-	let filepath_query = req.query.path;
-	Path.find({path: filepath_query}).then(function(result){
-		return fs.readFile(filepath_query, 'binary');
-	}).then(function(file){
-		res.write(file,'binary');
-		res.end();
+router.get('/search',function(req,res){
+	let current_dir = req.query.parent;
+	let name_query = req.query.name;
+	let date_query = req.query.dateCreated;
+	let extension_query = req.query.extension;
+	let tags_query = req.query.tags;
+	Path.find({$and: [{parent: current_dir},
+					  {$or: [{name: name_query},
+						     {dateCreated: date_query},
+						     {extension: extension_query},
+						     {tags: tags_query}]}]})
+	.then(function(result){
+		if(req.accepts('html')) {
+			res.render('index', {list: result});
+		} else {
+			res.type('application/json').json(result);
+		}
+	}).catch(function(err){
+		res.status(500);
+		res.end("Database Communication Error!");
 	});
-});*/
+});

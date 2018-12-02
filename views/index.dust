@@ -18,7 +18,26 @@
 </div>
 
 <div id="files">
-    {> file /}
+	<table>
+		<tr>
+			<th>
+				
+			</th>
+			<th>
+				File Name
+			</th>
+			<th>
+				File Size
+			</th>
+			<th>
+				Date Created
+			</th>
+			<th>
+				Tags
+			</th>
+		</tr>
+		{> file /}
+	</table>
 </div>
 
 <div id="footer">

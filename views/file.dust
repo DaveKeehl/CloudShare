@@ -1,6 +1,20 @@
 {# list}
-<div id="files">
-	<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-	<a href='/preview/{path}' target="_blank">{name}</a> {size}B {dateCreated} {tags}
-</div>
+<tr>
+	<td>
+		<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
+	</td>
+	<td>
+		<a href='/preview/{path}' target="_blank">{name}</a>
+	</td>
+	<td>
+		{size}B
+	</td>
+	<td>
+		{timeCreated}<br>
+		{dateCreated}
+	</td>
+	<td>
+		{tags}
+	</td>
+</tr>
 {/ list}

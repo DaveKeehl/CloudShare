@@ -5,3 +5,17 @@ body{
 img{
   width: 16px;
 }
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table,th,tr,td{
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: left;
+	border: 1px solid black;
+}
