@@ -35,11 +35,13 @@ db.once('open', function() {
 	let paths = walk("test");
 	console.log("Initialising Database:") 
     paths.forEach((result)=>{
-    	let filename = path.basename(result);
+    	let file_name = path.basename(result);
     	let extension = path.extname(result);
+    	let parent_folder = path.dirname(result);
     	let form = {
     		path: result,
-    		name: filename,
+    		name: file_name,
+    		parent: parent_folder,
     		extension: extension,
     		size: fs.statSync(result).size
     	}

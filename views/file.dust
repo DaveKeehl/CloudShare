@@ -1,6 +1,6 @@
 {# list}
 <div id="files">
 	<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-	{file}
+	<a href='/download?path={path}' target="_blank">{name}</a> {size}B {dateCreated} {tags}
 </div>
 {/ list}

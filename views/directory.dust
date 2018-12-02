@@ -1,6 +1,0 @@
-{# list}
-<div id="directories">
-	<img src="https://cdn2.iconfinder.com/data/icons/minimal-set-one/32/minimal-13-512.png">
-	{file}
-</div>
-{/ list}
