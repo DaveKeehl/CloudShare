@@ -1,5 +1,42 @@
-body{
+
+.padding-side-50 {
+    padding: 0 50px;
+}
+
+.col-md-3,
+.col-md-9 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+body {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+header {
+    height: 100px;
+}
+
+.leftPane header {
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.rightPane header {
+    border-bottom: 1px solid black;
+}
+
+.leftPane {
+    background-color: #333;
+    text-align: center;
+}
+
+.rightPane {
+    background-color: orange;
+}
+
+.rightPane main {
+    margin: 40px 50px 0 50px;
 }
 
 img{
