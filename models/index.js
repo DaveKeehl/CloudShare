@@ -10,4 +10,3 @@ require('./Files');
 module.exports = {
   'Files' : mongoose.model('Files')
 }
-

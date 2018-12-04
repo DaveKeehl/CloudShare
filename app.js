@@ -22,10 +22,10 @@ db.once('open', function() {
 	    list.forEach(function(file) {
 	        file = path.join(dir,file);
 	        var stat = fs.statSync(file);
-	        if (stat && stat.isDirectory()) { 
+	        if (stat && stat.isDirectory()) {
 	            /* Recurse into a subdirectory */
 	            results = results.concat(walk(file));
-	        } else { 
+	        } else {
 	            /* Is a file */
 	            results.push(file);
 	        }
@@ -33,7 +33,7 @@ db.once('open', function() {
     	return results;
 	}
 	let paths = walk("test");
-	console.log("Initialising Database:") 
+	console.log("Initialising Database:")
     paths.forEach((result)=>{
     	let file_name = path.basename(result);
     	let extension = path.extname(result);
@@ -72,7 +72,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 const routers = require('./routes/routers');
 
 app.use('/', routers.root);
-app.use('/chat', routers.chat);
 //app.use('/upload', routers.upload);
 
 module.exports = app;
