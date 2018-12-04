@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "DEBUG='cloudshare-server' ./bin/www",
-    "dustc": "cd ./views; dustc *.dust -o ../public/js/views.js"
+    "dustc": "cd ./views; dustc *.dust partials/*.dust -o ../public/js/views.js"
   },
   "keywords": [
     "Node.js",
@@ -17,13 +17,13 @@
   "author": "Ozren Dabić, Irene Hlen",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",    
-    "body-parser": "^1.18.3",    
+    "express": "^4.16.2",
+    "body-parser": "^1.18.3",
     "dustjs-linkedin": "^2.7.5",
     "hypermedia": "^2.0.1",
     "klei-dust": "^1.0.0",
     "path": "*",
-    "fs": "*",    
+    "fs": "*",
     "debug": "^3.1.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.3.10",

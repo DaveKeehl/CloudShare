@@ -57,10 +57,10 @@ db.once('open', function() {
 
 //configure app
 app.use(logger('dev'));
-
-app.set('view engine', 'dust');
-app.set('views', './views');
+//dust
+app.set('views', __dirname + '/views');
 app.engine('dust', kleiDust.dust);
+app.set('view engine', 'dust');
 
 app.use(express.static('./public'));
 app.use('/preview/test',express.static(path.join(__dirname, 'test')));
