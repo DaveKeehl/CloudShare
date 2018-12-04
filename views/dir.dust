@@ -1,0 +1,20 @@
+{# dirList}
+<tr>
+	<td>
+		<img src="http://chittagongit.com//images/black-and-white-folder-icon/black-and-white-folder-icon-19.jpg">
+	</td>
+	<td>
+		<a href='/dir/{path}'>{name}</a>
+	</td>
+	<td>
+		{size}B
+	</td>
+	<td>
+		{timeCreated}<br>
+		{dateCreated}
+	</td>
+	<td>
+		{tags}
+	</td>
+</tr>
+{/ dirList}

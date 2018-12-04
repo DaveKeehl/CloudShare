@@ -5,8 +5,9 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const mongoose = require('mongoose');
-require('../../models/Paths');
-const Path = mongoose.model('Paths');
+require('../../models/Entries');
+const File = mongoose.model('Files');
+const Dir = mongoose.model('Dirs');
 
 const rootFolder = "test";
 const currentFolder = rootFolder;
@@ -14,13 +15,15 @@ const currentFolder = rootFolder;
 /** router for /root */
 module.exports = router;
 
+// Default get, routes the user immediately to the root
 router.get('/', function(req, res){
-	res.redirect('/displaydir?path='+rootFolder);
+	res.redirect('/dir/'+rootFolder);
 });
 
-router.get('/displaydir', function(req, res){
-	let dirpath_query = req.query.path;
-	Path.find({parent: dirpath_query}).then(function(result){
+/* Old Directory get
+router.get('/dir/*', function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	File.find({parent: dirpath}).then(function(result){
 		res.status(200);
 		if(req.accepts('html')) {
 			res.render('index', {list: result});
@@ -31,39 +34,114 @@ router.get('/displaydir', function(req, res){
 		res.status(404);
 		res.end("Directory Not Found!");
 	});
-});
+}); */
 
-router.get('/download', function(req, res){
-	let filepath_query = req.query.path;
-	Path.find({path: filepath_query}).then(function(result){
-		res.status(202);
-		res.download(filepath_query, result.name);
-		res.end();
-	}).catch(function(err) {
-		res.status(400);
-		res.end("File Could Not Be Downloaded!");
+// Directory get
+router.get('/dir/*', function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	let directories;
+	Dir.find({parent: dirpath}).then(function(result){
+		directories = result;
+		return result;
+	}).then(function(_result){
+		return File.find({parent: dirpath})
+	}).then(function(result){
+		res.status(200);
+		if(req.accepts('html')) {
+			res.render('index', {dirList: directories, fileList: result});
+		} else {
+			res.type('application/json').json(result);
+		}	
+	}).catch(function(err){
+		res.status(500);
+		res.end("Internal Server Error!");
 	});
 });
 
+// Directory creation
+router.post('/dir/*', function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	res.end('POST ' + dirpath);
+});
+
+// Directory replacement
+router.put('/dir/*', function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	fs.mkdirSync(dirpath);
+	//Put the directory reference into the database
+	res.status(200);
+	res.end('Directory ' + dirpath + ' created');
+});
+
+// Directory deletion
+router.delete('/dir/*', function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	res.end('DELETE ' + dirpath);
+});
+
+// A general search function that starts from the root and returns all files
+// matching criteria using an OR
 router.get('/search',function(req,res){
-	let current_dir = req.query.parent;
 	let name_query = req.query.name;
 	let date_query = req.query.dateCreated;
 	let extension_query = req.query.extension;
 	let tags_query = req.query.tags;
-	Path.find({$and: [{parent: current_dir},
-					  {$or: [{name: name_query},
-						     {dateCreated: date_query},
-						     {extension: extension_query},
-						     {tags: tags_query}]}]})
+	let size_query = req.query.size;
+	File.find({$or: [{name: name_query},
+					 {size: size_query},
+			         {dateCreated: date_query},
+					 {extension: extension_query},
+					 {tags: tags_query}]})
 	.then(function(result){
+		res.status(200);
 		if(req.accepts('html')) {
 			res.render('index', {list: result});
 		} else {
 			res.type('application/json').json(result);
 		}
 	}).catch(function(err){
-		res.status(500);
-		res.end("Database Communication Error!");
+		res.status(404);
+		res.end("File With Specified Properties Does Not Exist!");
+	});
+});
+
+// A directory specific search function that starts from
+// the specified URL of directory and returns all files
+// matching criteria using an OR
+/*router.get('/search/*',function(req,res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	let name_query = req.query.name;
+	let date_query = req.query.dateCreated;
+	let extension_query = req.query.extension;
+	let tags_query = req.query.tags;
+	File.find({$and: [{parent: dirpath},
+					  {$or: [{name: name_query},
+					 		 {size: size_query},
+			        		 {dateCreated: date_query},
+							 {extension: extension_query},
+							 {tags: tags_query}]}]})
+	.then(function(result){
+		res.status(200);
+		if(req.accepts('html')) {
+			res.render('index', {list: result});
+		} else {
+			res.type('application/json').json(result);
+		}
+	}).catch(function(err){
+		res.status(404);
+		res.end("File With Specified Properties Does Not Exist!");
+	});
+});*/
+
+// Download  a file
+router.get('/download/*', function(req, res){
+	let dirpath = req.originalUrl.split('/dir/')[1];
+	File.find({path: dirpath}).then(function(result){
+		res.status(202);
+		res.download(dirpath, result.name);
+		res.end();
+	}).catch(function(err) {
+		res.status(400);
+		res.end("File Could Not Be Downloaded!");
 	});
 });
