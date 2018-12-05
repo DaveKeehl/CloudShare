@@ -23,10 +23,12 @@ router.get('/', function(req, res){
 router.get('/dir/*', function(req,res){
 	let dirpath = req.originalUrl.split('/dir/')[1];
 	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let previous = prevpath.join('/');
 	Entry.find({parent: dirpath}).then(function(result){
 		res.status(200);
 		if(req.accepts('html')) {
-			res.render('index', {path: dirpath, list: result});
+			res.render('index', {previous: previous, path: dirpath, list: result});
 		} else {
 			res.type('application/json').json(result);
 		}
