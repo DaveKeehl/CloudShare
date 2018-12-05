@@ -9,7 +9,6 @@ require('../../models/Entries');
 const Entry = mongoose.model('Entries');
 
 const rootFolder = "test";
-const currentFolder = rootFolder;
 
 /** router for /root */
 module.exports = router;
