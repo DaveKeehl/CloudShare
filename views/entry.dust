@@ -1,38 +1,56 @@
-{# list}
-<tr>
-	{@eq key=isDir value=false type="boolean"}
-		<td>
-			<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-		</td>
-		<td>
-			<a href='/preview/{path}' target="_blank">{name}</a>
-		</td>
-		<td>
-			{size}B
-		</td>
-		<td>
-			{timeCreated}<br>
-			{dateCreated}
-		</td>
-		<td>
-			{tags}
-		</td>
-	{:else}
-		<td>
-			<img src="https://img.icons8.com/small/1600/filled-folder.png">
-		</td>
-		<td>
-			<a href='/dir/{path}'>{name}</a>
-		</td>
-		<td>
-		</td>
-		<td>
-			{timeCreated}<br>
-			{dateCreated}
-		</td>
-		<td>
-			{tags}
-		</td>	
-	{/eq}
-</tr>
-{/ list}
+<html>
+	{# list}
+	<tr>
+		{@eq key=isDir value=false type="boolean"}
+			<td>
+				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
+			</td>
+			<td>
+				<a href='/preview/{path}' target="_blank">{name}</a>
+			</td>
+			<td>
+				{size}B
+			</td>
+			<td>
+				<!-- {timeCreated}<br> -->
+				{dateCreated}
+			</td>
+			<!-- <td>
+				{tags}
+			</td> -->
+			<td>
+				<ul>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+				</ul>
+			</td>
+		{:else}
+			<td>
+				<img src="https://img.icons8.com/small/1600/filled-folder.png">
+			</td>
+			<td>
+				<a href='/dir/{path}'>{name}</a>
+			</td>
+			<td>
+			</td>
+			<td>
+				<!-- {timeCreated}<br> -->
+				{dateCreated}
+			</td>
+			<!-- <td>
+				{tags}
+			</td> -->
+			<td>
+				<ul>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+					<li><button class="file-action"></button></li>
+				</ul>
+			</td>
+		{/eq}
+	</tr>
+	{/ list}
+</html>

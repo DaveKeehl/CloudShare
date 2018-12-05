@@ -9,7 +9,7 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron:400,500" rel="stylesheet">
 
         <!-- Fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -22,64 +22,77 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
         <!-- Stylesheets -->
-        <!-- <link rel="stylesheet" href="/reset.css"> -->
         <link rel="stylesheet" href="/style.css">
 
         <!-- Favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0062ff">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="manifest" href="img/site.webmanifest">
+        <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#0062ff">
         <meta name="msapplication-TileColor" content="#000000">
         <meta name="theme-color" content="#000000">
     </head>
 
     <body>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3 leftPane">
-                    <header>
+
+        <aside id="left" class="column">
+            <header class="top-left">
+                <div>
+                    <a href="#">
+                        <img src="img/logo.svg">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 49 31" width="49" height="31">
+                            <path
+                            d=" M 33 31 L 33 31 L 40.272 31 C 45.08 31 49 27.06 49 22.227 C 49 17.744 45.578 14.181 41.252 13.669 C 41.267 13.43 41.313 13.208 41.313 12.961 C 41.313 5.82 35.525 0 28.42 0 L 28.42 0.001 L 28.42 0.001 C 23.309 0.001 18.984 3.075 16.905 7.42 C 15.799 6.654 14.516 6.097 13.077 6.097 C 9.425 6.097 6.511 9.002 6.309 12.623 C 2.656 13.946 0 17.371 0 21.488 C 0 26.737 4.241 31 9.463 31 L 17 31 L 17 29.03 L 9.463 29.03 C 7.471 29.036 5.559 28.244 4.15 26.828 C 2.742 25.412 1.953 23.49 1.96 21.488 C 1.958 18.087 4.213 15.102 7.473 14.192 L 8.208 14.008 L 8.177 13.207 C 8.173 13.069 8.177 13 8.177 12.992 C 8.177 10.256 10.355 8.067 13.077 8.067 C 14.439 8.067 15.68 8.616 16.568 9.513 L 17.64 10.622 L 18.16 9.176 C 19.703 4.989 23.707 1.972 28.42 1.972 L 28.42 1.971 L 28.42 1.971 C 31.32 1.968 34.103 3.125 36.154 5.187 C 38.205 7.248 39.356 10.045 39.353 12.961 C 39.353 13.412 39.319 13.854 39.262 14.315 L 39.108 15.423 L 40.272 15.423 C 42.068 15.42 43.792 16.136 45.062 17.413 C 46.332 18.69 47.044 20.422 47.04 22.228 C 47.043 24.033 46.331 25.765 45.061 27.041 C 43.791 28.318 42.068 29.033 40.272 29.03 L 34 29.03 L 34 29 L 28.6 29 C 27.274 29 26.2 28.105 26.2 27 L 26.2 24.5 L 28 24.5 L 25 21 L 22 24.5 L 23.8 24.5 L 23.8 27 C 23.8 29.195 25.966 31 28.6 31 L 33 31 Z "
+                            fill="rgb(255,255,255)"/>
+                        </svg> -->
                         <h1>CloudShare</h1>
-                    </header>
+                    </a>
                 </div>
-
-                {dirPath}
-
-                <div class="col-md-9 rightPane">
-                    <header>
-                        <div class="padding-side-50">
-                            <p>path</p>
-                        </div>
-                    </header>
-                    <main>
-                        <div id="files">
-                            <table>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Size</th>
-                                    <th>Date Created</th>
-                                    <th>Tags</th>
-                                </tr>
-                                {> entry /}
-                            </table>
-                        </div>
-                    </main>
-                </div>
+            </header>
+            <div class="bottom">
+                <button>Create new folder</button>
+                <button>Upload new file</button>
             </div>
-        </div>
+        </aside>
+        <main id="right" class="column">
+            <header class="top-right">
+                <div class="padding-side-50">
+                    <nav class="navbar" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
+                        </form>
+                    </nav>
+                </div>
+            </header>
+            <div class="bottom">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {> entry /}
+                    </tbody>
+                </table>
+            </div>
+        </main>
 
         <!-- Optional JavaScript -->
-
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <!-- Dust script -->
-        <script src="dustjs-linkedin/dust-core.min.js"></script>
-        <script src="js/views.js"></script>
+
         <script></script>
 
     </body>
