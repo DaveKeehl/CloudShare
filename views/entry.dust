@@ -2,8 +2,6 @@
 	<tr>
 		<td>
 			<img src="https://img.icons8.com/small/1600/filled-folder.png">
-		</td>
-		<td>
 			<a href='/dir/{path}'>.</a>
 		</td>
 		<td>
@@ -18,8 +16,6 @@
 		{@eq key=isDir value=false type="boolean"}
 			<td>
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-			</td>
-			<td>
 				<a href='/preview/{path}' target="_blank">{name}</a>
 			</td>
 			<td>
@@ -43,8 +39,6 @@
 		{:else}
 			<td>
 				<img src="https://img.icons8.com/small/1600/filled-folder.png">
-			</td>
-			<td>
 				<a href='/dir/{path}'>{name}</a>
 			</td>
 			<td>
