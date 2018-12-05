@@ -25,10 +25,25 @@ function formatBytes(a,b){
     return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f];
 }
 
+function formatDate(dateMS){
+    dateMS = dateMS.toJSON();
+    const year = dateMS.slice(0,4);
+    const month = dateMS.slice(5,7);
+    const day = dateMS.slice(8,10);
+    return [day,month,year].join().replace(/,/g,'/');
+}
+
+function formatTime(dateMS){
+    dateMS = dateMS.toJSON();
+    return dateMS.slice(11,19);
+}
+
 mongoose.connect('mongodb://localhost/cloudshare-dev');
 var db = mongoose.connection;
 db.once('open', function() {
     console.log('Mongodb connection opened');
+    console.log("Date: "+formatDate(new Date()));
+    console.log("Time: "+formatTime(new Date()));
 	var walk = function(dir){
 	    var results = [];
 	    var list = fs.readdirSync(dir);
@@ -46,7 +61,9 @@ db.once('open', function() {
                     name: file_name,
                     parent: parent_folder,
                     size: formatBytes(stat.size),
-                    extension: null
+                    extension: null,
+                    timeCreated: formatTime(stat.ctime),
+                    dateCreated: formatDate(stat.ctime)
                 })
 	            results = results.concat(walk(file));
 	        } else {
@@ -57,7 +74,9 @@ db.once('open', function() {
                     name: file_name,
                     parent: parent_folder,
                     size: formatBytes(stat.size),
-                    extension: extension
+                    extension: extension,
+                    timeCreated: formatTime(stat.ctime),
+                    dateCreated: formatDate(stat.ctime)
                 });
 	        }
     	});
