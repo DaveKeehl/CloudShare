@@ -9,6 +9,5 @@ require('./Entries');
 
 
 module.exports = {
-  'Files' : mongoose.model('Files'),
-  'Dirs' : mongoose.model('Dirs')
+  'Entries' : mongoose.model('Entries')
 }

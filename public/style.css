@@ -1,3 +1,33 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1;
+    height: 100%;
+    overflow: hidden;  /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
+    margin: 0px;  /*removes default style*/
+    display: flex;  /*enables flex content for its children*/
+    box-sizing: border-box;
+}
+
+a {
+    color: #333;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+ul {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
 .padding-side-50 {
     padding: 0 50px;
@@ -9,50 +39,191 @@
     padding-left: 0;
 }
 
-body {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.column {
+    height: 100%;  /*allows both columns to span the full height of the browser window*/
+    display: flex;
+    flex-direction: column;  /*places the left and right headers above the bottom content*/
+    padding: 0;
 }
 
-header {
-    height: 100px;
+#left {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
+    background-color: #333;
+    text-align: center;
+    width: 300px;
 }
 
-.leftPane header {
+#left button {
+    background-color: white;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    width: 80%;
+    border: 0px solid;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+#left button:hover {
+    cursor: pointer;
+}
+
+.top-left,
+.top-right {
+    height: 75px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.top-left {
+    font-family: 'Orbitron', sans-serif;
     color: white;
+    margin-bottom: 40px;
     border-bottom: 1px solid white;
 }
 
-.rightPane header {
-    border-bottom: 1px solid black;
+.top-left h1 {
+    font-size: 30px;
+    font-weight: 100;
 }
 
-.leftPane {
-    background-color: #333;
-    text-align: center;
+.top-right {
+    border-bottom: 1px solid #333;
 }
 
-.rightPane {
-    background-color: #FFFFFF;
+.top-left a,
+.top-left a:hover {
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
 }
 
-.rightPane main {
-    margin: 40px 50px 0 50px;
+#right {
+    width: 100%;
+}
+
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.breadcrumb-item.active {
+    color: #333;
+    font-weight: bold;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: #6c757d;
+    content: "/";
+    font-weight: normal;
+}
+
+#right .bottom {
+    padding: 40px 50px 0 50px;
+}
+
+.form-inline .form-control {
+    height: 30px;
+    border-color: #333;
+    width: 250px;
+}
+
+.form-inline .form-control::placeholder {
+    color: #333;
+    opacity: 1; /* Firefox */
+}
+
+.form-inline .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #333;
+}
+
+.form-inline .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #333;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.bottom {
+    flex-grow: 1;  /*ensures that the container will take up the full height of the parent container*/
+    overflow-y: auto;  /*adds scroll to this container*/
+}
+
+table {
+	width: 100%;
+}
+
+thead {
+    border-bottom: 0px;
+}
+
+/* table thead tr th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+} */
+
+th {
+    border-left: 1px solid rgba(51, 51, 51, 0.5);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+    padding: 10px 20px;
+    font-weight: initial;
+    width: 100%
+}
+
+td {
+    width: 100%;
+}
+
+tr {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.25);
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+td {
+    padding: 20px;
 }
 
 img{
-  width: 16px;
+    width: 25px;
+    margin-right: 20px;
 }
 
-table{
-	width: 100%;
-	border-collapse: collapse;
+.file-action {
+    display: inline-block;
+    background-color: #333;
+    border-radius: 3px;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-table,th,tr,td{
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 5px;
-	padding-right: 5px;
-	text-align: left;
-	border: 1px solid black;
+.file-action:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+
+.file-action a {
+    color: white;
+    font-size: 2em;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
 }

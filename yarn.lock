@@ -541,6 +541,11 @@ diff@3.3.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
   integrity sha512-MKPHZDMB0o6yHyDryUOScqZibp914ksXwAMYMTHj6KO8UeKsRYNJD3oNCKjTqZon+V488P7N/HzXF8t7ZR95ww==
 
+dustjs-helpers@^1.7.4:
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/dustjs-helpers/-/dustjs-helpers-1.7.4.tgz#2e462b80e317262ad6c1c5a3c0fee0e82a826219"
+  integrity sha1-LkYrgOMXJirWwcWjwP7g6CqCYhk=
+
 dustjs-linkedin@^2.7.5:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/dustjs-linkedin/-/dustjs-linkedin-2.7.5.tgz#618f063f72c19b78c8055ac2301c75b7b6bbdccc"
