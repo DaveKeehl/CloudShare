@@ -1,4 +1,18 @@
 <html>
+	<tr>
+		<td>
+			<img src="https://img.icons8.com/small/1600/filled-folder.png">
+		</td>
+		<td>
+			<a href='/dir/{path}'>.</a>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
 	{# list}
 	<tr>
 		{@eq key=isDir value=false type="boolean"}

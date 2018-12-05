@@ -22,6 +22,8 @@ router.get('/', function(req, res){
 // Directory get
 router.get('/dir/*', function(req,res){
 	let dirpath = req.originalUrl.split('/dir/')[1];
+	let prevpath = dirpath.split('/');
+	console.log(prevpath);
 	Entry.find({parent: dirpath}).then(function(result){
 		console.log(result);
 		res.status(200);
