@@ -6,8 +6,7 @@ const router = express.Router();
 const fs = require('fs');
 const mongoose = require('mongoose');
 require('../../models/Entries');
-const File = mongoose.model('Files');
-const Dir = mongoose.model('Dirs');
+const Entry = mongoose.model('Entries');
 
 const rootFolder = "test";
 const currentFolder = rootFolder;
@@ -20,35 +19,14 @@ router.get('/', function(req, res){
 	res.redirect('/dir/'+rootFolder);
 });
 
-/* Old Directory get
-router.get('/dir/*', function(req,res){
-	let dirpath = req.originalUrl.split('/dir/')[1];
-	File.find({parent: dirpath}).then(function(result){
-		res.status(200);
-		if(req.accepts('html')) {
-			res.render('index', {list: result});
-		} else {
-			res.type('application/json').json(result);
-		}
-	}).catch(function(err){
-		res.status(404);
-		res.end("Directory Not Found!");
-	});
-}); */
-
 // Directory get
 router.get('/dir/*', function(req,res){
 	let dirpath = req.originalUrl.split('/dir/')[1];
-	let directories;
-	Dir.find({parent: dirpath}).then(function(result){
-		directories = result;
-		return result;
-	}).then(function(_result){
-		return File.find({parent: dirpath})
-	}).then(function(result){
+	Entry.find({parent: dirpath}).then(function(result){
+		console.log(result);
 		res.status(200);
 		if(req.accepts('html')) {
-			res.render('index', {dirList: directories, fileList: result});
+			res.render('index', {path: dirpath, list: result});
 		} else {
 			res.type('application/json').json(result);
 		}	
@@ -87,7 +65,7 @@ router.get('/search',function(req,res){
 	let extension_query = req.query.extension;
 	let tags_query = req.query.tags;
 	let size_query = req.query.size;
-	File.find({$or: [{name: name_query},
+	Entry.find({$or: [{name: name_query},
 					 {size: size_query},
 			         {dateCreated: date_query},
 					 {extension: extension_query},
@@ -95,13 +73,13 @@ router.get('/search',function(req,res){
 	.then(function(result){
 		res.status(200);
 		if(req.accepts('html')) {
-			res.render('index', {list: result});
+			res.render('index', {path: dirpath, list: result});
 		} else {
 			res.type('application/json').json(result);
 		}
 	}).catch(function(err){
-		res.status(404);
-		res.end("File With Specified Properties Does Not Exist!");
+		res.status(500);
+		res.end("Internal Server Error!");
 	});
 });
 
@@ -136,7 +114,7 @@ router.get('/search',function(req,res){
 // Download  a file
 router.get('/download/*', function(req, res){
 	let dirpath = req.originalUrl.split('/dir/')[1];
-	File.find({path: dirpath}).then(function(result){
+	Entry.find({path: dirpath}).then(function(result){
 		res.status(202);
 		res.download(dirpath, result.name);
 		res.end();

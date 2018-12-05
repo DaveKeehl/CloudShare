@@ -6,8 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
 require('./models/Entries');
-const File = mongoose.model('Files');
-const Dir = mongoose.model('Dirs');
+const Entry = mongoose.model('Entries');
 
 const app = express();
 
@@ -22,14 +21,31 @@ db.once('open', function() {
 	    var list = fs.readdirSync(dir);
 	    list.forEach(function(file) {
 	        file = path.join(dir,file);
+            var file_name = path.basename(file);
+            var extension = path.extname(file);
+            var parent_folder = path.dirname(file);
 	        var stat = fs.statSync(file);
 	        if (stat && stat.isDirectory()) {
 	            /* Recurse into a subdirectory */
-                results.push(file);
+                results.push({
+                    isDir: true,
+                    path: file,
+                    name: file_name,
+                    parent: parent_folder,
+                    size: fs.statSync(file).size,
+                    extension: null
+                })
 	            results = results.concat(walk(file));
 	        } else {
 	            /* Is a file */
-	            results.push(file);
+                results.push({
+                    isDir: false,
+                    path: file,
+                    name: file_name,
+                    parent: parent_folder,
+                    size: fs.statSync(file).size,
+                    extension: extension
+                });
 	        }
     	});
     	return results;
@@ -37,35 +53,15 @@ db.once('open', function() {
 	let paths = walk("test");
 	console.log("Initialising Database:")
     paths.forEach((result)=>{
-    	let file_name = path.basename(result);
-    	let extension = path.extname(result);
-    	let parent_folder = path.dirname(result);
-        if (extension != ''){
-            let form = {
-                path: result,
-                name: file_name,
-                parent: parent_folder,
-                extension: extension,
-                size: fs.statSync(result).size
-            }
-            new File(form).save().then(function(saved) {
-                console.log("Saved File: " + saved.path);
-            }).catch(function(err){
-                console.log(err);
-            })
-        } else {
-            let form = {
-                path: result,
-                name: file_name,
-                parent: parent_folder,
-                size: fs.statSync(result).size
-            }
-            new Dir(form).save().then(function(saved) {
+    	new Entry(result).save().then(function(saved) {
+            if(saved.isDir){
                 console.log("Saved Directory: " + saved.path);
-            }).catch(function(err){
-                console.log(err);
-            })            
-        }
+            } else {
+                console.log("Saved File: " + saved.path);
+            }
+        }).catch(function(err){
+            console.log(err);
+        });
     });
 });
 
@@ -75,6 +71,7 @@ db.once('open', function() {
 app.use(logger('dev'));
 //dust
 app.set('views', __dirname + '/views');
+kleiDust.setOptions({useHelpers : true});
 app.engine('dust', kleiDust.dust);
 app.set('view engine', 'dust');
 
@@ -88,6 +85,5 @@ app.use(bodyParser.urlencoded({extended: true}));
 const routers = require('./routes/routers');
 
 app.use('/', routers.root);
-//app.use('/upload', routers.upload);
 
 module.exports = app;

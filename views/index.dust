@@ -45,6 +45,8 @@
                     </header>
                 </div>
 
+                {dirPath}
+
                 <div class="col-md-9 rightPane">
                     <header>
                         <div class="padding-side-50">
@@ -61,8 +63,7 @@
                                     <th>Date Created</th>
                                     <th>Tags</th>
                                 </tr>
-                                {> dir /}
-                                {> file /}
+                                {> entry /}
                             </table>
                         </div>
                     </main>
