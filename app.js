@@ -85,5 +85,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const routers = require('./routes/routers');
 
 app.use('/', routers.root);
+app.use('/file', routers.file);
+app.use('/dir', routers.dir);
 
 module.exports = app;
