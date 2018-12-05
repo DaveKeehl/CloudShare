@@ -12,6 +12,19 @@ const app = express();
 
 //configure database
 
+function formatBytes(a,b){
+    if (0==a){
+        return"0 B";
+    }
+
+    var c = 1024;
+    var d = b || 1;
+    var e = ["B","KB","MB","GB","TB","PB","EB","ZB","YB"];
+    var f = Math.floor(Math.log(a)/Math.log(c));
+
+    return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f];
+}
+
 mongoose.connect('mongodb://localhost/cloudshare-dev');
 var db = mongoose.connection;
 db.once('open', function() {
@@ -32,7 +45,7 @@ db.once('open', function() {
                     path: file,
                     name: file_name,
                     parent: parent_folder,
-                    size: fs.statSync(file).size,
+                    size: formatBytes(stat.size),
                     extension: null
                 })
 	            results = results.concat(walk(file));
@@ -43,7 +56,7 @@ db.once('open', function() {
                     path: file,
                     name: file_name,
                     parent: parent_folder,
-                    size: fs.statSync(file).size,
+                    size: formatBytes(stat.size),
                     extension: extension
                 });
 	        }

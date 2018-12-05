@@ -33,7 +33,7 @@
 				<a href='/file/preview/{path}' target="_blank">{name}</a>
 			</td>
 			<td>
-				{size}B
+				{size}
 			</td>
 			<td>
 				<!-- {timeCreated}<br> -->
