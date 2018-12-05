@@ -11,12 +11,24 @@
 		<td>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<img src="https://img.icons8.com/small/1600/filled-folder.png">
+			<a href=''>..</a>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>	
 	{# list}
 	<tr>
 		{@eq key=isDir value=false type="boolean"}
 			<td>
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-				<a href='/preview/{path}' target="_blank">{name}</a>
+				<a href='/file/preview/{path}' target="_blank">{name}</a>
 			</td>
 			<td>
 				{size}B

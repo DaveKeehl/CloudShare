@@ -76,7 +76,7 @@ app.engine('dust', kleiDust.dust);
 app.set('view engine', 'dust');
 
 app.use(express.static('./public'));
-app.use('/preview/test',express.static(path.join(__dirname, 'test')));
+app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));

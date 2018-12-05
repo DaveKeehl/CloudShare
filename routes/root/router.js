@@ -23,9 +23,7 @@ router.get('/', function(req, res){
 router.get('/dir/*', function(req,res){
 	let dirpath = req.originalUrl.split('/dir/')[1];
 	let prevpath = dirpath.split('/');
-	console.log(prevpath);
 	Entry.find({parent: dirpath}).then(function(result){
-		console.log(result);
 		res.status(200);
 		if(req.accepts('html')) {
 			res.render('index', {path: dirpath, list: result});
@@ -158,29 +156,27 @@ router.get('/download/*', function(req, res){
 router.delete('/*', function(req, res) {
     let path = req.originalUrl;
 
-    Entry.find({path: path}).then(function(found){
-        if (found == []) {
-            res.status(404).end("No Entries Found!");
-						return;
-        }
-        else {
-            return Entry.remove(found);
-        }
-		}).then(function(removed){
-				if(removed.isDir) {
-					fs.rmdirSync(path);
-				}
-				else{
-					fs.unlinkSync(path);
-				}
-				if (req.accepts("html")) {
-						res.status(204).redirect("/");
-				}
-				else {
-						res.json(removed);
-				}
-			}
-		}).catch(function(err){
-				res.status(500).end("Internal Server Error!");
-    });
+	Entry.find({path: path}).then(function(found){
+	    if (found == []) {
+	        res.status(404).end("No Entries Found!");
+			return;
+	    }
+	    else {
+	        return Entry.remove(found);
+	    }
+	}).then(function(removed){
+		if(removed.isDir) {
+			fs.rmdirSync(path);
+		} else {
+			fs.unlinkSync(path);
+		}
+		if (req.accepts("html")) {
+			res.status(204).redirect("/");
+		} else {
+			res.json(removed);
+		}
+	}).catch(function(err){
+		res.status(500).end("Internal Server Error!");
+	});
 });
+
