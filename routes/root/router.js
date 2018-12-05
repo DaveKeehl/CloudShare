@@ -26,7 +26,7 @@ router.get('/displaydir', function(req, res){
 			res.render('index', {list: result});
 		} else {
 			res.type('application/json').json(result);
-		}	
+		}
 	}).catch(function(err){
 		res.status(404);
 		res.end("Directory Not Found!");
