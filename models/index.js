@@ -5,8 +5,10 @@
 
 const mongoose = require('mongoose');
 
-require('./Files');
+require('./Entries');
+
 
 module.exports = {
-  'Files' : mongoose.model('Files')
+  'Files' : mongoose.model('Files'),
+  'Dirs' : mongoose.model('Dirs')
 }

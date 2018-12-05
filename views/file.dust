@@ -1,4 +1,4 @@
-{# list}
+{# fileList}
 <tr>
 	<td>
 		<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
@@ -17,4 +17,4 @@
 		{tags}
 	</td>
 </tr>
-{/ list}
+{/ fileList}
