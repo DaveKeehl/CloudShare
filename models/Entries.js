@@ -1,5 +1,5 @@
 /** @module models/favorites */
-const scripts = require('../public/scripts/script');
+const util = require('../util');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -10,8 +10,8 @@ let Entries = new Schema({
 	parent: {type: 'string', required: true, default: ""},
 	size: {type: 'string', required: true, default: ""},
 	extension: {type: 'string', default: ""},
-	timeCreated: {type: 'string', default: scripts.formatTime(new Date())},
-	dateCreated: {type: 'string', default: scripts.formatDate(new Date())},
+	timeCreated: {type: 'string', default: util.formatTime(new Date())},
+	dateCreated: {type: 'string', default: util.formatDate(new Date())},
 	tags: {type: 'string', default: ""}
 });
 

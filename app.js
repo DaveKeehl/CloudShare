@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
 const path = require('path');
 const fs = require('fs');
-const scripts = require('./public/scripts/script');
+const util = require('./util');
 const mongoose = require('mongoose');
 require('./models/Entries');
 const Entry = mongoose.model('Entries');
@@ -19,20 +19,38 @@ mongoose.connect('mongodb://localhost/cloudshare-dev');
 var db = mongoose.connection;
 db.once('open', function() {
     console.log('Mongodb connection opened');
-    console.log("Date: "+scripts.formatDate(new Date()));
-    console.log("Time: "+scripts.formatTime(new Date()));
-	let paths = scripts.walk(rootFolder);
+    console.log("Date: "+util.formatDate(new Date()));
+    console.log("Time: "+util.formatTime(new Date()));
+	let paths = util.walk(rootFolder);
 	console.log("Initialising Database:")
     paths.forEach((result)=>{
-    	new Entry(result).save().then(function(saved) {
-            if(saved.isDir){
-                console.log("Saved Directory: " + saved.path);
+        Entry.find({path: result.path}).then(function(found){
+            if (found) {
+                if(result.isDir){
+                    console.log("Saved Directory: " + result.path);
+                } else {
+                    console.log("Saved File: " + result.path);
+                }              
+                new Entry(result).save();
             } else {
-                console.log("Saved File: " + saved.path);
+                if(result.isDir){
+                    console.log("Directory already in database: "+result.path);
+                } else {
+                    console.log("File already in database: "+result.path);
+                }
             }
         }).catch(function(err){
             console.log(err);
         });
+    	// new Entry(result).save().then(function(saved) {
+     //        if(saved.isDir){
+     //            console.log("Saved Directory: " + saved.path);
+     //        } else {
+     //            console.log("Saved File: " + saved.path);
+     //        }
+     //    }).catch(function(err){
+     //        console.log(err);
+     //    });
     });
 });
 

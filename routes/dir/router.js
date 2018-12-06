@@ -6,6 +6,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const util = require('../../util');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
 
@@ -53,44 +54,80 @@ router.get('/*', function(req,res){
 // Directory creation
 router.post('/*', function(req,res){
 	let dirpath = req.path.slice(1);
-	fs.mkdirSync(dirpath);
-	let stats = fs.statSync(dirpath);
-	let file_name = path.basename(dirpath);
-	// let extension = path.extname(dirpath);
-	let parent_folder = path.dirname(dirpath);
+	fs.mkdir(dirpath, function(err){
+		if(err){
+			console.log(err);
+			return
+		}
+		let stats = fs.statSync(dirpath);
+		let file_name = path.basename(dirpath);
+		let parent_folder = path.dirname(dirpath);
 
-	const entry = new Entries ({
-		isDir: stats.isDirectory(),
-		path: dirpath,
-		name: file_name,
-		parent: parent_folder,
-		extension: null,
-		size: null,
-		timeCreated: formatTime(stat.ctime),
-		dateCreated: formatDate(stat.ctime)
-	});
-	entry.save(function(err, saved) {
-			if (!err) {
-					if (req.accepts("html")) {
-							res.status(201);
-							res.redirect("/*");
-					}
-					else {
-							res.status(201).json(saved);
-					}
+		const form = {
+			isDir: stats.isDirectory(),
+			path: dirpath,
+			name: file_name,
+			parent: parent_folder,
+			extension: null,
+			size: util.formatBytes(stats.size),
+			timeCreated: util.formatTime(stats.ctime),
+			dateCreated: util.formatDate(stats.ctime)
+		};
+
+		new Entry(form).save().then(function(saved) {
+			console.log("Created Directory: " + saved.path);
+			if (req.accepts("html")) {
+				res.status(201);
+				res.redirect("/"+dirpath);
+			} else {
+				res.status(201).json(saved);
 			}
-			else {
-					res.status(400).end();
-			}
+		}).catch(function(err){
+			res.status(400);
+			res.end("Bad Method!");
+		});	
 	});
-	res.end('POST ' + dirpath);
+});
+
+// Directory deletion
+router.delete('/*', function(req,res){
+	let dirpath = req.path.slice(1);
+	let foundparent;
+	fs.rmdir(dirpath, function(err){
+		if(err){
+			console.log(err);
+			return
+		}
+		Entry.findOne({path: dirpath}).then(function(found){
+			if(found){
+				foundparent = found.parent;
+				return found;
+			} else {
+				res.status(404);
+				res.end("Specified Directory Does Not Exist!");
+			}
+		}).then(function(found){
+			return Entry.deleteOne(found);
+		}).then(function(deleted){
+			console.log("Deleted Directory: " + dirpath);
+			if (req.accepts("html")) {
+				res.status(204);
+				res.redirect("/"+foundparent);
+			} else {
+				res.status(204).json(saved);
+			}
+		}).catch(function(err){
+			console.log(err);
+			res.status(400);
+			res.end("Bad Method!");			
+		})
+	});	
 });
 
 // Directory replacement
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1);
 	fs.mkdirSync(dirpath);
-	//Put the directory reference into the database
 	Entries.find(dirpath, function(err, found){
 		if(err){
 			res.status(400).end();
@@ -164,10 +201,4 @@ router.put('/*', function(req,res){
 	fs.renameSync(dirpath,)
 	res.status(200);
 	res.end('Directory ' + dirpath + ' created');
-});
-
-// Directory deletion
-router.delete('/*', function(req,res){
-	let dirpath = req.path.slice(1);
-	res.end('DELETE ' + dirpath);
 });
