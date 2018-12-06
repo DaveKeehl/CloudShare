@@ -15,9 +15,10 @@ module.exports = router;
 
 // Download  a file
 router.get('/download/*', function(req, res){
-	let dirpath = req.originalUrl.split('/dir/')[1];
+	let dirpath = req.path.slice(1);
 	Entry.find({path: dirpath}).then(function(result){
 		res.status(202);
+		res.set("Content-Disposition", "attachment;filename="+result.name);
 		res.download(dirpath, result.name);
 		res.end();
 	}).catch(function(err) {
@@ -57,7 +58,7 @@ router.get('/download/*', function(req, res){
 
 /*
 router.delete('/*', function(req, res) {
-    let path = req.originalUrl;
+    let path = req.path.slice(1);
 
 	Entry.find({path: path}).then(function(found){
 	    if (found == []) {

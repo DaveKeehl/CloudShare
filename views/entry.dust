@@ -11,20 +11,22 @@
 		<td>
 		</td>
 	</tr>
-	{@ne key=previous value="" type="string"}
-		<tr>
-			<td class="top-action">
-				<img src="https://img.icons8.com/small/1600/filled-folder.png">
-				<a href='/dir/{previous}'>..</a>
-			</td>
-			<td>
-			</td>
-			<td>
-			</td>
-			<td>
-			</td>
-		</tr>
-	{/ne}
+	{@eq key=squery value=true type="boolean"}
+		{@ne key=previous value="" type="string"}
+			<tr>
+				<td class="top-action">
+					<img src="https://img.icons8.com/small/1600/filled-folder.png">
+					<a href='/dir/{previous}'>..</a>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+			</tr>
+		{/ne}
+	{/eq}
 	{# list}
 	<tr>
 		{@eq key=isDir value=false type="boolean"}
