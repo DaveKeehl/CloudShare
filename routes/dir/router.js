@@ -21,7 +21,7 @@ router.get('/*', function(req,res){
 	let previous = prevpath.join('/');
 	let name_query = req.query.name;
 	if (name_query){
-		Entry.find({$and: [{parent: dirpath},{name: name_query}]}, null, {sort: {extension: 1}})
+		Entry.find({$and: [{parent: dirpath},{name: name_query}]}, null, {sort: {isDir: -1, name: 1}})
 		.then(function(result){
 			res.status(200);
 			if(req.accepts('html')) {
@@ -34,7 +34,7 @@ router.get('/*', function(req,res){
 			res.end("Internal Server Error!");
 		});
 	} else {
-		Entry.find({parent: dirpath}, null, {sort: {extension: 1}})
+		Entry.find({parent: dirpath}, null, {sort: {isDir: -1, name: 1}})
 		.then(function(result){
 			res.status(200);
 			if(req.accepts('html')) {
