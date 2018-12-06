@@ -1,4 +1,5 @@
 <html>
+	<!-- SELF LINK -->
 	<tr>
 		<td class="top-action">
 			<img src="https://img.icons8.com/small/1600/filled-folder.png">
@@ -11,6 +12,7 @@
 		<td>
 		</td>
 	</tr>
+	<!-- LINK TO PARENT -->
 	{@eq key=squery value=true type="boolean"}
 		{@ne key=previous value="" type="string"}
 			<tr>
@@ -27,8 +29,10 @@
 			</tr>
 		{/ne}
 	{/eq}
+	<!-- FILES -->
 	{# list}
 	<tr>
+		<!-- FILE IS A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
 			<td>
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
@@ -52,6 +56,7 @@
 					<li><button class="file-action"></button></li>
 				</ul>
 			</td>
+		<!-- FILE IS NOT A DIRECTORY -->
 		{:else}
 			<td>
 				<img src="https://img.icons8.com/small/1600/filled-folder.png">
