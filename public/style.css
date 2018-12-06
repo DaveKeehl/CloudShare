@@ -113,6 +113,20 @@ button.dropdown-item:active {
     /* background-color: #333 !important; */
 }
 
+.dropdown > button {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#db3286+0,53dbd2+100 */
+    background: #db3286; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #db3286 0%, #53dbd2 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #db3286 0%,#53dbd2 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #db3286 0%,#53dbd2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db3286', endColorstr='#53dbd2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    color: white !important;
+}
+
+.dropdown > button i {
+    color: white;
+}
+
 .uploadMultipleContainer {
     height: calc(100vh - 335px);
 }
