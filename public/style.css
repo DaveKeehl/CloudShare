@@ -67,7 +67,7 @@ ul {
     margin-bottom: 20px;
     border-radius: 5px;
     text-align: left;
-    padding: 0 37px;
+    padding: 0 35px;
     transition: all 0.2s ease;
 }
 
@@ -143,7 +143,12 @@ button.dropdown-item:active {
 i.fas {
     color: #333;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 15px;
+}
+
+.dropdown-toggle::after {
+    margin-left: 10px;
+    vertical-align: 2px;
 }
 
 .top-left h1 {
