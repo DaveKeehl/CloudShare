@@ -52,7 +52,7 @@ router.get('/*', function(req,res){
 });
 
 // Directory creation
-router.post('/*', function(req,res){
+router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1);
 	fs.mkdir(dirpath, function(err){
 		if(err){
@@ -89,13 +89,29 @@ router.post('/*', function(req,res){
 	});
 });
 
+// Add Tags
+router.post('/addtag/*', function(req, res){
+	let dirpath = req.path.slice(1);
+	let tags_query = req.query.tags;
+	let tags = tags_query.replace(/\s/g,'').split(',');
+	Entry.findOne({parent: dirpath}).then(function(found){
+
+	})
+})
+
 // Directory deletion
 router.delete('/*', function(req,res){
 	let dirpath = req.path.slice(1);
 	let foundparent;
 	fs.rmdir(dirpath, function(err){
 		if(err){
-			console.log(err);
+			let code = err.code;
+			switch (code){
+				case "ENOTEMPTY":
+					break;
+				default:
+					break;	
+			}
 			return
 		}
 		Entry.findOne({path: dirpath}).then(function(found){
@@ -120,7 +136,7 @@ router.delete('/*', function(req,res){
 			console.log(err);
 			res.status(400);
 			res.end("Bad Method!");			
-		})
+		});
 	});	
 });
 
@@ -128,7 +144,7 @@ router.delete('/*', function(req,res){
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1);
 	fs.mkdirSync(dirpath);
-	Entries.findOne(dirpath, function(err, found){
+	Entry.findOne(dirpath, function(err, found){
 		if(err){
 			res.status(400).end();
 		}

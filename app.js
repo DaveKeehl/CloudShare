@@ -24,17 +24,10 @@ db.once('open', function() {
 	let paths = util.walk(rootFolder);
 	console.log("Initialising Database:")
     paths.forEach((result)=>{
-    	// new Entry(result).save().then(function(saved) {
-     //        if(saved.isDir){
-     //            console.log("Saved Directory: " + saved.path);
-     //        } else {
-     //            console.log("Saved File: " + saved.path);
-     //        }
-     //    }).catch(function(err){
-     //        console.log(err);
-     //    });
         Entry.findOne({path: result.path}).then(function(found){
             if (found) {
+                //Add a check to check if the record fully matches
+                //the file we want to add
                 if(found.isDir){
                     console.log("Directory already in database: "+result.path);
                 } else {
@@ -53,8 +46,6 @@ db.once('open', function() {
         });        
     });
 });
-
-
 
 //configure app
 app.use(logger('dev'));

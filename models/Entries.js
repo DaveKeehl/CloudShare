@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Entries = new Schema({
-	isDir: {type: 'boolean', required: true, default: true},
-	path: {type: 'string', required: true, default: ""},
-	name: {type: 'string', required: true, default: ""},
-	parent: {type: 'string', required: true, default: ""},
-	size: {type: 'string', required: true, default: ""},
-	extension: {type: 'string', default: ""},
-	timeCreated: {type: 'string', default: util.formatTime(new Date())},
-	dateCreated: {type: 'string', default: util.formatDate(new Date())},
-	tags: {type: 'string', default: ""}
+	isDir: {type: Boolean, required: true, default: true},
+	path: {type: String, required: true, default: ""},
+	name: {type: String, required: true, default: ""},
+	parent: {type: String, required: true, default: ""},
+	size: {type: String, required: true, default: ""},
+	extension: {type: String, default: ""},
+	timeCreated: {type: String, default: util.formatTime(new Date())},
+	dateCreated: {type: String, default: util.formatDate(new Date())},
+	tags: {type: [String], default: []}
 });
 
 mongoose.model('Entries', Entries);
