@@ -3,7 +3,7 @@
 
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
+const fs = require('fs-extra');
 const mongoose = require('mongoose');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');

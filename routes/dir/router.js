@@ -3,7 +3,7 @@
 
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const mongoose = require('mongoose');
 const util = require('../../util');
@@ -128,7 +128,7 @@ router.delete('/*', function(req,res){
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1);
 	fs.mkdirSync(dirpath);
-	Entries.find(dirpath, function(err, found){
+	Entries.findOne(dirpath, function(err, found){
 		if(err){
 			res.status(400).end();
 		}

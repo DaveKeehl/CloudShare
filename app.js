@@ -3,7 +3,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const util = require('./util');
 const mongoose = require('mongoose');
 require('./models/Entries');
@@ -24,24 +24,6 @@ db.once('open', function() {
 	let paths = util.walk(rootFolder);
 	console.log("Initialising Database:")
     paths.forEach((result)=>{
-        Entry.find({path: result.path}).then(function(found){
-            if (found) {
-                if(result.isDir){
-                    console.log("Saved Directory: " + result.path);
-                } else {
-                    console.log("Saved File: " + result.path);
-                }              
-                new Entry(result).save();
-            } else {
-                if(result.isDir){
-                    console.log("Directory already in database: "+result.path);
-                } else {
-                    console.log("File already in database: "+result.path);
-                }
-            }
-        }).catch(function(err){
-            console.log(err);
-        });
     	// new Entry(result).save().then(function(saved) {
      //        if(saved.isDir){
      //            console.log("Saved Directory: " + saved.path);
@@ -51,6 +33,24 @@ db.once('open', function() {
      //    }).catch(function(err){
      //        console.log(err);
      //    });
+        Entry.findOne({path: result.path}).then(function(found){
+            if (found) {
+                if(found.isDir){
+                    console.log("Directory already in database: "+result.path);
+                } else {
+                    console.log("File already in database: "+result.path);
+                }
+            } else {
+                if(result.isDir){
+                    console.log("Saving Directory: " + result.path);
+                } else {
+                    console.log("Saving File: " + result.path);
+                }              
+                new Entry(result).save();        
+            }
+        }).catch(function(err){
+            console.log(err);
+        });        
     });
 });
 
