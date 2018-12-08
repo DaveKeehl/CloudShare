@@ -178,6 +178,10 @@ button.dropdown-item:active {
     border-bottom: 1px solid white;
 }
 
+.logo img {
+    width: 80%;
+}
+
 i.fas {
     color: #333;
     font-size: 20px;
