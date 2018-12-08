@@ -164,7 +164,7 @@ button.dropdown-item:active {
 
 .top-left,
 .top-right {
-    height: 75px;
+    height: 90px;
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
@@ -210,7 +210,8 @@ i.fas {
 }
 
 #right {
-    width: 100%;
+    /* width: 100%; */
+    width: calc(100vw - 300px);
 }
 
 .breadcrumb {
