@@ -279,6 +279,10 @@ thead {
     letter-spacing: 3px;
 }
 
+.top-action i {
+    font-size: 25px;
+}
+
 th {
     border-left: 1px solid rgba(51, 51, 51, 0.5);
     border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -378,6 +382,23 @@ thead tr th:nth-child(4) {
 }
 
 .renameFile {
+    background-image: url(/img/RenameFile.svg);
+    margin-right: 0 !important;
+}
+
+.deleteDirectory {
+    background-image: url(/img/DeleteFile.svg);
+}
+
+.getDirectoryLink {
+    background-image: url(/img/GetLink.svg);
+}
+
+.downloadDirectory {
+    background-image: url(/img/DownloadFile.svg);
+}
+
+.renameDirectory {
     background-image: url(/img/RenameFile.svg);
     margin-right: 0 !important;
 }

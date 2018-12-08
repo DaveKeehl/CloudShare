@@ -2,7 +2,8 @@
 	<!-- SELF LINK -->
 	<tr>
 		<td class="top-action">
-			<img src="https://img.icons8.com/small/1600/filled-folder.png">
+			<i class="fas fa-folder"></i>
+			<!-- <img src="https://img.icons8.com/small/1600/filled-folder.png"> -->
 			<a href='/dir/{path}'>.</a>
 		</td>
 		<td>
@@ -17,7 +18,8 @@
 		{@ne key=previous value="" type="string"}
 			<tr>
 				<td class="top-action">
-					<img src="https://img.icons8.com/small/1600/filled-folder.png">
+					<i class="fas fa-folder"></i>
+					<!-- <img src="https://img.icons8.com/small/1600/filled-folder.png"> -->
 					<a href='/dir/{previous}'>..</a>
 				</td>
 				<td></td>
@@ -93,10 +95,10 @@
 			</td> -->
 			<td>
 				<form class="file-actions" method="POST">
-					<input type="submit" value="" formaction="" class="deleteFile">
-					<input type="submit" value="" formaction="" class="getLink">
-					<input type="submit" value="" formaction="" class="downloadFile">
-					<input type="submit" value="" formaction="" class="renameFile">
+					<input type="submit" value="" formaction="" class="deleteDirectory">
+					<input type="submit" value="" formaction="" class="getDirectoryLink">
+					<input type="submit" value="" formaction="" class="downloadDirectory">
+					<input type="submit" value="" formaction="" class="renameDirectory">
 				</form>
 			</td>
 		{/eq}
