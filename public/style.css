@@ -294,6 +294,21 @@ tbody tr:hover {
     background-color: #f9f9f9;
 }
 
+.fileName {
+    color: #333;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.fileName:hover,
+.fileName:active {
+    color: #0056b3 !important;
+    background-color: transparent !important;
+    border: 0;
+    padding: 0;
+}
+
 td {
     padding: 20px;
 }

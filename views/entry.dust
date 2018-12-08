@@ -32,11 +32,34 @@
 	<!-- FILES -->
 	{# list}
 	<tr>
-		<!-- FILE IS A DIRECTORY -->
+		<!-- FILE IS NOT A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
 			<td>
+				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
+				<a href='/file/preview/{path}' target="_blank">{name}</a> -->
+
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-				<a href='/file/preview/{path}' target="_blank">{name}</a>
+				<button type="button" class="fileName btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+					{name}
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">{name}</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<!-- PREVIEW IN MODAL IF IMAGE -->
+							<img src="/file/preview/{path}">
+						</div>
+					</div>
+				  </div>
+				</div>
 			</td>
 			<td>
 				{size}
@@ -56,33 +79,11 @@
 					<li><img src="/img/RenameFile.svg"></li>
 				</ul>
 			</td>
-		<!-- FILE IS NOT A DIRECTORY -->
+		<!-- FILE IS A DIRECTORY -->
 		{:else}
 			<td>
-				<!-- <img src="https://img.icons8.com/small/1600/filled-folder.png">
-				<a href='/dir/{path}'>{name}</a> -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-				  <img src="https://img.icons8.com/small/1600/filled-folder.png">
-				  {name}
-				</button>
-
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-					<div class="modal-content">
-					  <div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">{name}</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					  </div>
-					  <div class="modal-body">
-						<!-- PREVIEW IN MODAL IF IMAGE -->
-						<img src="/dir/{path}">
-					  </div>
-					</div>
-				  </div>
-				</div>
+				<img src="https://img.icons8.com/small/1600/filled-folder.png">
+				<a href='/dir/{path}'>{name}</a>
 			</td>
 			<td>
 			</td>
