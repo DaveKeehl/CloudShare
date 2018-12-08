@@ -279,10 +279,6 @@ thead {
     letter-spacing: 3px;
 }
 
-.top-action i {
-    font-size: 25px;
-}
-
 th {
     border-left: 1px solid rgba(51, 51, 51, 0.5);
     border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -297,6 +293,11 @@ td {
 
 tr {
     border-bottom: 1px solid rgba(51, 51, 51, 0.25);
+}
+
+td:first-of-type i {
+    font-size: 25px;
+    margin-right: 20px;
 }
 
 tbody tr:hover {

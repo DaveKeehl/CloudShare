@@ -3,7 +3,6 @@
 	<tr>
 		<td class="top-action">
 			<i class="fas fa-folder"></i>
-			<!-- <img src="https://img.icons8.com/small/1600/filled-folder.png"> -->
 			<a href='/dir/{path}'>.</a>
 		</td>
 		<td>
@@ -19,7 +18,6 @@
 			<tr>
 				<td class="top-action">
 					<i class="fas fa-folder"></i>
-					<!-- <img src="https://img.icons8.com/small/1600/filled-folder.png"> -->
 					<a href='/dir/{previous}'>..</a>
 				</td>
 				<td></td>
@@ -34,15 +32,15 @@
 		<!-- FILE IS NOT A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
 			<td>
-				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-				<a href='/file/preview/{path}' target="_blank">{name}</a> -->
 
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
+				<a href='/file/preview/{path}' target="_blank">{name}</a>
+
+				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
 				<button type="button" class="fileName btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 					{name}
 				</button>
 
-				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -53,12 +51,12 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<!-- PREVIEW IN MODAL IF IMAGE -->
 							<img src='/file/preview/{path}'>
 						</div>
 					</div>
 				  </div>
-				</div>
+				</div> -->
+
 			</td>
 			<td>
 				{size}
@@ -81,7 +79,7 @@
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
 			<td>
-				<img src="https://img.icons8.com/small/1600/filled-folder.png">
+				<i class="fas fa-folder"></i>
 				<a href='/dir/{path}'>{name}</a>
 			</td>
 			<td>
