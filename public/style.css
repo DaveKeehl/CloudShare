@@ -326,6 +326,10 @@ thead tr th:nth-child(2) {
     padding: 10px 100px 10px 20px;
 }
 
+thead tr th:nth-child(4) {
+    padding: 10px 80px 10px 20px;
+}
+
 .file-actions li {
     cursor: pointer;
     margin-right: 10px;
@@ -337,4 +341,42 @@ thead tr th:nth-child(2) {
 
 .file-actions li:active {
     opacity: 0.5;
+}
+
+.file-actions input {
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.file-actions input:hover {
+    opacity: 0.75;
+}
+
+.file-actions input:active {
+    opacity: 0.5;
+}
+
+.file-actions input:focus {
+    outline: 0;
+}
+
+.deleteFile {
+    background-image: url(/img/DeleteFile.svg);
+}
+
+.getLink {
+    background-image: url(/img/GetLink.svg);
+}
+
+.downloadFile {
+    background-image: url(/img/DownloadFile.svg);
+}
+
+.renameFile {
+    background-image: url(/img/RenameFile.svg);
+    margin-right: 0 !important;
 }

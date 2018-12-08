@@ -20,12 +20,9 @@
 					<img src="https://img.icons8.com/small/1600/filled-folder.png">
 					<a href='/dir/{previous}'>..</a>
 				</td>
-				<td>
-				</td>
-				<td>
-				</td>
-				<td>
-				</td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 		{/ne}
 	{/eq}
@@ -55,7 +52,7 @@
 						</div>
 						<div class="modal-body">
 							<!-- PREVIEW IN MODAL IF IMAGE -->
-							<img src="/file/preview/{path}">
+							<img src='/file/preview/{path}'>
 						</div>
 					</div>
 				  </div>
@@ -72,12 +69,12 @@
 				{tags}
 			</td> -->
 			<td>
-				<ul class="file-actions">
-					<li><img src="/img/DeleteFile.svg"></li>
-					<li><img src="/img/GetLink.svg"></li>
-					<li><img src="/img/DownloadFile.svg"></li>
-					<li><img src="/img/RenameFile.svg"></li>
-				</ul>
+				<form class="file-actions" method="POST">
+					<input type="submit" value="" formaction="" class="deleteFile">
+					<input type="submit" value="" formaction="" class="getLink">
+					<input type="submit" value="" formaction="" class="downloadFile">
+					<input type="submit" value="" formaction="" class="renameFile">
+				</form>
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -95,12 +92,12 @@
 				{tags}
 			</td> -->
 			<td>
-				<ul class="file-actions">
-					<li><img src="/img/DeleteFile.svg"></li>
-					<li><img src="/img/GetLink.svg"></li>
-					<li><img src="/img/DownloadFile.svg"></li>
-					<li><img src="/img/RenameFile.svg"></li>
-				</ul>
+				<form class="file-actions" method="POST">
+					<input type="submit" value="" formaction="" class="deleteFile">
+					<input type="submit" value="" formaction="" class="getLink">
+					<input type="submit" value="" formaction="" class="downloadFile">
+					<input type="submit" value="" formaction="" class="renameFile">
+				</form>
 			</td>
 		{/eq}
 	</tr>
