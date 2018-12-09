@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <form method="POST">
-                    <button class="new-folder" formaction="">
+                    <button class="new-folder" formaction="/dir/{path}/new-folder?_method=PUT">
                         <i class="fas fa-folder-plus"></i>Create new folder
                     </button>
                     <button class="upload-file" formaction="">

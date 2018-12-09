@@ -15,11 +15,11 @@ module.exports = router;
 
 // Download  a file
 router.get('/*', function(req, res){
-	let dirpath = req.path.slice(1);
-	Entry.find({path: dirpath}).then(function(result){
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	Entry.findOne({path: dirpath}).then(function(result){
 		res.status(202);
 		res.set("Content-Disposition", "attachment;filename="+result.name);
-		res.download(dirpath, result.name);
+		res.download(dirpath.replace(/ /g,'\ '), result.name);
 		res.end();
 	}).catch(function(err) {
 		res.status(400);
@@ -58,20 +58,21 @@ router.get('/*', function(req, res){
 
 
 router.delete('/*', function(req, res) {
-    let dirpath = req.path.slice(1);
+    let dirpath = req.path.slice(1).replace(/%20/g,' ');
     let redirect;
-	Entry.findOne({path: path}).then(function(found){
+	Entry.findOne({path: dirpath}).then(function(found){
 	    if (!found) {
 	        res.status(404);
 	        res.end("No Entries Found!");
 	    } else {
+	    	redirect = found.parent;
 	        return Entry.deleteOne(found);
 	    }
 	}).then(function(deleted){
 		return fs.remove(dirpath);
 	}).then(function(){
 		if (req.accepts("html")) {
-			res.status(204).redirect("/"+redirect);
+			res.status(204).end();
 		} else {
 			res.json(removed);
 		}

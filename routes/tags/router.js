@@ -17,7 +17,7 @@ module.exports = router;
 
 // Add Tags
 router.post('/*', function(req, res){
-	let dirpath = req.path.slice(1);
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let tags_query = req.query.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');	
 	let foundentry;
@@ -57,7 +57,7 @@ router.post('/*', function(req, res){
 });
 
 router.delete('/*', function(req, res){
-	let dirpath = req.path.slice(1);
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let tags_query = req.query.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');	
 	let foundentry;
@@ -99,7 +99,7 @@ router.delete('/*', function(req, res){
 
 // Clear Tags
 router.put('/*', function(req, res){
-	let dirpath = req.path.slice(1);
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let foundentry;
 	Entry.findOne({path: dirpath}).then(function(found){
 		foundentry = found;

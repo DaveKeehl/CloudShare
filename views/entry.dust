@@ -62,7 +62,7 @@
 				{size}
 			</td>
 			<td>
-				<!-- {timeCreated}<br> -->
+				{timeCreated}<br>
 				{dateCreated}
 			</td>
 			<!-- <td>
@@ -70,9 +70,9 @@
 			</td> -->
 			<td>
 				<form class="file-actions" method="POST">
-					<input type="submit" value="" formaction="" class="deleteFile">
+					<input type="submit" value="" formaction="/file/{path}?_method=DELETE" class="deleteFile">
 					<input type="submit" value="" formaction="" class="getLink">
-					<input type="submit" value="" formaction="" class="downloadFile">
+					<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
 					<input type="submit" value="" formaction="" class="renameFile">
 				</form>
 			</td>
@@ -85,7 +85,7 @@
 			<td>
 			</td>
 			<td>
-				<!-- {timeCreated}<br> -->
+				{timeCreated}<br>
 				{dateCreated}
 			</td>
 			<!-- <td>
@@ -93,7 +93,7 @@
 			</td> -->
 			<td>
 				<form class="file-actions" method="POST">
-					<input type="submit" value="" formaction="" class="deleteDirectory">
+					<input type="submit" value="" formaction="/dir/{path}?_method=DELETE" class="deleteDirectory">
 					<input type="submit" value="" formaction="" class="getDirectoryLink">
 					<input type="submit" value="" formaction="" class="downloadDirectory">
 					<input type="submit" value="" formaction="" class="renameDirectory">

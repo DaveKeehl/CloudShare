@@ -17,7 +17,7 @@ module.exports = router;
 
 // Directory get
 router.get('/*', function(req,res){
-	let dirpath = req.path.slice(1);
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
@@ -53,7 +53,8 @@ router.get('/*', function(req,res){
 
 // Directory creation
 router.put('/*', function(req,res){
-	let dirpath = req.path.slice(1);
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let counter = 0;
 	fs.mkdir(dirpath, function(err){
 		if(err){
 			console.log(err);
@@ -78,7 +79,7 @@ router.put('/*', function(req,res){
 			console.log("Created Directory: " + saved.path);
 			if (req.accepts("html")) {
 				res.status(201);
-				res.redirect("/"+dirpath);
+				res.redirect("/dir/"+dirpath);
 			} else {
 				res.status(201).json(saved);
 			}
@@ -91,22 +92,15 @@ router.put('/*', function(req,res){
 
 // Directory deletion
 router.delete('/*', function(req,res){
-	let dirpath = req.path.slice(1);
-	let foundparent;
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	fs.rmdir(dirpath, function(err){
 		if(err){
-			let code = err.code;
-			switch (code){
-				case "ENOTEMPTY":
-					break;
-				default:
-					break;	
-			}
-			return
+			console.log(err);
+			res.status(500);
+			res.end();
 		}
 		Entry.findOne({path: dirpath}).then(function(found){
 			if(found){
-				foundparent = found.parent;
 				return found;
 			} else {
 				res.status(404);
@@ -117,8 +111,7 @@ router.delete('/*', function(req,res){
 		}).then(function(deleted){
 			console.log("Deleted Directory: " + dirpath);
 			if (req.accepts("html")) {
-				res.status(204);
-				res.redirect("/"+foundparent);
+				res.status(204).end();
 			} else {
 				res.status(204).json(saved);
 			}
@@ -131,80 +124,80 @@ router.delete('/*', function(req,res){
 });
 
 // Directory replacement
-router.put('/*', function(req,res){
-	let dirpath = req.path.slice(1);
-	fs.mkdirSync(dirpath);
-	Entry.findOne(dirpath, function(err, found){
-		if(err){
-			res.status(400).end();
-		}
-		else if(found === null){
-			const entry = new Entries ({
-				isDir: req.body.isDir,
-				path: req.body.path,
-				name: req.body.name,
-				parent: req.body.parent,
-				extension: req.body.extension,
-				size: req.body.size,
-				timeCreated: req.body.timeCreated,
-				dateCreated: req.body.dateCreated
-			});
-			entry.save(function(err, saved) {
-					if (!err) {
-							if (req.accepts("html")) {
-									res.status(201);
-									res.redirect("/");
-							}
-							else {
-									res.status(201).json(saved);
-							}
-					}
-			});
-		}
-		else {
-			if (req.body.isDir) {
-					found.isDir = req.body.isDir;
-			}
-			if (req.body.path) {
-					found.path = req.body.path;
-			}
-			if (req.body.name) {
-					found.name = req.body.name;
-			}
-			if (req.body.parent) {
-					found.parent = req.body.parent;
-			}
-			if(req.body.extension){
-				found.extension = req.body.extension;
-			}
-			if(req.body.size){
-				found.size = req.body.size;
-			}
-			if(req.body.timeCreated) {
-				found.timeCreated =req.body.timeCreated;
-			}
-			if(req.body.dateCreated) {
-				found.dateCreated = req.body.dateCreated;
-			}
-			found.save(function(err, saved) {
-					if (!err) {
-							if (req.accepts("html")) {
-									// event.emit('favorite.updated', saved);
-									res.status(201);
-									res.redirect("/");
-							}
-							else {
-									// event.emit('favorite.updated', saved);
-									res.status(201).json(saved);
-							}
-					}
-					else {
-							res.status(400).end();
-					}
-			});
-		}
-	});
-	fs.renameSync(dirpath,)
-	res.status(200);
-	res.end('Directory ' + dirpath + ' created');
-});
+// router.put('/*', function(req,res){
+// 	let dirpath = req.path.slice(1);
+// 	fs.mkdirSync(dirpath);
+// 	Entry.findOne(dirpath, function(err, found){
+// 		if(err){
+// 			res.status(400).end();
+// 		}
+// 		else if(found === null){
+// 			const entry = new Entries ({
+// 				isDir: req.body.isDir,
+// 				path: req.body.path,
+// 				name: req.body.name,
+// 				parent: req.body.parent,
+// 				extension: req.body.extension,
+// 				size: req.body.size,
+// 				timeCreated: req.body.timeCreated,
+// 				dateCreated: req.body.dateCreated
+// 			});
+// 			entry.save(function(err, saved) {
+// 					if (!err) {
+// 							if (req.accepts("html")) {
+// 									res.status(201);
+// 									res.redirect("/");
+// 							}
+// 							else {
+// 									res.status(201).json(saved);
+// 							}
+// 					}
+// 			});
+// 		}
+// 		else {
+// 			if (req.body.isDir) {
+// 					found.isDir = req.body.isDir;
+// 			}
+// 			if (req.body.path) {
+// 					found.path = req.body.path;
+// 			}
+// 			if (req.body.name) {
+// 					found.name = req.body.name;
+// 			}
+// 			if (req.body.parent) {
+// 					found.parent = req.body.parent;
+// 			}
+// 			if(req.body.extension){
+// 				found.extension = req.body.extension;
+// 			}
+// 			if(req.body.size){
+// 				found.size = req.body.size;
+// 			}
+// 			if(req.body.timeCreated) {
+// 				found.timeCreated =req.body.timeCreated;
+// 			}
+// 			if(req.body.dateCreated) {
+// 				found.dateCreated = req.body.dateCreated;
+// 			}
+// 			found.save(function(err, saved) {
+// 					if (!err) {
+// 							if (req.accepts("html")) {
+// 									// event.emit('favorite.updated', saved);
+// 									res.status(201);
+// 									res.redirect("/");
+// 							}
+// 							else {
+// 									// event.emit('favorite.updated', saved);
+// 									res.status(201).json(saved);
+// 							}
+// 					}
+// 					else {
+// 							res.status(400).end();
+// 					}
+// 			});
+// 		}
+// 	});
+// 	fs.renameSync(dirpath,)
+// 	res.status(200);
+// 	res.end('Directory ' + dirpath + ' created');
+// });

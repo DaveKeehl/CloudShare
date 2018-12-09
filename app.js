@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const kleiDust = require('klei-dust');
+const methodOverride = require('method-override');
 const path = require('path');
 const fs = require('fs-extra');
 const util = require('./util');
@@ -71,6 +72,7 @@ app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 // Initialize routers here
 const routers = require('./routes/routers');
