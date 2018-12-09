@@ -3,7 +3,9 @@
 
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 const fs = require('fs-extra');
+const formidable = require('formidable');
 const mongoose = require('mongoose');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
@@ -19,8 +21,8 @@ router.get('/*', function(req, res){
 	Entry.findOne({path: dirpath}).then(function(result){
 		fs.readFile(result.path, 'binary', function(err, file){
 			if(err) {
-				res.status(500).end();
-				return;
+				res.status(500)
+				res.end();
 			} else {
 				res.status(202);
 				res.set("Content-Disposition", "attachment;filename="+result.name);
@@ -34,56 +36,54 @@ router.get('/*', function(req, res){
 	});
 });
 
-/* router.post('/*', function(req,res) {
-	const entry = new Entries ({
-		isDir: req.body.isDir,
-		path: req.body.path,
-		name: req.body.name,
-		parent: req.body.parent,
-		extension: req.body.extension,
-		size: req.body.size,
-		timeCreated: req.body.timeCreated,
-		dateCreated: req.body.dateCreated,
-		tags: req.body.tags
-	});
-	entry.save(function(err, saved) {
-			if (!err) {
-					if (req.accepts("html")) {
-							res.status(201);
-							res.redirect("/");
-					}
-					else {
-							res.status(201).json(saved);
-					}
-			}
-			else {
-					res.status(400).end();
-			}
-	});
-});
-*/
-
-
+// Delete a file
 router.delete('/*', function(req, res) {
     let dirpath = req.path.slice(1).replace(/%20/g,' ');
-    let redirect;
+    let previous;
 	Entry.findOne({path: dirpath}).then(function(found){
 	    if (!found) {
 	        res.status(404);
 	        res.end("No Entries Found!");
 	    } else {
-	    	redirect = found.parent;
+	    	previous = found.parent;
 	        return Entry.deleteOne(found);
 	    }
 	}).then(function(deleted){
 		return fs.remove(dirpath);
 	}).then(function(){
 		if (req.accepts("html")) {
-			res.status(204).end();
+			res.status(204);
+			res.redirect("/dir/display/"+previous);
 		} else {
 			res.json(removed);
 		}
 	}).catch(function(err){
 		res.status(500).end("Internal Server Error!");
+	});
+});
+
+// Add a file
+router.put('/*', function(req,res) {
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let parentpath = prevpath.join('/');
+	let form = new formidable.IncomingForm();
+	form.uploadDir = parentpath+"/";
+	form.parse(req, function(err, _fields, files){
+	    if(err) {
+	    	console.log(err);
+			res.status(500);
+			res.end("An Error Has Occured!");
+	    }
+	    let tmpFile = files.file.path;
+	    let destFile = path.join(parentpath, files.file.name);
+	    fs.rename(tmpFile, destFile, (err) => {
+			if(err) {
+				res.status(500);
+				res.end();
+			}
+			res.redirect('/dir/display/')
+	    });	    
 	});
 });

@@ -83,11 +83,11 @@
                         <div class="modal-content">
                             <form method="POST">
                                 <div class="modal-body">
-                                    <input type="text" placeholder="New folder">
+                                    <input type="text" name="folder_name" placeholder="New folder">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}/New Folder?_method=PUT">OK</button>
+                                    <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">OK</button>
                                 </div>
                             </form>
                         </div>

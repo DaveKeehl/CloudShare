@@ -22,8 +22,13 @@ router.get('/display/*', function(req,res){
 	prevpath.pop();
 	let previous = prevpath.join('/');
 	let name_query = req.query.name;
+	let sort_critareon = {
+		isDir: -1,
+		name: 1
+	};
+
 	if (name_query){
-		Entry.find({$and: [{parent: dirpath},{name: name_query}]}, null, {sort: {isDir: -1, name: 1}})
+		Entry.find({$and: [{parent: dirpath},{name: name_query}]}, null, {sort: sort_critareon})
 		.then(function(result){
 			res.status(200);
 			if(req.accepts('html')) {
@@ -36,7 +41,7 @@ router.get('/display/*', function(req,res){
 			res.end("Internal Server Error!");
 		});
 	} else {
-		Entry.find({parent: dirpath}, null, {sort: {isDir: -1, name: 1}})
+		Entry.find({parent: dirpath}, null, {sort: sort_critareon})
 		.then(function(result){
 			res.status(200);
 			if(req.accepts('html')) {
@@ -62,24 +67,31 @@ router.get('/download/*', function(req,res){
 // Directory creation
 router.put('/new/*', function(req,res){
 	let dirpath = req.path.slice(5).replace(/%20/g,' ');
-	fs.pathExists(dirpath).then(function(exists){
+	let dirname = req.body.folder_name;
+	if (!dirname){
+		dirname = "New Folder";
+	}
+	let creationpath = path.join(dirpath,dirname);
+	fs.pathExists(creationpath).then(function(exists){
 		if(exists){
 			//Modify the name so that it is non existant in fs
+			res.status(403);
+			res.end("Directory Already Exists!: "+dirname);
 		} else {
-			fs.mkdir(dirpath, function(err){
+			fs.mkdir(creationpath, function(err){
 				if(err){
 					console.log(err);
 					res.status(500);
 					res.end("Something Went Wrong!");
 				}
 
-				let stats = fs.statSync(dirpath);
-				let file_name = path.basename(dirpath);
-				let parent_folder = path.dirname(dirpath);
+				let stats = fs.statSync(creationpath);
+				let file_name = path.basename(creationpath);
+				let parent_folder = path.dirname(creationpath);
 
 				const form = {
 					isDir: stats.isDirectory(),
-					path: dirpath,
+					path: creationpath,
 					name: file_name,
 					parent: parent_folder,
 					extension: null,
@@ -106,15 +118,18 @@ router.put('/new/*', function(req,res){
 // Directory deletion
 router.delete('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let previous = prevpath.join('/');
 	Entry.findOne({path: dirpath}).then(function(found){
 		return Entry.deleteOne(found);
 	}).then(function(_deleted){
-		return Entry.remove({parent: {$regex: dirpath}});
+		return Entry.deleteMany({parent: {$regex: dirpath}});
 	}).then(function(_removed){
-		return fs.remove(dirpath)
+		return fs.remove(dirpath);
 	}).then(function(){
 		res.status(204);
-		res.end("Delete Successfull!")
+		res.redirect("/dir/display/"+previous);
 	}).catch(function(err){
 		console.log(err);
 		res.status(500);
@@ -123,40 +138,28 @@ router.delete('/*', function(req,res){
 });
 
 // Directory renaming
-// router.put('/rename/*', function(req,res){
-// 	let dirpath = req.path.slice(8).replace(/%20/g,' ');
-// 	let newname = req.query.name;
-// 	let old;
-// 	let form;
-// 	Entry.findOne({path: dirpath}).then(function(found){
-// 		old = found;
-// 		form = {
-// 			isDir: found.isDir,
-// 			path: found.parent + '/' + newname,
-// 			name: newname,
-// 			parent: found.parent,
-// 			extension: found.extension,
-// 			size: found.size,
-// 			timeCreated: found.timeCreated,
-// 			dateCreated: found.dateCreated
-// 		};
-// 		return fs.rename(dirpath,found.parent + '/' + newname);
-// 	}).then(function(){
-// 		Entry.find({path: {$regex: }})
-// 	}).then(function(removed){
-// 		return new Entry(form).save();
-// 	}).then(function(_saved){
-// 		console.log("Saving Updated Entry");
-// 		return Entry.deleteOne(old);
-// 	}).then(function(_deleted){
-// 		res.status(200);
-// 		res.end("Renaming Successfull");
-// 	}).catch(function(err){
-// 		console.log(err);
-// 		res.status(500);
-// 		res.end("Renaming Failed");
-// 	});
-// });
+router.put('/rename/*', function(req,res){
+	let dirpath = req.path.slice(8).replace(/%20/g,' ');
+	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let previous = prevpath.join('/');
+	let newname = req.body.new_name;
+	let newpath = path.join(previous,newname);
+	let old;
+	Entry.findOne({path: dirpath}).then(function(found){
+		old = found;
+		const form = {
+			isDir: found.isDir,
+			path: newpath,
+			name: newname,
+			parent: found.parent,
+			extension: found.extension,
+			size: found.size,
+			timeCreated: found.timeCreated,
+			dateCreated: found.dateCreated
+		};		
+	});
+});
 
 // router.put('/*', function(req,res){
 // 	let dirpath = req.path.slice(1);
