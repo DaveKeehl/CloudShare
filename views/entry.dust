@@ -3,7 +3,7 @@
 	<tr>
 		<td class="top-action">
 			<i class="fas fa-folder"></i>
-			<a href='/dir/{path}'>.</a>
+			<a href='/dir/display/{path}'>.</a>
 		</td>
 		<td>
 		</td>
@@ -18,7 +18,7 @@
 			<tr>
 				<td class="top-action">
 					<i class="fas fa-folder"></i>
-					<a href='/dir/{previous}'>..</a>
+					<a href='/dir/display/{previous}'>..</a>
 				</td>
 				<td></td>
 				<td></td>
@@ -80,7 +80,7 @@
 		{:else}
 			<td>
 				<i class="fas fa-folder"></i>
-				<a href='/dir/{path}'>{name}</a>
+				<a href='/dir/display/{path}'>{name}</a>
 			</td>
 			<td>
 			</td>

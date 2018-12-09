@@ -16,8 +16,9 @@ const rootFolder = "test";
 module.exports = router;
 
 // Directory get
-router.get('/*', function(req,res){
-	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+router.get('/display/*', function(req,res){
+	let dirpath = req.path.slice(9).replace(/%20/g,' ');
+	console.log(dirpath);
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
@@ -52,43 +53,86 @@ router.get('/*', function(req,res){
 });
 
 // Directory creation
-router.put('/*', function(req,res){
-	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let counter = 0;
-	fs.mkdir(dirpath, function(err){
-		if(err){
-			console.log(err);
-			return
+router.put('/new/*', function(req,res){
+	let dirpath = req.path.slice(5).replace(/%20/g,' ');
+	fs.pathExists(dirpath).then(function(exists){
+		if(exists){
+			//Modify the name so that it is non existant in fs
+		} else {
+			fs.mkdir(dirpath, function(err){
+				if(err){
+					console.log(err);
+					res.status(500);
+					res.end("Something Went Wrong!");
+				}
+
+				let stats = fs.statSync(dirpath);
+				let file_name = path.basename(dirpath);
+				let parent_folder = path.dirname(dirpath);
+
+				const form = {
+					isDir: stats.isDirectory(),
+					path: dirpath,
+					name: file_name,
+					parent: parent_folder,
+					extension: null,
+					size: util.formatBytes(stats.size),
+					timeCreated: util.formatTime(stats.ctime),
+					dateCreated: util.formatDate(stats.ctime)
+				};
+
+				return new Entry(form).save();
+			});
 		}
-		let stats = fs.statSync(dirpath);
-		let file_name = path.basename(dirpath);
-		let parent_folder = path.dirname(dirpath);
-
-		const form = {
-			isDir: stats.isDirectory(),
-			path: dirpath,
-			name: file_name,
-			parent: parent_folder,
-			extension: null,
-			size: util.formatBytes(stats.size),
-			timeCreated: util.formatTime(stats.ctime),
-			dateCreated: util.formatDate(stats.ctime)
-		};
-
-		new Entry(form).save().then(function(saved) {
-			console.log("Created Directory: " + saved.path);
-			if (req.accepts("html")) {
-				res.status(201);
-				res.redirect("/dir/"+dirpath);
-			} else {
-				res.status(201).json(saved);
-			}
-		}).catch(function(err){
-			res.status(400);
-			res.end("Bad Method!");
-		});	
+	}).then(function(saved) {
+		if (req.accepts("html")) {
+			res.status(201);
+			res.redirect("/dir/display/"+dirpath);
+		} else {
+			res.status(201).json(saved);
+		}
+	}).catch(function(err){
+		console.log(err);
 	});
 });
+
+// router.put('/*', function(req,res){
+// 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+// 	let counter = 0;
+// 	fs.mkdir(dirpath, function(err){
+// 		if(err){
+// 			console.log(err);
+// 			return
+// 		}
+// 		let stats = fs.statSync(dirpath);
+// 		let file_name = path.basename(dirpath);
+// 		let parent_folder = path.dirname(dirpath);
+
+// 		const form = {
+// 			isDir: stats.isDirectory(),
+// 			path: dirpath,
+// 			name: file_name,
+// 			parent: parent_folder,
+// 			extension: null,
+// 			size: util.formatBytes(stats.size),
+// 			timeCreated: util.formatTime(stats.ctime),
+// 			dateCreated: util.formatDate(stats.ctime)
+// 		};
+
+// 		new Entry(form).save().then(function(saved) {
+// 			console.log("Created Directory: " + saved.path);
+// 			if (req.accepts("html")) {
+// 				res.status(201);
+// 				res.redirect("/dir/display/"+dirpath);
+// 			} else {
+// 				res.status(201).json(saved);
+// 			}
+// 		}).catch(function(err){
+// 			res.status(400);
+// 			res.end("Bad Method!");
+// 		});	
+// 	});
+// });
 
 // Directory deletion
 router.delete('/*', function(req,res){

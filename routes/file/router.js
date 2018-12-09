@@ -17,10 +17,17 @@ module.exports = router;
 router.get('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	Entry.findOne({path: dirpath}).then(function(result){
-		res.status(202);
-		res.set("Content-Disposition", "attachment;filename="+result.name);
-		res.download(dirpath.replace(/ /g,'\ '), result.name);
-		res.end();
+		fs.readFile(result.path, 'binary', function(err, file){
+			if(err) {
+				res.status(500).end();
+				return;
+			} else {
+				res.status(202);
+				res.set("Content-Disposition", "attachment;filename="+result.name);
+				res.write(file, 'binary');
+				res.end();		
+			}
+		})
 	}).catch(function(err) {
 		res.status(400);
 		res.end("File Could Not Be Downloaded!");

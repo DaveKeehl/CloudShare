@@ -17,5 +17,5 @@ module.exports = router;
 
 // Default get, routes the user immediately to the root
 router.get('/', function(req, res){
-	res.redirect('/dir/'+rootFolder);
+	res.redirect('/dir/display/'+rootFolder);
 });
