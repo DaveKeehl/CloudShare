@@ -18,7 +18,6 @@ module.exports = router;
 // Directory get
 router.get('/display/*', function(req,res){
 	let dirpath = req.path.slice(9).replace(/%20/g,' ');
-	console.log(dirpath);
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
@@ -50,6 +49,14 @@ router.get('/display/*', function(req,res){
 			res.end("Internal Server Error!");
 		});
 	}
+});
+
+// Directory download
+router.get('/download/*', function(req,res){
+	let dirpath = req.path.slice(10).replace(/%20/g,' ');
+	fs.pathExists(dirpath).then(function(exists){
+
+	});
 });
 
 // Directory creation
@@ -96,78 +103,61 @@ router.put('/new/*', function(req,res){
 	});
 });
 
-// router.put('/*', function(req,res){
-// 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-// 	let counter = 0;
-// 	fs.mkdir(dirpath, function(err){
-// 		if(err){
-// 			console.log(err);
-// 			return
-// 		}
-// 		let stats = fs.statSync(dirpath);
-// 		let file_name = path.basename(dirpath);
-// 		let parent_folder = path.dirname(dirpath);
-
-// 		const form = {
-// 			isDir: stats.isDirectory(),
-// 			path: dirpath,
-// 			name: file_name,
-// 			parent: parent_folder,
-// 			extension: null,
-// 			size: util.formatBytes(stats.size),
-// 			timeCreated: util.formatTime(stats.ctime),
-// 			dateCreated: util.formatDate(stats.ctime)
-// 		};
-
-// 		new Entry(form).save().then(function(saved) {
-// 			console.log("Created Directory: " + saved.path);
-// 			if (req.accepts("html")) {
-// 				res.status(201);
-// 				res.redirect("/dir/display/"+dirpath);
-// 			} else {
-// 				res.status(201).json(saved);
-// 			}
-// 		}).catch(function(err){
-// 			res.status(400);
-// 			res.end("Bad Method!");
-// 		});	
-// 	});
-// });
-
 // Directory deletion
 router.delete('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	fs.rmdir(dirpath, function(err){
-		if(err){
-			console.log(err);
-			res.status(500);
-			res.end();
-		}
-		Entry.findOne({path: dirpath}).then(function(found){
-			if(found){
-				return found;
-			} else {
-				res.status(404);
-				res.end("Specified Directory Does Not Exist!");
-			}
-		}).then(function(found){
-			return Entry.deleteOne(found);
-		}).then(function(deleted){
-			console.log("Deleted Directory: " + dirpath);
-			if (req.accepts("html")) {
-				res.status(204).end();
-			} else {
-				res.status(204).json(saved);
-			}
-		}).catch(function(err){
-			console.log(err);
-			res.status(400);
-			res.end("Bad Method!");			
-		});
-	});	
+	Entry.findOne({path: dirpath}).then(function(found){
+		return Entry.deleteOne(found);
+	}).then(function(_deleted){
+		return Entry.remove({parent: {$regex: dirpath}});
+	}).then(function(_removed){
+		return fs.remove(dirpath)
+	}).then(function(){
+		res.status(204);
+		res.end("Delete Successfull!")
+	}).catch(function(err){
+		console.log(err);
+		res.status(500);
+		res.end("Delete Unsuccessfull!");
+	})
 });
 
-// Directory replacement
+// Directory renaming
+// router.put('/rename/*', function(req,res){
+// 	let dirpath = req.path.slice(8).replace(/%20/g,' ');
+// 	let newname = req.query.name;
+// 	let old;
+// 	let form;
+// 	Entry.findOne({path: dirpath}).then(function(found){
+// 		old = found;
+// 		form = {
+// 			isDir: found.isDir,
+// 			path: found.parent + '/' + newname,
+// 			name: newname,
+// 			parent: found.parent,
+// 			extension: found.extension,
+// 			size: found.size,
+// 			timeCreated: found.timeCreated,
+// 			dateCreated: found.dateCreated
+// 		};
+// 		return fs.rename(dirpath,found.parent + '/' + newname);
+// 	}).then(function(){
+// 		Entry.find({path: {$regex: }})
+// 	}).then(function(removed){
+// 		return new Entry(form).save();
+// 	}).then(function(_saved){
+// 		console.log("Saving Updated Entry");
+// 		return Entry.deleteOne(old);
+// 	}).then(function(_deleted){
+// 		res.status(200);
+// 		res.end("Renaming Successfull");
+// 	}).catch(function(err){
+// 		console.log(err);
+// 		res.status(500);
+// 		res.end("Renaming Failed");
+// 	});
+// });
+
 // router.put('/*', function(req,res){
 // 	let dirpath = req.path.slice(1);
 // 	fs.mkdirSync(dirpath);
