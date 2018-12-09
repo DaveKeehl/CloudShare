@@ -26,12 +26,23 @@ db.once('open', function() {
     paths.forEach((result)=>{
         Entry.findOne({path: result.path}).then(function(found){
             if (found) {
-                //Add a check to check if the record fully matches
-                //the file we want to add
-                if(found.isDir){
-                    console.log("Directory already in database: "+result.path);
+                if (util.compareEntries(result,found)){
+                    if(found.isDir){
+                        console.log("Directory already in database: "+result.path);
+                    } else {
+                        console.log("File already in database: "+result.path);
+                    }
                 } else {
-                    console.log("File already in database: "+result.path);
+                    if(result.isDir){
+                        console.log("Replacing Expired Directory: " + result.path);
+                    } else {
+                        console.log("Replacing Expired File: " + result.path);
+                    }
+                    Entry.deleteOne(found).then(function(_deleted){
+                        new Entry(result).save();
+                    }).catch(function(err){
+                        console.log(err);
+                    });
                 }
             } else {
                 if(result.isDir){
@@ -67,5 +78,6 @@ const routers = require('./routes/routers');
 app.use('/', routers.root);
 app.use('/file', routers.file);
 app.use('/dir', routers.dir);
+app.use('/tags', routers.tags);
 
 module.exports = app;

@@ -1,4 +1,4 @@
-/** @module root/router */
+/** @module file/router */
 'use strict';
 
 const express = require('express');
@@ -10,11 +10,11 @@ const Entry = mongoose.model('Entries');
 
 const rootFolder = "test";
 
-/** router for /root */
+/** router for /file */
 module.exports = router;
 
 // Download  a file
-router.get('/download/*', function(req, res){
+router.get('/*', function(req, res){
 	let dirpath = req.path.slice(1);
 	Entry.find({path: dirpath}).then(function(result){
 		res.status(202);
@@ -27,7 +27,7 @@ router.get('/download/*', function(req, res){
 	});
 });
 
-/* router.post('/upload', function(req,res) {
+/* router.post('/*', function(req,res) {
 	const entry = new Entries ({
 		isDir: req.body.isDir,
 		path: req.body.path,
@@ -56,26 +56,22 @@ router.get('/download/*', function(req, res){
 });
 */
 
-/*
-router.delete('/*', function(req, res) {
-    let path = req.path.slice(1);
 
-	Entry.find({path: path}).then(function(found){
-	    if (found == []) {
-	        res.status(404).end("No Entries Found!");
-			return;
+router.delete('/*', function(req, res) {
+    let dirpath = req.path.slice(1);
+    let redirect;
+	Entry.findOne({path: path}).then(function(found){
+	    if (!found) {
+	        res.status(404);
+	        res.end("No Entries Found!");
+	    } else {
+	        return Entry.deleteOne(found);
 	    }
-	    else {
-	        return Entry.remove(found);
-	    }
-	}).then(function(removed){
-		if(removed.isDir) {
-			fs.rmdirSync(path);
-		} else {
-			fs.unlinkSync(path);
-		}
+	}).then(function(deleted){
+		return fs.remove(dirpath);
+	}).then(function(){
 		if (req.accepts("html")) {
-			res.status(204).redirect("/");
+			res.status(204).redirect("/"+redirect);
 		} else {
 			res.json(removed);
 		}
@@ -83,4 +79,3 @@ router.delete('/*', function(req, res) {
 		res.status(500).end("Internal Server Error!");
 	});
 });
-*/

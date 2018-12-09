@@ -1,4 +1,4 @@
-/** @module root/router */
+/** @module dir/router */
 'use strict';
 
 const express = require('express');
@@ -12,7 +12,7 @@ const Entry = mongoose.model('Entries');
 
 const rootFolder = "test";
 
-/** router for /root */
+/** router for /dir */
 module.exports = router;
 
 // Directory get
@@ -88,16 +88,6 @@ router.put('/*', function(req,res){
 		});	
 	});
 });
-
-// Add Tags
-router.post('/addtag/*', function(req, res){
-	let dirpath = req.path.slice(1);
-	let tags_query = req.query.tags;
-	let tags = tags_query.replace(/\s/g,'').split(',');
-	Entry.findOne({parent: dirpath}).then(function(found){
-
-	})
-})
 
 // Directory deletion
 router.delete('/*', function(req,res){

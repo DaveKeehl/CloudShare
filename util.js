@@ -66,7 +66,19 @@ function walk(dir){
     return results;
 }
 
+function compareEntries(obj1,obj2){
+    return ((obj1.isDir == obj2.isDir) &&
+            (obj1.path == obj2.path) &&
+            (obj1.name == obj2.name) &&
+            (obj1.parent == obj2.parent) &&
+            (obj1.size == obj2.size) &&
+            (obj1.extension == obj2.extension) &&
+            (obj1.timeCreated == obj2.timeCreated) &&
+            (obj1.dateCreated == obj2.dateCreated));
+}
+
 module.exports.formatTime = formatTime;
 module.exports.formatDate = formatDate;
 module.exports.formatBytes = formatBytes;
+module.exports.compareEntries = compareEntries;
 module.exports.walk = walk;
