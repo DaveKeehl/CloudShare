@@ -62,7 +62,7 @@
 				{size}
 			</td>
 			<td>
-				{timeCreated}<br>
+				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
 			<!-- <td>
@@ -85,7 +85,7 @@
 			<td>
 			</td>
 			<td>
-				{timeCreated}<br>
+				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
 			<!-- <td>
