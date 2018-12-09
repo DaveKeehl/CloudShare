@@ -41,7 +41,7 @@
         <aside id="left" class="column">
             <header class="top-left">
                 <div class="logo">
-                    <a href="#">
+                    <a href="/">
                         <img src="/img/logo.svg">
                     </a>
                 </div>
