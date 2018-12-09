@@ -55,7 +55,27 @@ ul {
     width: 300px;
 }
 
-#left button {
+.dropdown > button {
+    background: #db3286;
+    background: -moz-linear-gradient(-45deg, #db3286 0%, #53dbd2 100%);
+    background: -webkit-linear-gradient(-45deg, #db3286 0%,#53dbd2 100%);
+    background: linear-gradient(135deg, #db3286 0%,#53dbd2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db3286', endColorstr='#53dbd2',GradientType=1 );
+    color: white !important;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    width: 80%;
+    border: 0px solid;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: left;
+    padding: 0 35px;
+    transition: all 0.2s ease;
+}
+
+button.new-folder,
+button.upload-file {
     cursor: pointer;
     background-color: white;
     color: #333;
@@ -71,7 +91,8 @@ ul {
     transition: all 0.2s ease;
 }
 
-#left button:hover {
+button.new-folder:hover,
+button.upload-file:hover {
     background-color: #c5c5c5;
 }
 
@@ -94,6 +115,11 @@ button.dropdown-item {
     width: 100% !important;
     height: 50px !important;
     border-radius: 0 !important;
+    transition: all 0.2s ease;
+}
+
+button.dropdown-item:hover {
+    cursor: pointer;
 }
 
 button.default-theme.dropdown-item {
@@ -113,19 +139,29 @@ button.dropdown-item:active {
     /* background-color: #333 !important; */
 }
 
-.dropdown > button {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#db3286+0,53dbd2+100 */
-    background: #db3286; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #db3286 0%, #53dbd2 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #db3286 0%,#53dbd2 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #db3286 0%,#53dbd2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db3286', endColorstr='#53dbd2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-    color: white !important;
+.modal-body {
+    border-radius: .3rem .3rem 0 0;
+    padding: 0;
 }
 
-/* .dropdown > button:hover {
-    box-shadow: 0 10px 20px black;
-} */
+.modal-body input {
+    width: 100%;
+    border: 0;
+    height: 50px;
+    padding: 0 20px;
+    font-size: 20px;
+    border-radius: .3rem .3rem 0 0;
+}
+
+.modal-footer {
+    justify-content: center;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
 
 .dropdown > button i {
     color: white;
