@@ -79,19 +79,8 @@
                     <button class="upload-file" formaction="">
                         <i class="fas fa-cloud-upload-alt"></i>Upload new file
                     </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <input type="text" name="folder_name" placeholder="New folder">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">OK</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    {> modal /}
 
                 </form>
 
