@@ -22,13 +22,16 @@ router.get('/display/*', function(req,res){
 	prevpath.pop();
 	let previous = prevpath.join('/');
 	let name_query = req.query.name;
+	//For now, sorting is statically predefined
+	//to sorting first by whether entries are
+	//directories or files, and then by name
 	let sort_critareon = {
 		isDir: -1,
 		name: 1
 	};
 
 	if (name_query){
-		Entry.find({$and: [{parent: dirpath},{name: name_query}]}, null, {sort: sort_critareon})
+		Entry.find({$and: [{parent: dirpath},{name: {$regex: name_query}}]}, null, {sort: sort_critareon})
 		.then(function(result){
 			res.status(200);
 			if(req.accepts('html')) {
@@ -65,44 +68,43 @@ router.get('/download/*', function(req,res){
 });
 
 // Directory creation
-router.put('/new/*', function(req,res){
+router.post('/new/*', function(req,res){
 	let dirpath = req.path.slice(5).replace(/%20/g,' ');
 	console.log(dirpath);
 	let dirname = req.body.folder_name;
 	if (!dirname){
 		dirname = "New Folder";
 	}
-	let creationpath = path.join(dirpath,dirname);
-	fs.pathExists(creationpath).then(function(exists){
-		if(exists){
-			//Modify the name so that it is non existant in fs
-			console.log("Directory Already Exists!: "+dirname);
+	let checkpath = path.join(dirpath,dirname);
+	let creationpath = checkpath;
+
+	let present = true;
+	let counter = -1;
+	while(present){
+		if(fs.pathExistsSync(checkpath)){
+			counter += 1;
+			checkpath = creationpath + " (" + counter + ")";
 		} else {
-			fs.mkdir(creationpath, function(err){
-				if(err){
-					console.log(err);
-					res.status(500);
-					res.end("Something Went Wrong!");
-				}
-
-				let stats = fs.statSync(creationpath);
-				let file_name = path.basename(creationpath);
-				let parent_folder = path.dirname(creationpath);
-
-				const form = {
-					isDir: stats.isDirectory(),
-					path: creationpath,
-					name: file_name,
-					parent: parent_folder,
-					extension: null,
-					size: util.formatBytes(stats.size),
-					timeCreated: util.formatTime(stats.ctime),
-					dateCreated: util.formatDate(stats.ctime)
-				};
-
-				return new Entry(form).save();
-			});
+			creationpath = checkpath;
+			present = false;
 		}
+	}
+
+	fs.mkdir(creationpath).then(function(){
+		let stats = fs.statSync(creationpath);
+		let file_name = path.basename(creationpath);
+		let parent_folder = path.dirname(creationpath);
+		const form = {
+			isDir: stats.isDirectory(),
+			path: creationpath,
+			name: file_name,
+			parent: parent_folder,
+			extension: null,
+			size: util.formatBytes(stats.size),
+			timeCreated: util.formatTime(stats.ctime),
+			dateCreated: util.formatDate(stats.ctime)
+		};
+		return new Entry(form).save();
 	}).then(function(saved) {
 		if (req.accepts("html")) {
 			res.status(201);
@@ -112,6 +114,8 @@ router.put('/new/*', function(req,res){
 		}
 	}).catch(function(err){
 		console.log(err);
+		res.status(500);
+		res.end("Something Went Wrong!");
 	});
 });
 
