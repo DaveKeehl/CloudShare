@@ -74,14 +74,14 @@
                     <i class="fas fa-folder-plus"></i>Create new folder
                 </button>
 
-                <button class="upload-file" formaction="">
-                    <i class="fas fa-cloud-upload-alt"></i>Upload new file
-                </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form method="POST">
+                <form method="POST">
+                    
+                    <button class="upload-file" formaction="">
+                        <i class="fas fa-cloud-upload-alt"></i>Upload new file
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
                                 <div class="modal-body">
                                     <input type="text" name="folder_name" placeholder="New folder">
                                 </div>
@@ -89,10 +89,11 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                     <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">OK</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                </form>
 
 
                 <!-- <div class="uploadMultipleContainer">

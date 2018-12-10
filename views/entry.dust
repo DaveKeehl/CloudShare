@@ -34,7 +34,11 @@
 			<td>
 
 				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-				<a href='/file/preview/{path}' target="_blank">{name}</a>
+				<div>
+					<a href='/file/preview/{path}' target="_blank">{name}</a>
+					<!-- {tags} -->
+					<p class="tags">LOVE, HATE</p>
+				</div>
 
 				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
 				<button type="button" class="fileName btn btn-primary" data-toggle="modal" data-target="#exampleModal">
