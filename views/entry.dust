@@ -39,13 +39,7 @@
 				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png"> -->
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
-					<!-- HAS TAG -->
-					{@gt key=tags.length value=0}
-						<!-- <p class="tags">{tags}</p> -->
-						<p>WEB, CLOUD, PROJECT</p>
-					{/gt}
-					<!-- NO TAG -->
-					<p class="tags"><i class="fas fa-plus-circle"></i></p>
+					{> tags /}
 				</div>
 			</td>
 			<td>
@@ -65,10 +59,14 @@
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
-			<td>
-				<i class="fas fa-folder"></i>
-				<a href='/dir/display/{path}'>{name}</a>
-				<!-- <p class="tags">{tags}</p> -->
+			<td class="tags">
+				<!-- <i class="fas fa-folder"></i> -->
+				<img src="/img/folder.svg">
+				<div>
+					<a href='/dir/display/{path}'>{name}</a>
+					{> tags /}
+				</div>
+
 			</td>
 			<td>
 			</td>

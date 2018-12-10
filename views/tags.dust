@@ -1,0 +1,9 @@
+<hmtl>
+    <!-- HAS TAG -->
+    {@gt key=tags.length value=0}
+        <!-- <p class="tags">{tags}</p> -->
+        <p>WEB, CLOUD, PROJECT</p>
+    {/gt}
+    <!-- NO TAG -->
+    <p class="tags"><i class="fas fa-plus-circle"></i></p>
+</html>
