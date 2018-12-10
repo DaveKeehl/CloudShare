@@ -4,6 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs-extra');
+const zipdir = require('zip-dir');
 const path = require('path');
 const mongoose = require('mongoose');
 const util = require('../../util');
@@ -62,14 +63,44 @@ router.get('/display/*', function(req,res){
 // Directory download
 router.get('/download/*', function(req,res){
 	let dirpath = req.path.slice(10).replace(/%20/g,' ');
+	let dirname = path.basename(dirpath);
 	fs.pathExists(dirpath).then(function(exists){
-
+		if (exists){
+			zipdir(dirpath, { saveTo: 'temp/' + dirname + '.zip', 
+							  filter: (path, stat) => !/\.zip$/.test(path) }, function (err, buffer) {
+				if (err){
+					console.log(err);
+					res.status(500);
+					res.end("There was a problem with the file compression!")
+				}
+				fs.readFile('temp/' + dirname + '.zip', 'binary', function(err, file){
+					if(err) {
+						res.status(500)
+						res.end("There was a problem with reading the compressed file!");
+					} else {
+						res.status(202);
+						res.set("Content-Disposition", "attachment;filename="+dirname+".zip");
+						res.write(file, 'binary');
+						fs.remove('temp/' + dirname + '.zip').then(function(){
+							res.end("Download Successfull!");
+						}).catch(function(err){
+							console.log(err);
+							res.status(500);
+							res.end("There was a problem with removing the compressed directory!");
+						});
+					}
+				})
+			});
+		} else {
+			res.status(404);
+			res.end("Directory Could Not Be Found!")
+		}
 	});
 });
 
 // Directory creation
-router.post('/new/*', function(req,res){
-	let dirpath = req.path.slice(5).replace(/%20/g,' ');
+router.post('/*', function(req,res){
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	console.log(dirpath);
 	let dirname = req.body.folder_name;
 	if (!dirname){
@@ -142,8 +173,8 @@ router.delete('/*', function(req,res){
 });
 
 // Directory renaming
-router.put('/rename/*', function(req,res){
-	let dirpath = req.path.slice(8).replace(/%20/g,' ');
+router.put('/*', function(req,res){
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');

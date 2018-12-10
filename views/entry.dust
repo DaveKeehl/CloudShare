@@ -78,7 +78,7 @@
 				<form class="file-actions" method="POST">
 					<input type="submit" value="" formaction="/dir/{path}?_method=DELETE" class="deleteDirectory">
 					<input type="submit" value="" formaction="" class="getDirectoryLink">
-					<input type="submit" value="" formaction="" class="downloadDirectory">
+					<input type="submit" value="" formaction="/dir/download/{path}?_method=GET" class="downloadDirectory">
 					<input type="submit" value="" formaction="" class="renameDirectory">
 				</form>
 			</td>

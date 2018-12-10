@@ -137,6 +137,11 @@ async@2.6.1:
   dependencies:
     lodash "^4.17.10"
 
+async@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+  integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -1312,6 +1317,13 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jszip@^2.4.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/jszip/-/jszip-2.6.1.tgz#b88f3a7b2e67a2a048152982c7a3756d9c4828f0"
+  integrity sha1-uI86ey5noqBIFSmCx6N1bZxIKPA=
+  dependencies:
+    pako "~1.0.2"
+
 kareem@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.3.0.tgz#ef33c42e9024dce511eeaf440cd684f3af1fc769"
@@ -1788,6 +1800,11 @@ osenv@^0.1.4:
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
+
+pako@~1.0.2:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.7.tgz#2473439021b57f1516c82f58be7275ad8ef1bb27"
+  integrity sha512-3HNK5tW4x8o5mO8RuHZp3Ydw9icZXx0RANAOMzlMzx7LVXhMJ4mo3MOBpzyd7r/+RUu8BmndP47LXT+vzjtWcQ==
 
 parse-glob@^3.0.4:
   version "3.0.4"
@@ -2618,3 +2635,11 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
   integrity sha1-AI4G2AlDIMNy28L47XagymyKxBk=
+
+zip-dir@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/zip-dir/-/zip-dir-1.0.2.tgz#253f907aead62a21acd8721d8b88032b2411c051"
+  integrity sha1-JT+QeurWKiGs2HIdi4gDKyQRwFE=
+  dependencies:
+    async "^1.5.2"
+    jszip "^2.4.0"
