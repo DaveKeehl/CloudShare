@@ -37,7 +37,7 @@
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
 					<!-- {tags} -->
-					<p class="tags">LOVE, HATE</p>
+					<p class="tags">{tags}</p>
 				</div>
 
 				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
@@ -85,6 +85,7 @@
 			<td>
 				<i class="fas fa-folder"></i>
 				<a href='/dir/display/{path}'>{name}</a>
+				<p class="tags">{tags}</p>
 			</td>
 			<td>
 			</td>

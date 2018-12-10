@@ -67,6 +67,7 @@ router.get('/download/*', function(req,res){
 // Directory creation
 router.put('/new/*', function(req,res){
 	let dirpath = req.path.slice(5).replace(/%20/g,' ');
+	console.log(dirpath);
 	let dirname = req.body.folder_name;
 	if (!dirname){
 		dirname = "New Folder";
@@ -75,8 +76,7 @@ router.put('/new/*', function(req,res){
 	fs.pathExists(creationpath).then(function(exists){
 		if(exists){
 			//Modify the name so that it is non existant in fs
-			res.status(403);
-			res.end("Directory Already Exists!: "+dirname);
+			console.log("Directory Already Exists!: "+dirname);
 		} else {
 			fs.mkdir(creationpath, function(err){
 				if(err){

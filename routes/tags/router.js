@@ -18,7 +18,7 @@ module.exports = router;
 // Add Tags
 router.post('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let tags_query = req.query.tags;
+	let tags_query = req.body.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');	
 	let foundentry;
 	let foundtags;
@@ -58,7 +58,7 @@ router.post('/*', function(req, res){
 
 router.delete('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let tags_query = req.query.tags;
+	let tags_query = req.body.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');	
 	let foundentry;
 	let foundtags;
