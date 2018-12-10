@@ -31,36 +31,22 @@
 	<tr>
 		<!-- FILE IS NOT A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
-			<td>
-
-				<img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
+			<td class="tags">
+				{@eq key=extension value=txt type="string"}{/eq}
+				{@eq key=extension value=gif type="string"}{/eq}
+				{@eq key=extension value=mp4 type="string"}{/eq}
+				<img src="/img/file-noExtension.svg">
+				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png"> -->
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
-					<!-- {tags} -->
-					<p class="tags">{tags}</p>
+					<!-- HAS TAG -->
+					{@gt key=tags.length value=0}
+						<!-- <p class="tags">{tags}</p> -->
+						<p>WEB, CLOUD, PROJECT</p>
+					{/gt}
+					<!-- NO TAG -->
+					<p class="tags"><i class="fas fa-plus-circle"></i></p>
 				</div>
-
-				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png">
-				<button type="button" class="fileName btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					{name}
-				</button>
-
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">{name}</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<img src='/file/preview/{path}'>
-						</div>
-					</div>
-				  </div>
-				</div> -->
-
 			</td>
 			<td>
 				{size}
@@ -69,9 +55,6 @@
 				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
-			<!-- <td>
-				{tags}
-			</td> -->
 			<td>
 				<form class="file-actions" method="POST">
 					<input type="submit" value="" formaction="/file/{path}?_method=DELETE" class="deleteFile">
@@ -85,7 +68,7 @@
 			<td>
 				<i class="fas fa-folder"></i>
 				<a href='/dir/display/{path}'>{name}</a>
-				<p class="tags">{tags}</p>
+				<!-- <p class="tags">{tags}</p> -->
 			</td>
 			<td>
 			</td>
@@ -93,9 +76,6 @@
 				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
-			<!-- <td>
-				{tags}
-			</td> -->
 			<td>
 				<form class="file-actions" method="POST">
 					<input type="submit" value="" formaction="/dir/{path}?_method=DELETE" class="deleteDirectory">
