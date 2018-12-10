@@ -1,3 +1,11 @@
+/********* UTILITY *********/
+
+.padding-side-50 {
+    padding: 0 50px;
+}
+
+/********** GENERAL STYLES *********/
+
 html {
     height: 100%;
 }
@@ -12,6 +20,67 @@ body {
     margin: 0px;  /*removes default style*/
     display: flex;  /*enables flex content for its children*/
     box-sizing: border-box;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
+    background-color: #333;
+    text-align: center;
+    width: 300px;
+}
+
+#right {
+    /* width: 100%; */
+    width: calc(100vw - 300px);
+}
+
+.top-left,
+.top-right {
+    height: 90px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.top-left {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    margin-bottom: 40px;
+    border-bottom: 1px solid white;
+}
+
+.top-left a,
+.top-left a:hover {
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.top-right {
+    border-bottom: 1px solid #333;
+}
+
+#right .bottom {
+    padding: 40px 50px 0 50px;
+}
+
+.bottom {
+    flex-grow: 1;  /*ensures that the container will take up the full height of the parent container*/
+    overflow-y: auto;  /*adds scroll to this container*/
+}
+
+.navbar {
+    padding: 0;
+}
+
+.column {
+    height: 100%;  /*allows both columns to span the full height of the browser window*/
+    display: flex;
+    flex-direction: column;  /*places the left and right headers above the bottom content*/
+    padding: 0;
 }
 
 a {
@@ -29,8 +98,10 @@ ul {
     margin: 0;
 }
 
-.padding-side-50 {
-    padding: 0 50px;
+i.fas {
+    color: #333;
+    font-size: 20px;
+    margin-right: 15px;
 }
 
 .col-md-3,
@@ -39,21 +110,11 @@ ul {
     padding-left: 0;
 }
 
-.column {
-    height: 100%;  /*allows both columns to span the full height of the browser window*/
-    display: flex;
-    flex-direction: column;  /*places the left and right headers above the bottom content*/
-    padding: 0;
+.logo img {
+    width: 80%;
 }
 
-#left {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
-    background-color: #333;
-    text-align: center;
-    width: 300px;
-}
+/********* LEFT PANEL BUTTONS *********/
 
 .dropdown > button {
     background: #db3286;
@@ -139,6 +200,17 @@ button.dropdown-item:active {
     /* background-color: #333 !important; */
 }
 
+.dropdown-toggle::after {
+    margin-left: 10px;
+    vertical-align: 2px;
+}
+
+.dropdown > button i {
+    color: white;
+}
+
+/********* MODAL WINDOW *********/
+
 .modal-body {
     border-radius: .3rem .3rem 0 0;
     padding: 0;
@@ -163,9 +235,7 @@ button.dropdown-item:active {
     border-color: #dc3545;
 }
 
-.dropdown > button i {
-    color: white;
-}
+/********* DRAG AND DROP UPLOAD SECTION *********/
 
 .uploadMultipleContainer {
     height: calc(100vh - 335px);
@@ -198,57 +268,7 @@ button.dropdown-item:active {
     font-weight: 400;
 }
 
-.top-left,
-.top-right {
-    height: 90px;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.top-left {
-    font-family: 'Orbitron', sans-serif;
-    color: white;
-    margin-bottom: 40px;
-    border-bottom: 1px solid white;
-}
-
-.logo img {
-    width: 80%;
-}
-
-i.fas {
-    color: #333;
-    font-size: 20px;
-    margin-right: 15px;
-}
-
-.dropdown-toggle::after {
-    margin-left: 10px;
-    vertical-align: 2px;
-}
-
-/* .top-left h1 {
-    font-size: 30px;
-    font-weight: 100;
-} */
-
-.top-right {
-    border-bottom: 1px solid #333;
-}
-
-.top-left a,
-.top-left a:hover {
-    color: white;
-    cursor: pointer;
-    font-size: 30px;
-}
-
-#right {
-    /* width: 100%; */
-    width: calc(100vw - 300px);
-}
+/********* BREADCRUMBS *********/
 
 .breadcrumb {
     margin: 0;
@@ -270,9 +290,7 @@ i.fas {
     font-weight: normal;
 }
 
-#right .bottom {
-    padding: 40px 50px 0 50px;
-}
+/********* SEARCHBAR *********/
 
 .form-inline .form-control {
     height: 30px;
@@ -293,14 +311,7 @@ i.fas {
     color: #333;
 }
 
-.navbar {
-    padding: 0;
-}
-
-.bottom {
-    flex-grow: 1;  /*ensures that the container will take up the full height of the parent container*/
-    overflow-y: auto;  /*adds scroll to this container*/
-}
+/********* TABLE *********/
 
 table {
 	width: 100%;
@@ -308,6 +319,48 @@ table {
 
 thead {
     border-bottom: 0px;
+}
+
+th {
+    border-left: 1px solid rgba(51, 51, 51, 0.5);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+    padding: 10px 20px;
+    font-weight: initial;
+    width: 100%
+}
+
+td {
+    width: 100%;
+    padding: 20px;
+}
+
+tr {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.25);
+}
+
+thead tr th:nth-child(2) {
+    padding: 10px 100px 10px 20px;
+}
+
+thead tr th:nth-child(4) {
+    padding: 10px 80px 10px 20px;
+}
+
+td:first-of-type i {
+    font-size: 25px;
+    margin-right: 20px;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+td:first-of-type img {
+    /* width: 25px; */
+    width: 35px;
+    margin-right: 20px;
+    /* previously there was no floating */
+    float: left;
 }
 
 .top-action {
@@ -323,31 +376,6 @@ thead {
     margin-top: 10px;
 }
 
-th {
-    border-left: 1px solid rgba(51, 51, 51, 0.5);
-    border-bottom: 1px solid rgba(51, 51, 51, 0.5);
-    padding: 10px 20px;
-    font-weight: initial;
-    width: 100%
-}
-
-td {
-    width: 100%;
-}
-
-tr {
-    border-bottom: 1px solid rgba(51, 51, 51, 0.25);
-}
-
-td:first-of-type i {
-    font-size: 25px;
-    margin-right: 20px;
-}
-
-tbody tr:hover {
-    background-color: #f9f9f9;
-}
-
 .fileName {
     color: #333;
     background-color: transparent;
@@ -361,39 +389,6 @@ tbody tr:hover {
     background-color: transparent !important;
     border: 0;
     padding: 0;
-}
-
-td {
-    padding: 20px;
-}
-
-td:first-of-type img {
-    /* width: 25px; */
-    width: 35px;
-    margin-right: 20px;
-    /* previously there was no floating */
-    float: left;
-}
-
-thead tr th:nth-child(2) {
-    padding: 10px 100px 10px 20px;
-}
-
-thead tr th:nth-child(4) {
-    padding: 10px 80px 10px 20px;
-}
-
-.file-actions li {
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.file-actions li:hover {
-    opacity: 0.75;
-}
-
-.file-actions li:active {
-    opacity: 0.5;
 }
 
 .file-actions input {
