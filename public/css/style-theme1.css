@@ -225,6 +225,11 @@ button.dropdown-item:active {
     border-radius: .3rem .3rem 0 0;
 }
 
+.modal-body p {
+    padding: 20px 0;
+    font-size: 20px;
+}
+
 .modal-footer {
     justify-content: center;
 }

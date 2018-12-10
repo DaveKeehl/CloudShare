@@ -1,5 +1,7 @@
 <html>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <!-- MODAL FOR MK DIR -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -11,5 +13,22 @@
                 </div>
             </div>
         </div>
+    </div> -->
+
+    <!-- MODAL FOR DELETE -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Do you really want to delete this?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary" formaction="/dir/{path}?_method=DELETE">Yes</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </html>
