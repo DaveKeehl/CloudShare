@@ -433,6 +433,14 @@ tbody tr:hover {
     padding: 0;
 }
 
+.file-actions {
+    display: inline;
+}
+
+.modal-body {
+    text-align: center;
+}
+
 .file-actions input {
     border: 0;
     height: 20px;
@@ -457,6 +465,12 @@ tbody tr:hover {
 
 .deleteFile {
     background-image: url(/img/DeleteFile.svg);
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .getLink {
@@ -474,6 +488,12 @@ tbody tr:hover {
 
 .deleteDirectory {
     background-image: url(/img/DeleteFile.svg);
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .getDirectoryLink {
