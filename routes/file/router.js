@@ -9,6 +9,7 @@ const formidable = require('formidable');
 const mongoose = require('mongoose');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
+const event = require('../../pubsub');
 
 const rootFolder = "test";
 
@@ -27,7 +28,7 @@ router.get('/*', function(req, res){
 				res.status(202);
 				res.set("Content-Disposition", "attachment;filename="+result.name);
 				res.write(file, 'binary');
-				res.end();		
+				res.end();
 			}
 		})
 	}).catch(function(err) {
@@ -53,8 +54,10 @@ router.delete('/*', function(req, res) {
 	}).then(function(){
 		if (req.accepts("html")) {
 			res.status(204);
+			// event.emit('entry.deleted');
 			res.redirect("/dir/display/"+previous);
 		} else {
+			// event.emit('entry.deleted');
 			res.json(removed);
 		}
 	}).catch(function(err){
@@ -89,6 +92,6 @@ router.post('/*', function(req,res) {
 			timeCreated: formatTime(stat.ctime),
 			dateCreated: formatDate(stat.ctime),
 			tags: []
-		};  
+		};
 	});
 });

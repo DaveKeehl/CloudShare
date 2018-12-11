@@ -32,11 +32,7 @@
 		<!-- FILE IS NOT A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
 			<td class="tags">
-				{@eq key=extension value=txt type="string"}{/eq}
-				{@eq key=extension value=gif type="string"}{/eq}
-				{@eq key=extension value=mp4 type="string"}{/eq}
-				<img src="/img/file-noExtension.svg">
-				<!-- <img src="https://cdn3.iconfinder.com/data/icons/brands-applications/512/File-512.png"> -->
+				{> icons /}
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
 					{> tags /}

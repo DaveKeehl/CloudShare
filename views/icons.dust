@@ -1,0 +1,52 @@
+<html>
+
+    {@eq key=extension value=".txt" type="string"}
+        <img src="/img/file-txt.svg">
+    {/eq}
+    {@eq key=extension value="" type="string"}
+        <img src="/img/file-noExtension.svg">
+    {/eq}
+    {@eq key=extension value=".gif" type="string"}
+        <img src="/img/file-img.svg">
+    {/eq}
+    {@eq key=extension value=".png" type="string"}
+        <img src="/img/file-img.svg">
+    {/eq}
+    {@eq key=extension value=".jpg" type="string"}
+        <img src="/img/file-img.svg">
+    {/eq}
+    {@eq key=extension value=".jpeg" type="string"}
+        <img src="/img/file-img.svg">
+    {/eq}
+    {@eq key=extension value=".js" type="string"}
+        <img src="/img/file-code.svg">
+    {/eq}
+    {@eq key=extension value=".html" type="string"}
+        <img src="/img/file-code.svg">
+    {/eq}
+    {@eq key=extension value=".json" type="string"}
+        <img src="/img/file-code.svg">
+    {/eq}
+    {@eq key=extension value=".css" type="string"}
+        <img src="/img/file-code.svg">
+    {/eq}
+    {@eq key=extension value=".mp4" type="string"}
+        <img src="/img/file-video.svg">
+    {/eq}
+    {@eq key=extension value=".ogv" type="string"}
+        <img src="/img/file-video.svg">
+    {/eq}
+    {@eq key=extension value=".pdf" type="string"}
+        <img src="/img/file-pdf.svg">
+    {/eq}
+    {@eq key=extension value=".zip" type="string"}
+        <img src="/img/file-zip.svg">
+    {/eq}
+    {@eq key=extension value=".mp3" type="string"}
+        <img src="/img/file-audio.svg">
+    {/eq}
+    {@eq key=extension value=".wav" type="string"}
+        <img src="/img/file-audio.svg">
+    {/eq}
+
+</html>
