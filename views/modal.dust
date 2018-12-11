@@ -51,11 +51,7 @@
                 <!-- MODAL FOR DIR UPLOADING -->
                 <div class="uploadObjectModal">
                     <div class="modal-body">
-                        <label for="choose-file">
-                            <i class="fas fa-upload"></i>
-                            <p>Choose File</p>
-                        </label>
-                        <input id="choose-file" type="file" name="uploadedFile">
+                        <input type="file" name="uploadedFile">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
