@@ -520,3 +520,38 @@ tbody tr:hover {
     border-radius: 3px;
     margin-right: 10px;
 }
+
+.uploadObjectModal .modal-body {
+    padding: 20px 0;
+}
+
+.uploadObjectModal input {
+    display: none;
+}
+
+.uploadObjectModal label {
+    margin-bottom: 0;
+    opacity: 1;
+    transition: all 0.2s ease;
+}
+
+.uploadObjectModal label:hover {
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.uploadObjectModal label:active {
+    opacity: 1;
+}
+
+.uploadObjectModal i {
+    font-size: 40px;
+    margin-right: 0;
+}
+
+.uploadObjectModal p {
+    padding: 0;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 400;
+}
