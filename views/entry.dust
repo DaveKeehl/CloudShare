@@ -28,7 +28,6 @@
 	{/eq}
 	<!-- FILES -->
 	{# list}
-	{> modal /}
 	<tr>
 		<!-- FILE IS NOT A DIRECTORY -->
 		{@eq key=isDir value=false type="boolean"}
