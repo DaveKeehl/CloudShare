@@ -17,7 +17,7 @@
 		{@ne key=previous value="" type="string"}
 			<tr>
 				<td class="top-action">
-					<i class="fas fa-folder"></i>
+					<img src="/img/folder.svg">
 					<a href='/dir/display/{previous}'>..</a>
 				</td>
 				<td></td>

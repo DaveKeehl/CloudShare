@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const busboyBodyParser = require('busboy-body-parser');
 const kleiDust = require('klei-dust');
 const methodOverride = require('method-override');
 const path = require('path');
@@ -60,6 +61,7 @@ app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(busboyBodyParser({ limit: '25mb' }));
 app.use(methodOverride('_method'));
 
 // Initialize routers here

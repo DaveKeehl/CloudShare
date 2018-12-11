@@ -95,3 +95,13 @@ router.post('/*', function(req,res) {
 		};
 	});
 });
+
+router.put('/*', function(req,res){
+	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let parentpath = prevpath.join('/');
+	let newpath = req.body.newname;
+	let old;
+
+})
