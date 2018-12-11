@@ -46,7 +46,8 @@ function walk(dir){
                 size: formatBytes(stat.size),
                 extension: null,
                 timeCreated: formatTime(stat.ctime),
-                dateCreated: formatDate(stat.ctime)
+                dateCreated: formatDate(stat.ctime),
+                tags: []
             })
             results = results.concat(walk(file));
         } else {
@@ -59,7 +60,8 @@ function walk(dir){
                 size: formatBytes(stat.size),
                 extension: extension,
                 timeCreated: formatTime(stat.ctime),
-                dateCreated: formatDate(stat.ctime)
+                dateCreated: formatDate(stat.ctime),
+                tags: []
             });
         }
     });

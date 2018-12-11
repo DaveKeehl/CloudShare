@@ -24,40 +24,28 @@ db.once('open', function() {
     console.log("Time: "+util.formatTime(new Date()));
 	let paths = util.walk(rootFolder);
 	console.log("Initialising Database:")
-    paths.forEach((result)=>{
-        Entry.findOne({path: result.path}).then(function(found){
-            if (found) {
-                if (util.compareEntries(result,found)){
-                    if(found.isDir){
-                        console.log("Directory already in database: "+result.path);
-                    } else {
-                        console.log("File already in database: "+result.path);
-                    }
-                } else {
-                    if(result.isDir){
-                        console.log("Replacing Expired Directory: " + result.path);
-                    } else {
-                        console.log("Replacing Expired File: " + result.path);
-                    }
-                    Entry.deleteOne(found).then(function(_deleted){
-                        new Entry(result).save();
-                    }).catch(function(err){
-                        console.log(err);
-                    });
-                }
+    Entry.deleteMany({}).then(function(_deleted){
+        paths.forEach((result)=>{
+            console.log("---------------------------------------------\n");
+            if(result.isDir){
+                console.log("Saving Directory: " + result.path + "\n");
             } else {
-                if(result.isDir){
-                    console.log("Saving Directory: " + result.path);
-                } else {
-                    console.log("Saving File: " + result.path);
-                }              
-                new Entry(result).save();        
+                console.log("Saving File: " + result.path + "\n");
             }
-        }).catch(function(err){
-            console.log(err);
-        });        
-    });
+            console.log("Stats:");
+            console.log("Entry Name: " + result.name);
+            console.log("Extension: " + result.extension);
+            console.log("Parent Dir: " + path.basename(result.parent));
+            console.log("Size: " + result.size);
+            console.log("Created: " + result.timeCreated + " " + result.dateCreated);
+            console.log("Tags: " + result.tags + "\n");
+            new Entry(result).save();         
+        });
+    }).catch(function(err){
+        console.log("An error occured in dropping the previous database:\n"+err);
+    }); 
 });
+
 
 //configure app
 app.use(logger('dev'));
