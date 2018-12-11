@@ -6,61 +6,71 @@
 
                 <!-- MODAL FOR MK DIR -->
                 <div class="makeDirModal">
-                    <div class="modal-body">
-                        <input type="text" name="folder_name" placeholder="New folder">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/{path}">OK</button>
-                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <input type="text" name="folder_name" placeholder="New folder">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" formaction="/dir/{path}">OK</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- MODAL FOR DELETE -->
                 <div class="deleteObjectModal">
-                    <div class="modal-body">
-                        <p>Do you really want to delete this?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/{path}?_method=DELETE">Yes</button>
-                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <p>Do you really want to delete this?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-primary" formaction="/dir/{path}?_method=DELETE">Yes</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- MODAL FOR DIR RENAMING -->
                 <div class="renameObjectModal">
-                    <div class="modal-body">
-                        <input type="text" name="folder_name" placeholder="{path}">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
-                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <input type="text" name="new_name" placeholder="{path}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- MODAL FOR DIR TAGGING -->
                 <div class="tagObjectModal">
-                    <div class="modal-body">
-                        <input type="text" name="folder_name" placeholder="{path}">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
-                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <input type="text" name="tag" placeholder="{path}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- MODAL FOR DIR UPLOADING -->
                 <div class="uploadObjectModal">
-                    <div class="modal-body">
-                        <label for="choose-file">
-                            <i class="fas fa-upload"></i>
-                            <p>Choose File</p>
-                        </label>
-                        <input id="choose-file" type="file" name="uploadedFile">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Upload</button>
-                    </div>
+                    <form method="POST">
+                        <div class="modal-body">
+                            <label for="choose-file">
+                                <i class="fas fa-upload"></i>
+                                <p>Choose File</p>
+                            </label>
+                            <input id="choose-file" type="file" name="uploadedFile">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Upload</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>
