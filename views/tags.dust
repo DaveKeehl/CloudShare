@@ -3,9 +3,6 @@
     {@gt key=tags.length value=0}
         <p class="tags">{tags}</p>
     {:else}
-        <!-- <p>WEB, CLOUD, PROJECT</p> -->
         <p><i class="fas fa-plus-circle"></i></p>
     {/gt}
-    <!-- NO TAG -->
-    <!-- <p>WEB, CLOUD, PROJECT</p> -->
 </html>

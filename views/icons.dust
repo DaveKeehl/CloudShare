@@ -46,6 +46,19 @@
         <img src="/img/file-pdf-red.svg">
     {/eq}
 
+    <!-- EXCEL -->
+    {@eq key=extension value=".xls" type="string"}
+        <img src="/img/file-excel.svg">
+    {/eq}
+
+    <!-- WORD -->
+    {@eq key=extension value=".doc" type="string"}
+        <img src="/img/file-word.svg">
+    {/eq}
+    {@eq key=extension value=".docx" type="string"}
+        <img src="/img/file-word.svg">
+    {/eq}
+
     <!-- ZIP -->
     {@eq key=extension value=".zip" type="string"}
         <img src="/img/file-zip.svg">
