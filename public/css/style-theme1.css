@@ -4,6 +4,10 @@
     padding: 0 50px;
 }
 
+.hide {
+    display: none;
+}
+
 /********** GENERAL STYLES *********/
 
 html {
