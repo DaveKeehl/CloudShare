@@ -51,11 +51,11 @@
                 <!-- MODAL FOR DIR UPLOADING -->
                 <div class="uploadObjectModal">
                     <div class="modal-body">
-                        <input type="text" name="folder_name" placeholder="{path}">
+                        <input type="file" name="uploadedFile">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Upload</button>
                     </div>
                 </div>
 
