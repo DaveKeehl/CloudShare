@@ -421,6 +421,7 @@ tbody tr:hover {
     opacity: 0.75;
     margin-top: 5px;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .fileName {
