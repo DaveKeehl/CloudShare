@@ -1,13 +1,25 @@
 
-function themeCSS(cssFile) {
+var link =document.getElementById("themes")
+document.getElementById("theme1")
+					.onclick = () => {
+   link.href="/css/style-theme1.css";
+};
 
-    var oldCSS = document.getElementsByid("themes");
 
-    var newCSS = document.createElement("link");
-    newCSS.setAttribute("rel", "stylesheet");
-    newCSS.setAttribute("type", "text/css");
-    newCSS.setAttribute("href", cssFile);
+document.getElementById("theme2")
+					.onclick = () => {
+    link.href="/css/style-theme2.css";
+};
 
-   document.getElementsByid("themes").replace(oldCSS,newCSS);
-}
+
+document.getElementById("theme3")
+					.onclick = () => {
+    link.href="/css/style-theme3.css";
+};
+
+
+document.getElementById("theme4")
+					.onclick = () => {
+    link.href="/css/style-theme4.css";
+};
 
