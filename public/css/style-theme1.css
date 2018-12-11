@@ -4,6 +4,10 @@
     padding: 0 50px;
 }
 
+.hide {
+    display: none;
+}
+
 /********** GENERAL STYLES *********/
 
 html {
@@ -433,6 +437,10 @@ tbody tr:hover {
     padding: 0;
 }
 
+.file-actions {
+    display: inline;
+}
+
 .file-actions input {
     border: 0;
     height: 20px;
@@ -457,6 +465,12 @@ tbody tr:hover {
 
 .deleteFile {
     background-image: url(/img/DeleteFile.svg);
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .getLink {
@@ -470,10 +484,22 @@ tbody tr:hover {
 .renameFile {
     background-image: url(/img/RenameFile.svg);
     margin-right: 0 !important;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .deleteDirectory {
     background-image: url(/img/DeleteFile.svg);
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .getDirectoryLink {
@@ -487,4 +513,10 @@ tbody tr:hover {
 .renameDirectory {
     background-image: url(/img/RenameFile.svg);
     margin-right: 0 !important;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-right: 10px;
 }

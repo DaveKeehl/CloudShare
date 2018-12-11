@@ -16,7 +16,7 @@
                 </div>
 
                 <!-- MODAL FOR DELETE -->
-                <!-- <div class="deleteObjectModal">
+                <div class="deleteObjectModal">
                     <div class="modal-body">
                         <p>Do you really want to delete this?</p>
                     </div>
@@ -24,10 +24,10 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                         <button type="submit" class="btn btn-primary" formaction="/dir/{path}?_method=DELETE">Yes</button>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- MODAL FOR DIR RENAMING -->
-                <!-- <div class="renameObjectModal">
+                <div class="renameObjectModal">
                     <div class="modal-body">
                         <input type="text" name="folder_name" placeholder="{path}">
                     </div>
@@ -35,7 +35,29 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
                     </div>
-                </div> -->
+                </div>
+
+                <!-- MODAL FOR DIR TAGGING -->
+                <div class="tagObjectModal">
+                    <div class="modal-body">
+                        <input type="text" name="folder_name" placeholder="{path}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                    </div>
+                </div>
+
+                <!-- MODAL FOR DIR UPLOADING -->
+                <div class="uploadObjectModal">
+                    <div class="modal-body">
+                        <input type="text" name="folder_name" placeholder="{path}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                    </div>
+                </div>
 
             </div>
         </div>

@@ -50,12 +50,12 @@
 				{dateCreated}
 			</td>
 			<td>
+				<input type="submit" value="" class="deleteFile" data-toggle="modal" data-target="#exampleModal">
 				<form class="file-actions" method="POST">
-					<input type="submit" value="" formaction="/file/{path}?_method=DELETE" class="deleteFile">
 					<input type="submit" value="" formaction="" class="getLink">
 					<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
-					<input type="submit" value="" formaction="" class="renameFile">
 				</form>
+				<input type="submit" value="" class="renameFile" data-toggle="modal" data-target="#exampleModal">
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -70,12 +70,13 @@
 				{dateCreated}
 			</td>
 			<td>
+				<input type="submit" value="" class="deleteDirectory" data-toggle="modal" data-target="#exampleModal">
 				<form class="file-actions" method="POST">
-					<input type="submit" value="" formaction="/dir/{path}?_method=DELETE" class="deleteDirectory">
 					<input type="submit" value="" formaction="" class="getDirectoryLink">
 					<input type="submit" value="" formaction="/dir/download/{path}?_method=GET" class="downloadDirectory">
-					<input type="submit" value="" formaction="" class="renameDirectory">
 				</form>
+				<input type="submit" value="" formaction="" class="renameDirectory" data-toggle="modal" data-target="#exampleModal">
+
 			</td>
 		{/eq}
 	</tr>
