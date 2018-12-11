@@ -64,31 +64,31 @@ router.get('/display/*', function(req,res){
 router.get('/download/*', function(req,res){
 	let dirpath = req.path.slice(10).replace(/%20/g,' ');
 	let dirname = path.basename(dirpath);
+	let filename = dirname + '.zip';
 	fs.pathExists(dirpath).then(function(exists){
 		if (exists){
-			zipdir(dirpath, { saveTo: 'temp/' + dirname + '.zip', 
+			zipdir(dirpath, { saveTo: 'temp/' + filename, 
 							  filter: (path, stat) => !/\.zip$/.test(path) }, function (err, buffer) {
 				if (err){
 					console.log(err);
 					res.status(500);
 					res.end("There was a problem with the file compression!")
 				}
-				fs.readFile('temp/' + dirname + '.zip', 'binary', function(err, file){
+				fs.readFile('temp/' + filename, 'binary', function(err, data){
 					if(err) {
 						res.status(500)
 						res.end("There was a problem with reading the compressed file!");
-					} else {
-						res.status(202);
-						res.set("Content-Disposition", "attachment;filename="+dirname+".zip");
-						res.write(file, 'binary');
-						fs.remove('temp/' + dirname + '.zip').then(function(){
-							res.end("Download Successfull!");
-						}).catch(function(err){
-							console.log(err);
-							res.status(500);
-							res.end("There was a problem with removing the compressed directory!");
-						});
 					}
+					res.status(202);
+					res.set("Content-Disposition", "attachment;filename="+filename);
+					res.write(data, 'binary');
+					fs.remove('temp/' + filename).then(function(){
+						res.end("Download Successfull!");
+					}).catch(function(err){
+						console.log(err);
+						res.status(500);
+						res.end("There was a problem with removing the compressed directory!");
+					});
 				})
 			});
 		} else {
