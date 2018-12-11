@@ -63,13 +63,13 @@ router.delete('/*', function(req, res) {
 });
 
 // Add a file
-router.put('/*', function(req,res) {
+router.post('/*', function(req,res) {
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let parentpath = prevpath.join('/');
 	let form = new formidable.IncomingForm();
-	form.uploadDir = parentpath+"/";
+	form.uploadDir = parentpath;
 	form.parse(req, function(err, _fields, files){
 	    if(err) {
 	    	console.log(err);
@@ -78,12 +78,17 @@ router.put('/*', function(req,res) {
 	    }
 	    let tmpFile = files.file.path;
 	    let destFile = path.join(parentpath, files.file.name);
-	    fs.rename(tmpFile, destFile, (err) => {
-			if(err) {
-				res.status(500);
-				res.end();
-			}
-			res.redirect('/dir/display/')
-	    });	    
+	    var stat = fs.statSync(destFile);
+	    const form ={
+			isDir: false,
+			path: destFile,
+			name: tmpFile,
+			parent: parentpath,
+			size: formatBytes(stat.size),
+			extension: path.extname(destFile),
+			timeCreated: formatTime(stat.ctime),
+			dateCreated: formatDate(stat.ctime),
+			tags: []
+		};  
 	});
 });

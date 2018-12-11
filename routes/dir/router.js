@@ -101,8 +101,8 @@ router.get('/download/*', function(req,res){
 // Directory creation
 router.post('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	console.log(dirpath);
 	let dirname = req.body.folder_name;
+	console.log(dirname);
 	if (!dirname){
 		dirname = "New Folder";
 	}
