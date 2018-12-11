@@ -60,16 +60,6 @@
                     </div>
                 </div>
 
-                <!-- <form method="POST">
-                    <button class="new-folder" formaction="/dir/new/{path}/New Folder?_method=PUT">
-                        <i class="fas fa-folder-plus"></i>Create new folder
-                    </button>
-                    <button class="upload-file" formaction="">
-                        <i class="fas fa-cloud-upload-alt"></i>Upload new file
-                    </button>
-                </form> -->
-
-
                 <button class="new-folder" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-folder-plus"></i>Create new folder
                 </button>
@@ -83,7 +73,6 @@
                     {> modal /}
 
                 </form>
-
 
                 <!-- <div class="uploadMultipleContainer">
                     <div class="uploadMultiple">

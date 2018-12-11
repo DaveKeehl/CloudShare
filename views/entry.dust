@@ -2,7 +2,7 @@
 	<!-- SELF LINK -->
 	<tr>
 		<td class="top-action">
-			<i class="fas fa-folder"></i>
+			<img src="/img/folder.svg">
 			<a href='/dir/display/{path}'>.</a>
 		</td>
 		<td>
@@ -61,7 +61,6 @@
 		{:else}
 			<td>
 				<img src="/img/folder.svg">
-				<!-- <i class="fas fa-folder"></i> -->
 				<a href='/dir/display/{path}'>{name}</a>
 			</td>
 			<td>
