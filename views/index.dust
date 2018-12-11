@@ -64,12 +64,14 @@
                     <i class="fas fa-folder-plus"></i>Create new folder
                 </button>
 
-                <button class="upload-file" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fas fa-cloud-upload-alt"></i>Upload new file
-                </button>
-
                 <form method="POST">
+
+                    <button class="upload-file" formaction="">
+                        <i class="fas fa-cloud-upload-alt"></i>Upload new file
+                    </button>
+
                     {> modal /}
+
                 </form>
 
                 <!-- <div class="uploadMultipleContainer">
@@ -160,14 +162,6 @@
                 $(".renameObjectModal").addClass("hide");
                 $(".tagObjectModal").addClass("hide");
                 $(".uploadObjectModal").addClass("hide");
-            });
-
-            $(".upload-file").on("click", function() {
-                $(".uploadObjectModal").removeClass("hide");
-                $(".deleteObjectModal").addClass("hide");
-                $(".makeDirModal").addClass("hide");
-                $(".renameObjectModal").addClass("hide");
-                $(".tagObjectModal").addClass("hide");
             });
 
         </script>
