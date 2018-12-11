@@ -383,10 +383,8 @@ td:first-of-type i {
 }
 
 td:first-of-type img {
-    /* width: 25px; */
     width: 28px;
     margin-right: 20px;
-    float: left;
 }
 
 tbody tr:hover {
@@ -400,6 +398,10 @@ tbody tr:hover {
 
 .tags div {
     display: inline;
+}
+
+.tags img {
+    float: left;
 }
 
 .tags i {

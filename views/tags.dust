@@ -5,6 +5,6 @@
         <p>WEB, CLOUD, PROJECT</p>
     {/gt}
     <!-- NO TAG -->
-    <!-- <p>WEB, CLOUD, PROJECT</p> -->
-    <p><i class="fas fa-plus-circle"></i></p>
+    <p>WEB, CLOUD, PROJECT</p>
+    <!-- <p><i class="fas fa-plus-circle"></i></p> -->
 </html>

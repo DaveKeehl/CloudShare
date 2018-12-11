@@ -59,13 +59,10 @@
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
-			<td class="tags">
-				<!-- <i class="fas fa-folder"></i> -->
+			<td>
 				<img src="/img/folder.svg">
-				<div>
-					<a href='/dir/display/{path}'>{name}</a>
-					{> tags /}
-				</div>
+				<!-- <i class="fas fa-folder"></i> -->
+				<a href='/dir/display/{path}'>{name}</a>
 			</td>
 			<td>
 			</td>
