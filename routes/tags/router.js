@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const util = require('../../util');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
+const event = require('../../pubsub');
 
 const rootFolder = "test";
 
@@ -19,7 +20,7 @@ module.exports = router;
 router.post('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let tags_query = req.body.tags;
-	let tags = tags_query.replace(/\s/g,'').split(',');	
+	let tags = tags_query.replace(/\s/g,'').split(',');
 	let foundentry;
 	let foundtags;
 	Entry.findOne({path: dirpath}).then(function(found){
@@ -34,7 +35,7 @@ router.post('/*', function(req, res){
 				console.log("Adding Tag: " + tag);
 				foundtags.push(tag);
 			}
-		});		
+		});
 		const form = {
 			isDir: foundentry.isDir,
 			path: foundentry.path,
@@ -49,6 +50,7 @@ router.post('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(201);
+		// event.emit('tags.created');
 		res.end("Successfully Added Tags to Entry: " + saved.path);
 	}).catch(function(err){
 		res.status(500);
@@ -59,7 +61,7 @@ router.post('/*', function(req, res){
 router.delete('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let tags_query = req.body.tags;
-	let tags = tags_query.replace(/\s/g,'').split(',');	
+	let tags = tags_query.replace(/\s/g,'').split(',');
 	let foundentry;
 	let foundtags;
 	Entry.findOne({path: dirpath}).then(function(found){
@@ -75,7 +77,7 @@ router.delete('/*', function(req, res){
 			} else {
 				console.log("Entry Does Not Contain Tag: " + tag);
 			}
-		});		
+		});
 		const form = {
 			isDir: foundentry.isDir,
 			path: foundentry.path,
@@ -90,6 +92,7 @@ router.delete('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(204);
+		//event.emit('tags.deleted');
 		res.end("Successfully Deleted Tags from Entry: " + saved.path);
 	}).catch(function(err){
 		res.status(500);
@@ -119,6 +122,7 @@ router.put('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(205);
+		//event.emit('tags.cleared');
 		res.end("Tags Successfully Cleared For Entry: " + saved.path);
 	}).catch(function(err){
 		res.status(500);

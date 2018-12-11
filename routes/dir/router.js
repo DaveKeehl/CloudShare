@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const util = require('../../util');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
+const event = require('../../pubsub');
 
 const rootFolder = "test";
 
@@ -67,7 +68,7 @@ router.get('/download/*', function(req,res){
 	let filename = dirname + '.zip';
 	fs.pathExists(dirpath).then(function(exists){
 		if (exists){
-			zipdir(dirpath, { saveTo: 'temp/' + filename, 
+			zipdir(dirpath, { saveTo: 'temp/' + filename,
 							  filter: (path, stat) => !/\.zip$/.test(path) }, function (err, buffer) {
 				if (err){
 					console.log(err);
@@ -139,8 +140,10 @@ router.post('/*', function(req,res){
 	}).then(function(saved) {
 		if (req.accepts("html")) {
 			res.status(201);
+			// event.emit('entry.created');
 			res.redirect("/dir/display/"+dirpath);
 		} else {
+			// event.emit('entry.created');
 			res.status(201).json(saved);
 		}
 	}).catch(function(err){
@@ -164,6 +167,7 @@ router.delete('/*', function(req,res){
 		return fs.remove(dirpath);
 	}).then(function(){
 		res.status(204);
+		// event.emit('entry.deleted');
 		res.redirect("/dir/display/"+previous);
 	}).catch(function(err){
 		console.log(err);
@@ -192,7 +196,7 @@ router.put('/*', function(req,res){
 			size: found.size,
 			timeCreated: found.timeCreated,
 			dateCreated: found.dateCreated
-		};		
+		};
 	});
 });
 

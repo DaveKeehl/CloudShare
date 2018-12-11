@@ -1,9 +1,43 @@
 #!/usr/bin/env node
 var debug = require('debug')('cloudshare-server');
 var app = require('../app');
+const eventBus = require('../pubsub');
 
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
+});
+
+// Server Socket
+const io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  console.log('client connected');
+
+  socket.on('disconnect', function() {
+    console.log('client disconnected');
+
+  });
+});
+
+eventBus.on('entry.deleted', function(event) {
+  io.emit('entry.deleted', event);
+});
+eventBus.on('entry.created', function(event) {
+  io.emit('entry.created', event)
+});
+
+eventBus.on('entry.moved', function(event) {
+  io.emit('entry.moved', event)
+});
+
+eventBus.on('tags.deleted', function(event) {
+  io.emit('tags.deleted', event);
+});
+eventBus.on('tags.created', function(event) {
+  io.emit('tags.created', event)
+});
+
+eventBus.on('tags.cleared', function(event) {
+  io.emit('tags.cleared', event)
 });
