@@ -111,10 +111,36 @@ router.post('/*', function(req,res) {
 
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let prevpath = dirpath.split('/');
-	prevpath.pop();
-	let parentpath = prevpath.join('/');
-	let newpath = req.body.newname;
+	let parentpath = path.dirname(dirpath);
+	let extname = path.extname(dirpath);
+	let newname = req.body.newname;
+	let newpath = path.join(parentpath,newname+extname);
 	let old;
-
+	fs.move(dirpath,newpath).then(function(){
+		return Entry.findOne({path: dirpath})
+	}).then(function(found){
+		old = found;
+		let stats = fs.statSync(newpath)
+		const form = {
+			isDir: false,
+			path: newpath,
+			name: newname,
+			parent: parentpath,
+			size: found.size,
+			extension: found.extension,
+			timeCreated: util.formatTime(stats.ctime),
+			dateCreated: util.formatDate(stats.ctime),
+			tags: found.tags
+		};
+		return new Entry(form).save();
+	}).then(function(_saved){
+		return Entry.deleteOne(old);
+	}).then(function(_deleted){
+		res.status(200);
+		res.redirect("/dir/display/"+parentpath);
+	}).catch(function(err){
+		console.log(err);
+		res.status(500);
+		res.end("An Error Occured While Updating The File");
+	});
 })

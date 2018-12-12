@@ -52,7 +52,7 @@ app.set('views', __dirname + '/views');
 kleiDust.setOptions({useHelpers : true});
 app.engine('dust', kleiDust.dust);
 app.set('view engine', 'dust');
-//Statics, Mthod Override and Body Parsers
+//Statics, Method Override and Body Parsers
 app.use(express.static('./public'));
 app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
