@@ -15,7 +15,7 @@ const rootFolder = "test";
 
 const app = express();
 
-//configure database
+//Configure DB
 
 mongoose.connect('mongodb://localhost/cloudshare-dev');
 var db = mongoose.connection;
@@ -47,23 +47,21 @@ db.once('open', function() {
     }); 
 });
 
-
-//configure app
-app.use(logger('dev'));
-//dust
+//Dust
 app.set('views', __dirname + '/views');
 kleiDust.setOptions({useHelpers : true});
 app.engine('dust', kleiDust.dust);
 app.set('view engine', 'dust');
-
+//Statics, Mthod Override and Body Parsers
 app.use(express.static('./public'));
 app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(busboyBodyParser({ limit: '25mb', multi: true }));
-//25 mb limit set only for testing and stability reasons
+app.use(busboyBodyParser({ multi: true }));
 app.use(methodOverride('_method'));
+//Configure Logger
+app.use(logger('dev'));
 
 // Initialize routers here
 const routers = require('./routes/routers');
