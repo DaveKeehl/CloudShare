@@ -70,9 +70,8 @@
                     <i class="fas fa-cloud-upload-alt"></i>Upload new file
                 </button>
 
-                <form method="POST">
-                    {> modal /}
-                </form>
+                
+                {> modal /}
 
                 <!-- MODAL FOR UPLOAD -->
                 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
