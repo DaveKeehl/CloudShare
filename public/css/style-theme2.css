@@ -4,6 +4,10 @@
     padding: 0 50px;
 }
 
+.hide {
+    display: none;
+}
+
 /********** GENERAL STYLES *********/
 
 html {
@@ -26,7 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
-    background-color: red;
+    background-color:#19582E;
     text-align: center;
     width: 300px;
 }
@@ -60,7 +64,7 @@ body {
 }
 
 .top-right {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid #19582E;
 }
 
 #right .bottom {
@@ -84,7 +88,7 @@ body {
 }
 
 a {
-    color: red;
+    color: #333;
 }
 
 a, a:hover {
@@ -99,7 +103,7 @@ ul {
 }
 
 i.fas {
-    color: red;
+    color: #19582E;
     font-size: 20px;
     margin-right: 15px;
 }
@@ -159,7 +163,7 @@ button.new-folder,
 button.upload-file {
     cursor: pointer;
     background-color: white;
-    color: red;
+    color: #19582E;
     font-size: 16px;
     font-weight: 500;
     height: 40px;
@@ -192,7 +196,7 @@ button.upload-file:visited {
 }
 
 .dropdown-menu.show {
-    box-shadow: 0px 5px 20px red;
+    box-shadow: 0px 5px 20px #19582E;
     width: 80%;
     transform: translate3d(30px, 77px, 0px) !important;
     padding: 0;
@@ -225,7 +229,7 @@ button.dropdown-item:hover {
 }
 
 button.dropdown-item:active {
-    /* background-color: red !important; */
+    /* background-color: #333 !important; */
 }
 
 .dropdown-toggle::after {
@@ -309,7 +313,7 @@ button.dropdown-item:active {
 }
 
 .breadcrumb-item.active {
-    color: red;
+    color: #19582E;
     font-weight: bold;
 }
 
@@ -325,21 +329,21 @@ button.dropdown-item:active {
 
 .form-inline .form-control {
     height: 30px;
-    border-color: red;
+    border-color: #19582E;
     width: 250px;
 }
 
 .form-inline .form-control::placeholder {
-    color: red;
+    color: #19582E;
     opacity: 1; /* Firefox */
 }
 
 .form-inline .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: red;
+    color: #19582E;
 }
 
 .form-inline .form-control::-ms-input-placeholder { /* Microsoft Edge */
-    color: red;
+    color: #19582E;
 }
 
 /********* TABLE *********/
@@ -416,10 +420,12 @@ tbody tr:hover {
     font-weight: 600;
     opacity: 0.75;
     margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .fileName {
-    color: red;
+    color: #333;
     background-color: transparent;
     border: 0;
     padding: 0;
@@ -433,6 +439,14 @@ tbody tr:hover {
     padding: 0;
 }
 
+.file-actions form {
+    display: flex;
+}
+
+.modal-body {
+    text-align: center;
+}
+
 .file-actions input {
     border: 0;
     height: 20px;
@@ -440,6 +454,7 @@ tbody tr:hover {
     cursor: pointer;
     border-radius: 3px;
     margin-right: 10px;
+    padding: 0;
 }
 
 .file-actions input:hover {
@@ -487,4 +502,4 @@ tbody tr:hover {
 .renameDirectory {
     background-image: url(/img/RenameFile.svg);
     margin-right: 0 !important;
-}f
+}
