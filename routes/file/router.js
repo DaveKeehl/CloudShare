@@ -124,7 +124,7 @@ router.put('/*', function(req,res){
 		const form = {
 			isDir: false,
 			path: newpath,
-			name: newname,
+			name: newname+extname,
 			parent: parentpath,
 			size: found.size,
 			extension: found.extension,
