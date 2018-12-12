@@ -1,6 +1,7 @@
 <html>
-
+     <!-- Extension not find -> Default -->
     <!-- TEXT FILES -->
+
     {@eq key=extension value=".txt" type="string"}
         <img src="/img/file-txt.svg">
     {/eq}
