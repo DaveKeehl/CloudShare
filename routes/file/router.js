@@ -111,10 +111,10 @@ router.post('/*', function(req,res) {
 
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let parentpath = path.dirname(dirpath);
-	let extname = path.extname(dirpath);
-	let newname = req.body.newname;
-	let newpath = path.join(parentpath,newname+extname);
+	let prevpath = dirpath.split('/');
+	prevpath.pop();
+	let parentpath = prevpath.join('/');
+	let newpath = req.body.newname;
 	let old;
 	fs.move(dirpath,newpath).then(function(){
 		return Entry.findOne({path: dirpath})

@@ -46,13 +46,13 @@
 				{dateCreated}
 			</td>
 			<td class="file-actions">
-					<input type="submit" value="" class="deleteFile" data-toggle="modal" data-target="#deleteFile" >
+					<input type="submit" value="" class="deleteFile" data-toggle="modal" data-target="#deleteModal" >
 					<form method="POST">
 						<input type="submit" value="" formaction="" class="getLink">
 						<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
 					</form>
-				<input type="submit" value="" class="renameFile" data-toggle="modal" data-target="#renameFile">
-				{> modals_file /}
+				<input type="submit" value="" class="renameFile" data-toggle="modal" data-target="#renameModal">
+				{> modals_right /}
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -67,15 +67,16 @@
 				{dateCreated}
 			</td>
 			<td class="file-actions">
-				<input type="submit" value="" class="deleteDirectory" data-toggle="modal" data-target="#deleteDir" >
+				<input type="submit" value="" class="deleteDirectory" data-toggle="modal" data-target="#deleteModal" >
 
 				<form method="POST">
 					<input type="submit" value="" formaction="" class="getDirectoryLink">
 					<input type="submit" value="" formaction="/dir/download/{path}?_method=GET" class="downloadDirectory">
 				</form>
 
-				<input type="submit" value="" class="renameDirectory" data-toggle="modal" data-target="#renameDir">
-				{> modals_dir /}
+				<input type="submit" value="" class="renameDirectory" data-toggle="modal" data-target="#renameModal">
+
+				{> modals_right /}
 			</td>
 		{/eq}
 	</tr>
