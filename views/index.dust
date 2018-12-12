@@ -73,32 +73,6 @@
                 
                 {> modal /}
 
-                <!-- MODAL FOR UPLOAD -->
-                <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form method="POST" enctype="multipart/form-data">
-                                <div class="makeDirModal">
-                                    <div class="modal-body">
-                                        <input type="file" name="choose-file" multiple>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary" formaction="/file/{path}">Upload</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="uploadMultipleContainer">
-                    <div class="uploadMultiple">
-                        <i class="fas fa-upload"></i>
-                        <p>Drop files</p>
-                    </div>
-                </div> -->
-
             </div>
         </aside>
         <main id="right" class="column">
@@ -106,8 +80,6 @@
                 <div class="padding-side-50">
                     <nav class="navbar" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
-                            <!--<li class="breadcrumb-item active" aria-current="page">Library</li>-->
                             {path}
                         </ol>
                         <form class="form-inline my-2 my-lg-0">
