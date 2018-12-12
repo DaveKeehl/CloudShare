@@ -1,4 +1,4 @@
-<hmtl>
+<html>
     <!-- HAS TAG -->
     {@gt key=tags.length value=0}
         <p class="tags">{tags}</p>
