@@ -70,43 +70,43 @@ router.delete('/*', function(req, res) {
 router.post('/*', function(req,res) {
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let file = req.files['choose-file'];
-
-	let extless = file.name.split('.')[0];
-	let extension = path.extname(file.name);
-	let newname = extless + extension;
-	let checkpath = path.join(dirpath,newname);
-	let creationpath = checkpath;
-	let present = true;
-	let counter = -1;
-	while(present){
-		if(fs.pathExistsSync(checkpath)){
-			counter += 1;
-			newname = extless + " (" + counter + ")" + extension;
-			checkpath = path.join(dirpath,newname);
-		} else {
-			creationpath = checkpath;
-			present = false;
+	file.forEach((file)=>{
+		let extless = file.name.split('.')[0];
+		let extension = path.extname(file.name);
+		let newname = extless + extension;
+		let checkpath = path.join(dirpath,newname);
+		let creationpath = checkpath;
+		let present = true;
+		let counter = -1;
+		while(present){
+			if(fs.pathExistsSync(checkpath)){
+				counter += 1;
+				newname = extless + " (" + counter + ")" + extension;
+				checkpath = path.join(dirpath,newname);
+			} else {
+				creationpath = checkpath;
+				present = false;
+			}
 		}
-	}
 
-	fs.writeFile(creationpath,file.data,{flag: 'w+'}).then(function(){
-		const form = {
-			isDir: false,
-			path: creationpath,
-			name: newname,
-			parent: dirpath,
-			size: util.formatBytes(file.size),
-			extension: extension
-		};
-		return new Entry(form).save();
-	}).then(function(saved){
-		res.status(201);
-		res.redirect("/dir/display/"+dirpath);
-	}).catch(function(err){
-		console.log(err);
-		res.status(500)
-		res.end("An Error Occured In Uploading The File");
-	})
+		fs.writeFile(creationpath,file.data,{flag: 'w+'}).then(function(){
+			const form = {
+				isDir: false,
+				path: creationpath,
+				name: newname,
+				parent: dirpath,
+				size: util.formatBytes(file.size),
+				extension: extension
+			};
+			new Entry(form).save();
+		}).catch(function(err){
+			console.log(err);
+			res.status(500)
+			res.end("An Error Occured In Uploading The File");
+		});
+	});
+	res.status(201);
+	res.redirect("/dir/display/"+dirpath);
 });
 
 router.put('/*', function(req,res){

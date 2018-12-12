@@ -61,7 +61,7 @@ app.use('/file/preview/test',express.static(path.join(__dirname, 'test')));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(busboyBodyParser({ limit: '25mb' }));
+app.use(busboyBodyParser({ limit: '25mb', multi: true }));
 //25 mb limit set only for testing and stability reasons
 app.use(methodOverride('_method'));
 
