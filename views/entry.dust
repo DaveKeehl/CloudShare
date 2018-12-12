@@ -5,12 +5,9 @@
 			<img src="/img/folder.svg">
 			<a href='/dir/display/{path}'>.</a>
 		</td>
-		<td>
-		</td>
-		<td>
-		</td>
-		<td>
-		</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<!-- LINK TO PARENT -->
 	{@eq key=squery value=true type="boolean"}
@@ -42,17 +39,15 @@
 				{size}
 			</td>
 			<td>
-				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
 			<td class="file-actions">
-					<input type="submit" value="" class="deleteFile" data-toggle="modal" data-target="#deleteModal" >
-					<form method="POST">
-						<input type="submit" value="" formaction="" class="getLink">
-						<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
-					</form>
-				<input type="submit" value="" class="renameFile" data-toggle="modal" data-target="#renameModal">
-				{> modals_right /}
+				<form method="POST">
+					<input class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" >
+					<input type="submit" value="" formaction="" class="getLink">
+					<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
+					<input class="renameFile" data-toggle="modal" data-target="#renameFileModal">
+				</form>
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -60,25 +55,20 @@
 				<img src="/img/folder.svg">
 				<a href='/dir/display/{path}'>{name}</a>
 			</td>
+			<td></td>
 			<td>
-			</td>
-			<td>
-				<!-- {timeCreated}<br> -->
 				{dateCreated}
 			</td>
 			<td class="file-actions">
-				<input type="submit" value="" class="deleteDirectory" data-toggle="modal" data-target="#deleteModal" >
-
 				<form method="POST">
-					<input type="submit" value="" formaction="" class="getDirectoryLink">
-					<input type="submit" value="" formaction="/dir/download/{path}?_method=GET" class="downloadDirectory">
+					<input class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal">
+					<input class="getDirectoryLink" type="submit" value="" formaction="">
+					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
+					<input class="renameDirectory" data-toggle="modal" data-target="#renameDirectoryModal">
 				</form>
-
-				<input type="submit" value="" class="renameDirectory" data-toggle="modal" data-target="#renameModal">
-
-				{> modals_right /}
 			</td>
 		{/eq}
+		{> modals_right /}
 	</tr>
 	{/ list}
 </html>
