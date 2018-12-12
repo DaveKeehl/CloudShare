@@ -62,6 +62,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(busboyBodyParser({ limit: '25mb' }));
+//25 mb limit set only for testing and stability reasons
 app.use(methodOverride('_method'));
 
 // Initialize routers here

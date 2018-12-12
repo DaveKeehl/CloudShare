@@ -6,6 +6,7 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs-extra');
 const formidable = require('formidable');
+const util = require('../../util');
 const mongoose = require('mongoose');
 require('../../models/Entries');
 const Entry = mongoose.model('Entries');
@@ -68,32 +69,44 @@ router.delete('/*', function(req, res) {
 // Add a file
 router.post('/*', function(req,res) {
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let prevpath = dirpath.split('/');
-	prevpath.pop();
-	let parentpath = prevpath.join('/');
-	let form = new formidable.IncomingForm();
-	form.uploadDir = parentpath;
-	form.parse(req, function(err, _fields, files){
-	    if(err) {
-	    	console.log(err);
-			res.status(500);
-			res.end("An Error Has Occured!");
-	    }
-	    let tmpFile = files.file.path;
-	    let destFile = path.join(parentpath, files.file.name);
-	    var stat = fs.statSync(destFile);
-	    const form ={
+	let file = req.files['choose-file'];
+
+	let extless = file.name.split('.')[0];
+	let extension = path.extname(file.name);
+	let newname = extless + extension;
+	let checkpath = path.join(dirpath,newname);
+	let creationpath = checkpath;
+	let present = true;
+	let counter = -1;
+	while(present){
+		if(fs.pathExistsSync(checkpath)){
+			counter += 1;
+			newname = extless + " (" + counter + ")" + extension;
+			checkpath = path.join(dirpath,newname);
+		} else {
+			creationpath = checkpath;
+			present = false;
+		}
+	}
+
+	fs.writeFile(creationpath,file.data,{flag: 'w+'}).then(function(){
+		const form = {
 			isDir: false,
-			path: destFile,
-			name: tmpFile,
-			parent: parentpath,
-			size: formatBytes(stat.size),
-			extension: path.extname(destFile),
-			timeCreated: formatTime(stat.ctime),
-			dateCreated: formatDate(stat.ctime),
-			tags: []
+			path: creationpath,
+			name: newname,
+			parent: dirpath,
+			size: util.formatBytes(file.size),
+			extension: extension
 		};
-	});
+		return new Entry(form).save();
+	}).then(function(saved){
+		res.status(201);
+		res.redirect("/dir/display/"+dirpath);
+	}).catch(function(err){
+		console.log(err);
+		res.status(500)
+		res.end("An Error Occured In Uploading The File");
+	})
 });
 
 router.put('/*', function(req,res){

@@ -103,7 +103,6 @@ router.get('/download/*', function(req,res){
 router.post('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let dirname = req.body.folder_name;
-	console.log(dirname);
 	if (!dirname){
 		dirname = "New Folder";
 	}
@@ -182,11 +181,13 @@ router.put('/*', function(req,res){
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
-	let newname = req.body.new_name;
-	let newpath = path.join(previous,newname);
-	let old;
-	Entry.findOne({path: dirpath}).then(function(found){
-		old = found;
+	let newpath = req.body.newpath;
+	let newpath_parent = path.dirname(newpath);
+	let old_dir;
+	fs.move(dirpath,newpath).then(function(){
+		return Entry.findOne({path: dirpath});
+	}).then(function(found){
+		old_dir = found;
 		const form = {
 			isDir: found.isDir,
 			path: newpath,
@@ -197,83 +198,10 @@ router.put('/*', function(req,res){
 			timeCreated: found.timeCreated,
 			dateCreated: found.dateCreated
 		};
+		new Entry(form).save();
+	}).catch(function(err){
+		console.log(err);
+		res.status(500);
+		res.end("Internal Server Error!");
 	});
 });
-
-// router.put('/*', function(req,res){
-// 	let dirpath = req.path.slice(1);
-// 	fs.mkdirSync(dirpath);
-// 	Entry.findOne(dirpath, function(err, found){
-// 		if(err){
-// 			res.status(400).end();
-// 		}
-// 		else if(found === null){
-// 			const entry = new Entries ({
-// 				isDir: req.body.isDir,
-// 				path: req.body.path,
-// 				name: req.body.name,
-// 				parent: req.body.parent,
-// 				extension: req.body.extension,
-// 				size: req.body.size,
-// 				timeCreated: req.body.timeCreated,
-// 				dateCreated: req.body.dateCreated
-// 			});
-// 			entry.save(function(err, saved) {
-// 					if (!err) {
-// 							if (req.accepts("html")) {
-// 									res.status(201);
-// 									res.redirect("/");
-// 							}
-// 							else {
-// 									res.status(201).json(saved);
-// 							}
-// 					}
-// 			});
-// 		}
-// 		else {
-// 			if (req.body.isDir) {
-// 					found.isDir = req.body.isDir;
-// 			}
-// 			if (req.body.path) {
-// 					found.path = req.body.path;
-// 			}
-// 			if (req.body.name) {
-// 					found.name = req.body.name;
-// 			}
-// 			if (req.body.parent) {
-// 					found.parent = req.body.parent;
-// 			}
-// 			if(req.body.extension){
-// 				found.extension = req.body.extension;
-// 			}
-// 			if(req.body.size){
-// 				found.size = req.body.size;
-// 			}
-// 			if(req.body.timeCreated) {
-// 				found.timeCreated =req.body.timeCreated;
-// 			}
-// 			if(req.body.dateCreated) {
-// 				found.dateCreated = req.body.dateCreated;
-// 			}
-// 			found.save(function(err, saved) {
-// 					if (!err) {
-// 							if (req.accepts("html")) {
-// 									// event.emit('favorite.updated', saved);
-// 									res.status(201);
-// 									res.redirect("/");
-// 							}
-// 							else {
-// 									// event.emit('favorite.updated', saved);
-// 									res.status(201).json(saved);
-// 							}
-// 					}
-// 					else {
-// 							res.status(400).end();
-// 					}
-// 			});
-// 		}
-// 	});
-// 	fs.renameSync(dirpath,)
-// 	res.status(200);
-// 	res.end('Directory ' + dirpath + ' created');
-// });
