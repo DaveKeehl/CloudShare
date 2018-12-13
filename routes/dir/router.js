@@ -137,12 +137,11 @@ router.post('/*', function(req,res){
 		};
 		return new Entry(form).save();
 	}).then(function(saved) {
+		// event.emit('entry.created');
 		if (req.accepts("html")) {
 			res.status(201);
-			// event.emit('entry.created');
 			res.redirect("/dir/display/"+dirpath);
 		} else {
-			// event.emit('entry.created');
 			res.status(201).json(saved);
 		}
 	}).catch(function(err){
@@ -158,7 +157,9 @@ router.delete('/*', function(req,res){
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
+	let deleted;
 	Entry.findOne({path: dirpath}).then(function(found){
+		deleted = found;
 		return Entry.deleteOne(found);
 	}).then(function(_deleted){
 		return Entry.deleteMany({parent: {$regex: dirpath}});
@@ -167,7 +168,11 @@ router.delete('/*', function(req,res){
 	}).then(function(){
 		res.status(204);
 		// event.emit('entry.deleted');
-		res.redirect("/dir/display/"+previous);
+		if (req.accepts("html")){
+			res.redirect("/dir/display/"+previous);
+		} else {
+			res.status(201).json(deleted);
+		}
 	}).catch(function(err){
 		console.log(err);
 		res.status(500);
@@ -179,4 +184,5 @@ router.delete('/*', function(req,res){
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = path.dirname(dirpath);
+
 });

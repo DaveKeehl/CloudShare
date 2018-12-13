@@ -23,8 +23,8 @@ router.get('/*', function(req, res){
 	Entry.findOne({path: dirpath}).then(function(result){
 		fs.readFile(result.path, 'binary', function(err, file){
 			if(err) {
-				res.status(500)
-				res.end();
+				res.status(400)
+				res.end("File Could Not Be Read");
 			} else {
 				res.status(202);
 				res.set("Content-Disposition", "attachment;filename="+result.name);
@@ -33,7 +33,7 @@ router.get('/*', function(req, res){
 			}
 		})
 	}).catch(function(err) {
-		res.status(400);
+		res.status(500);
 		res.end("File Could Not Be Downloaded!");
 	});
 });
@@ -42,27 +42,29 @@ router.get('/*', function(req, res){
 router.delete('/*', function(req, res) {
     let dirpath = req.path.slice(1).replace(/%20/g,' ');
     let previous;
+    let removed;
 	Entry.findOne({path: dirpath}).then(function(found){
 	    if (!found) {
 	        res.status(404);
 	        res.end("No Entries Found!");
 	    } else {
 	    	previous = found.parent;
+	    	removed = found;
 	        return Entry.deleteOne(found);
 	    }
 	}).then(function(deleted){
 		return fs.remove(dirpath);
 	}).then(function(){
+		// event.emit('entry.deleted');
 		if (req.accepts("html")) {
 			res.status(204);
-			// event.emit('entry.deleted');
 			res.redirect("/dir/display/"+previous);
 		} else {
-			// event.emit('entry.deleted');
 			res.json(removed);
 		}
 	}).catch(function(err){
-		res.status(500).end("Internal Server Error!");
+		res.status(500);
+		res.end("Internal Server Error!");
 	});
 });
 
@@ -70,6 +72,7 @@ router.delete('/*', function(req, res) {
 router.post('/*', function(req,res) {
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let file = req.files['choose-file'];
+	let added = [];
 	file.forEach((file)=>{
 		let extless = file.name.split('.')[0];
 		let extension = path.extname(file.name);
@@ -98,7 +101,9 @@ router.post('/*', function(req,res) {
 				size: util.formatBytes(file.size),
 				extension: extension
 			};
-			new Entry(form).save();
+			let result = new Entry(form)
+			added.push(result);
+			result.save();
 		}).catch(function(err){
 			console.log(err);
 			res.status(500)
@@ -106,7 +111,11 @@ router.post('/*', function(req,res) {
 		});
 	});
 	res.status(201);
-	res.redirect("/dir/display/"+dirpath);
+	if (req.accepts("html")){
+		res.redirect("/dir/display/"+dirpath);
+	} else {
+		res.status(201).json(added);
+	}
 });
 
 router.put('/*', function(req,res){
