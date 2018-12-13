@@ -1,25 +1,45 @@
 
-var link =document.getElementById("themes")
+const css= () =>{
+                if (typeof(Storage) !== "undefined") {
+                    if (localStorage.getItem("css") == null){
+                        localStorage.setItem("css", "style-theme1.css");
+                    }
+                    var head  = document.getElementsByTagName('head')[0];
+                    var link  = document.createElement('link');
+                    link.rel  = 'stylesheet';
+                    link.type = 'text/css';
+                    link.href = "/css/"+localStorage.getItem("css");
+                    head.appendChild(link);
+
+                }else {
+                	console.log("error")
+                }
+            }
+        
+
 document.getElementById("theme1")
 					.onclick = () => {
-   link.href="/css/style-theme1.css";
+   localStorage.setItem("css", "style-theme1.css");
+   css();
 };
 
 
 document.getElementById("theme2")
 					.onclick = () => {
-    link.href="/css/style-theme2.css";
+   localStorage.setItem("css", "style-theme2.css");
+   css();
 };
 
 
 document.getElementById("theme3")
 					.onclick = () => {
-    link.href="/css/style-theme3.css";
+    localStorage.setItem("css", "style-theme3.css");
+    css();
 };
 
 
 document.getElementById("theme4")
 					.onclick = () => {
-    link.href="/css/style-theme4.css";
+    localStorage.setItem("css", "style-theme4.css");
+    css();s
 };
-
