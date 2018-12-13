@@ -32,7 +32,13 @@
 				{> icons /}
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
-					{> tags /}
+					{@gt key=tags.length value=0}
+						<!-- HAS TAG -->
+						<p class="tags" data-toggle="modal" data-target="#tagsModal" onclick="taggingPath()" data-path="{path}">{tags}</p>
+					{:else}
+						<!-- NO TAG -->
+						<p data-toggle="modal" data-target="#tagsModal"><i class="fas fa-plus-circle" onclick="taggingPath()" data-path="{path}"></i></p>
+					{/gt}
 				</div>
 			</td>
 			<td>
@@ -43,11 +49,12 @@
 			</td>
 			<td class="file-actions">
 				<form method="POST">
-					<input class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" >
-					<input type="submit" value="" formaction="" class="getLink">
-					<input type="submit" value="" formaction="/file/{path}?_method=GET" class="downloadFile">
+					<input data-path="{path}" class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
+					<input class="getLink" type="submit" value="" formaction="">
+					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
 					<input class="renameFile" data-toggle="modal" data-target="#renameFileModal">
 				</form>
+				<button data-path="{path}" onclick="test()">my button</button>
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -61,11 +68,12 @@
 			</td>
 			<td class="file-actions">
 				<form method="POST">
-					<input class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal">
+					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">
 					<input class="getDirectoryLink" type="submit" value="" formaction="">
 					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
 					<input class="renameDirectory" data-toggle="modal" data-target="#renameDirectoryModal">
 				</form>
+				<button data-path="{path}" onclick="test()">my button</button>
 			</td>
 		{/eq}
 		{> modals_right /}

@@ -239,9 +239,12 @@ button.dropdown-item:active {
 
 /********* MODAL WINDOW *********/
 
-.modal-body {
+.modal-body,
+.modal-header {
     border-radius: .3rem .3rem 0 0;
     padding: 0;
+    text-align: center;
+    display: inline;
 }
 
 .modal-body input {
@@ -254,7 +257,8 @@ button.dropdown-item:active {
     border-radius: .3rem .3rem 0 0;
 }
 
-.modal-body p {
+.modal-body p,
+.modal-header p {
     padding: 20px 0;
     font-size: 20px;
     margin-bottom: 0;
@@ -264,10 +268,72 @@ button.dropdown-item:active {
     justify-content: center;
 }
 
-.btn-secondary {
+/* .btn-secondary {
     color: #fff;
     background-color: #dc3545;
     border-color: #dc3545;
+} */
+
+#tagsModal .modal-body {
+}
+
+#tagsModal input {
+}
+
+#tagsModal .row button {
+    border-radius: 0 .3rem .3rem 0;
+}
+
+#tagsModal .row button::placeholder {
+    color: tomato;
+}
+
+#uploadModal .modal-body {
+}
+
+#uploadModal label {
+    cursor: pointer;
+    margin-bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    transition: all 0.2s ease;
+}
+
+#uploadModal label:hover {
+    background-color: whitesmoke;
+    border-radius: .3rem;
+}
+
+#uploadModal label:active {
+    background-color: #adadad;
+    border-radius: .3rem;
+}
+
+#uploadModal label:focus {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+#uploadModal label i {
+    font-size: 40px;
+    margin-right: 0;
+    border-radius: .3rem;
+}
+
+#uploadModal label p {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 0;
+    color: #333;
+}
+
+#uploadModal input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 /********* DRAG AND DROP UPLOAD SECTION *********/
@@ -424,6 +490,17 @@ tbody tr:hover {
     letter-spacing: 1px;
 }
 
+.tags i:hover,
+.tags p:hover {
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.tags i:active,
+.tags p:active {
+    opacity: 0.5;
+}
+
 .fileName {
     color: #333;
     background-color: transparent;
@@ -441,10 +518,6 @@ tbody tr:hover {
 
 .file-actions form {
     display: flex;
-}
-
-.modal-body {
-    text-align: center;
 }
 
 .file-actions input {
