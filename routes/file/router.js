@@ -123,7 +123,7 @@ router.put('/*', function(req,res){
 	let parentpath = path.dirname(dirpath);
 	let extname = path.extname(dirpath);
 	
-	let newname = req.body.newname.replace(/\//g,'');
+	let newname = req.body.newname;
 	if (!newname){
 		newname = "newname";
 	}

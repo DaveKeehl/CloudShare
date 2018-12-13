@@ -102,7 +102,7 @@ router.get('/download/*', function(req,res){
 // Directory creation
 router.post('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let dirname = req.body.folder_name.replace(/\//g,'');
+	let dirname = req.body.folder_name;
 	if (!dirname){
 		dirname = "New Folder";
 	}
@@ -184,7 +184,7 @@ router.delete('/*', function(req,res){
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = path.dirname(dirpath);
-	let dirname = req.body.dirname.replace(/\//g,'');
+	let dirname = req.body.dirname;
 	if (!dirname){
 		dirname = "newname";
 	}
