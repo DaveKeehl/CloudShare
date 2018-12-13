@@ -10,7 +10,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                            <button type="submit" class="btn btn-primary" formaction="/dir/{path}?_method=DELETE">Yes</button>
+                            <button type="submit" class="btn btn-primary" formaction="/file/{path}?_method=DELETE">Yes</button>
                         </div>
                 </form>
             </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary" formaction="/dir/new/{path}?_method=PUT">Rename</button>
+                            <button type="submit" class="btn btn-primary" formaction="/file/new/{path}?_method=PUT">Rename</button>
                         </div>
                 </form>
             </div>
