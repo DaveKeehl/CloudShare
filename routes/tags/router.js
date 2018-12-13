@@ -19,6 +19,7 @@ module.exports = router;
 // Add Tags
 router.post('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let parentpath = path.dirname(dirpath);
 	let tags_query = req.body.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');
 	let foundentry;
@@ -51,7 +52,7 @@ router.post('/*', function(req, res){
 	}).then(function(saved){
 		res.status(201);
 		// event.emit('tags.created');
-		res.end("Successfully Added Tags to Entry: " + saved.path);
+		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);
 		res.end(err);
@@ -60,6 +61,7 @@ router.post('/*', function(req, res){
 
 router.delete('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let parentpath = path.dirname(dirpath);
 	let tags_query = req.body.tags;
 	let tags = tags_query.replace(/\s/g,'').split(',');
 	let foundentry;
@@ -93,7 +95,7 @@ router.delete('/*', function(req, res){
 	}).then(function(saved){
 		res.status(204);
 		//event.emit('tags.deleted');
-		res.end("Successfully Deleted Tags from Entry: " + saved.path);
+		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);
 		res.end(err);
@@ -103,6 +105,7 @@ router.delete('/*', function(req, res){
 // Clear Tags
 router.put('/*', function(req, res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
+	let parentpath = path.dirname(dirpath);
 	let foundentry;
 	Entry.findOne({path: dirpath}).then(function(found){
 		foundentry = found;
@@ -123,7 +126,7 @@ router.put('/*', function(req, res){
 	}).then(function(saved){
 		res.status(205);
 		//event.emit('tags.cleared');
-		res.end("Tags Successfully Cleared For Entry: " + saved.path);
+		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);
 		res.end(err);

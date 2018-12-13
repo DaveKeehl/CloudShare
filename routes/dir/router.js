@@ -204,9 +204,6 @@ router.put('/*', function(req,res){
 		}
 	}
 
-	let old;
-	let update;
-
  	fs.move(dirpath,creationpath).then(function(){
 		return Entry.deleteMany({path: {$regex: dirpath}});
 	}).then(function(_deleted){
