@@ -184,5 +184,54 @@ router.delete('/*', function(req,res){
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
 	let prevpath = path.dirname(dirpath);
+	let dirname = req.body.dirname;
+	if (!dirname){
+		dirname = "newname";
+	}
 
+	let checkpath = path.join(prevpath,dirname);
+	let creationpath = checkpath;
+
+	let present = true;
+	let counter = -1;
+	while(present){
+		if(fs.pathExistsSync(checkpath)){
+			counter += 1;
+			checkpath = creationpath + " (" + counter + ")";
+		} else {
+			creationpath = checkpath;
+			present = false;
+		}
+	}
+
+	let old;
+	let update;
+
+ 	fs.move(dirpath,creationpath).then(function(){
+		return Entry.deleteMany({path: {$regex: dirpath}});
+	}).then(function(_deleted){
+		let stats = fs.statSync(creationpath);
+        const form = {
+        	isDir: true,
+        	path: creationpath,
+        	name: dirname,
+        	parent: prevpath,
+        	extension: null,
+        	size: util.formatBytes(stats.size),
+        	timeCreated: util.formatDate(stats.ctime),
+        	dateCreated: util.formatDate(stats.ctime)
+        }
+        new Entry(form).save();	
+		let paths = util.walk(creationpath);
+		paths.forEach((result)=>{
+            new Entry(result).save();         
+        });
+
+        res.status(202);
+        res.redirect("/dir/display/"+prevpath);
+	}).catch(function(err){
+		console.log(err);
+		res.status(500);
+		res.end("An Error Occured While Updating The Directory Name");
+	});
 });

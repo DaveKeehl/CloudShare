@@ -128,8 +128,7 @@ router.put('/*', function(req,res){
 		newname = "newname";
 	}
 	
-	let newpath = path.join(parentpath,newname+extname);
-	let checkpath = newpath;
+	let checkpath = path.join(parentpath,newname+extname);
 	let creationpath = checkpath;
 	let creationname = newname;
 	let present = true;
