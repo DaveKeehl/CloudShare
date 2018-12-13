@@ -123,7 +123,7 @@ router.put('/*', function(req,res){
 	let parentpath = path.dirname(dirpath);
 	let extname = path.extname(dirpath);
 	
-	let newname = req.body.newname;
+	let newname = req.body.newname.replace(/\//g,'');
 	if (!newname){
 		newname = "newname";
 	}
@@ -136,8 +136,7 @@ router.put('/*', function(req,res){
 	while(present){
 		if(fs.pathExistsSync(checkpath)){
 			counter += 1;
-			creationname = newname + " (" + counter + ")";
-			checkpath = path.join(parentpath, creationname+extname);
+			checkpath = path.join(parentpath, newname + " (" + counter + ")" +extname);
 		} else {
 			creationpath = checkpath;
 			present = false;
@@ -153,7 +152,7 @@ router.put('/*', function(req,res){
 		const form = {
 			isDir: false,
 			path: creationpath,
-			name: creationname+extname,
+			name: path.basename(creationpath),
 			parent: parentpath,
 			size: found.size,
 			extension: extname,
