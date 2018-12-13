@@ -9,7 +9,7 @@
                             <input type="text" name="folder_name" placeholder="New folder">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary" formaction="/dir/{path}">OK</button>
                         </div>
                 </form>
@@ -30,7 +30,7 @@
                             </label>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary" formaction="/file/{path}">Upload</button>
                         </div>
                 </form>

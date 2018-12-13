@@ -9,8 +9,8 @@
                         <p>Do you really want to delete this file?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-primary" formaction="" id="deleteFileButton">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" formaction="" id="deleteFileButton">Yes</button>
                     </div>
                 </form>
             </div>
@@ -26,8 +26,8 @@
                         <p>Do you really want to delete {eve}?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-primary" id="deleteDirectoryButton">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" id="deleteDirectoryButton">Yes</button>
                     </div>
                 </form>
             </div>
@@ -43,8 +43,8 @@
                         <input type="text" name="newname" placeholder="Rename file">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="renameFileButton" formaction="">Rename</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" id="renameFileButton" formaction="">Rename</button>
                     </div>
                 </form>
             </div>
@@ -60,8 +60,8 @@
                         <input type="text" name="folder_name" placeholder="Rename directory">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" id="renameDirectoryButton" formaction="">Rename</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" id="renameDirectoryButton" formaction="">Rename</button>
                     </div>
                 </form>
             </div>

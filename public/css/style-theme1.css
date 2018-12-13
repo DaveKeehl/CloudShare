@@ -229,7 +229,8 @@ button.dropdown-item:hover {
 }
 
 button.dropdown-item:active {
-    /* background-color: #333 !important; */
+    color: #333;
+    background-color: #ccc !important;
 }
 
 .dropdown-toggle::after {
@@ -244,7 +245,6 @@ button.dropdown-item:active {
     border-radius: .3rem .3rem 0 0;
     padding: 0;
     text-align: center;
-    display: inline;
 }
 
 .modal-body input {
@@ -268,50 +268,23 @@ button.dropdown-item:active {
     justify-content: center;
 }
 
-/* .btn-secondary {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-} */
-
-#tagsModal .modal-body {
-}
-
-#tagsModal input {
-}
-
 #tagsModal .row button {
     border-radius: 0 .3rem .3rem 0;
 }
 
-#tagsModal .row button::placeholder {
-    color: tomato;
-}
-
-#uploadModal .modal-body {
+#uploadModal .modal-content {
+    position: relative;
+    z-index: 0;
 }
 
 #uploadModal label {
     cursor: pointer;
     margin-bottom: 0;
     width: 100%;
-    padding: 20px 0;
+    padding-bottom: 20px;
     transition: all 0.2s ease;
-}
-
-#uploadModal label:hover {
-    background-color: whitesmoke;
-    border-radius: .3rem;
-}
-
-#uploadModal label:active {
-    background-color: #adadad;
-    border-radius: .3rem;
-}
-
-#uploadModal label:focus {
-    outline: 1px dotted #000;
-    outline: -webkit-focus-ring-color auto 5px;
+    position: relative;
+    z-index: 1;
 }
 
 #uploadModal label i {
@@ -328,45 +301,18 @@ button.dropdown-item:active {
 }
 
 #uploadModal input {
-    width: 0.1px;
-    height: 0.1px;
+    width: 100%;
+    height: 120px;
+    margin-bottom: -120px;
     opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-/********* DRAG AND DROP UPLOAD SECTION *********/
-
-.uploadMultipleContainer {
-    height: calc(100vh - 335px);
-}
-
-.uploadMultiple {
-    margin: 0 30px;
-    height: 100%;
-    border-radius: 10px;
-    border: 3px dashed rgba(255, 255, 255, 0.25);
-    padding: calc((100vh - 335px)/2.75) 0;
     cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.uploadFileHover {
+    background-color: #eaeaea;
     transition: all 0.2s ease;
-}
-
-.uploadMultiple:hover {
-    background-color: #252525;
-}
-
-.uploadMultiple i {
-    color: rgba(255, 255, 255, 0.25) !important;
-    font-size: 40px !important;
-    margin-right: 0 !important;
-    margin-bottom: 20px;
-}
-
-.uploadMultiple p {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 25px;
-    font-weight: 400;
 }
 
 /********* BREADCRUMBS *********/
@@ -376,19 +322,6 @@ button.dropdown-item:active {
     padding: 0;
     background-color: transparent;
     font-size: 20px;
-}
-
-.breadcrumb-item.active {
-    color: #333;
-    font-weight: bold;
-}
-
-.breadcrumb-item+.breadcrumb-item::before {
-    display: inline-block;
-    padding-right: .5rem;
-    color: #6c757d;
-    content: "/";
-    font-weight: normal;
 }
 
 /********* SEARCHBAR *********/
@@ -486,7 +419,7 @@ tbody tr:hover {
     font-weight: 600;
     opacity: 0.75;
     margin-top: 5px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 1px;
 }
 
@@ -547,7 +480,15 @@ tbody tr:hover {
     background-image: url(/img/DeleteFile.svg);
 }
 
+.deleteDirectory {
+    background-image: url(/img/DeleteFile.svg);
+}
+
 .getLink {
+    background-image: url(/img/GetLink.svg);
+}
+
+.getDirectoryLink {
     background-image: url(/img/GetLink.svg);
 }
 
@@ -555,21 +496,13 @@ tbody tr:hover {
     background-image: url(/img/DownloadFile.svg);
 }
 
+.downloadDirectory {
+    background-image: url(/img/DownloadFile.svg);
+}
+
 .renameFile {
     background-image: url(/img/RenameFile.svg);
     margin-right: 0 !important;
-}
-
-.deleteDirectory {
-    background-image: url(/img/DeleteFile.svg);
-}
-
-.getDirectoryLink {
-    background-image: url(/img/GetLink.svg);
-}
-
-.downloadDirectory {
-    background-image: url(/img/DownloadFile.svg);
 }
 
 .renameDirectory {
