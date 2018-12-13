@@ -27,8 +27,8 @@ eventBus.on('entry.created', function(event) {
   io.emit('entry.created', event)
 });
 
-eventBus.on('entry.moved', function(event) {
-  io.emit('entry.moved', event)
+eventBus.on('entry.renamed', function(event) {
+  io.emit('entry.renamed', event)
 });
 
 eventBus.on('tags.deleted', function(event) {
