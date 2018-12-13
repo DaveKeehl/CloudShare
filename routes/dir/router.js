@@ -178,30 +178,5 @@ router.delete('/*', function(req,res){
 // Directory renaming
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let prevpath = dirpath.split('/');
-	prevpath.pop();
-	let previous = prevpath.join('/');
-	let newpath = req.body.newpath;
-	let newpath_parent = path.dirname(newpath);
-	let old_dir;
-	fs.move(dirpath,newpath).then(function(){
-		return Entry.findOne({path: dirpath});
-	}).then(function(found){
-		old_dir = found;
-		const form = {
-			isDir: found.isDir,
-			path: newpath,
-			name: newname,
-			parent: found.parent,
-			extension: found.extension,
-			size: found.size,
-			timeCreated: found.timeCreated,
-			dateCreated: found.dateCreated
-		};
-		new Entry(form).save();
-	}).catch(function(err){
-		console.log(err);
-		res.status(500);
-		res.end("Internal Server Error!");
-	});
+	let prevpath = path.dirname(dirpath);
 });

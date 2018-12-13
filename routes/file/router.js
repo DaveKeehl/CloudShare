@@ -111,23 +111,44 @@ router.post('/*', function(req,res) {
 
 router.put('/*', function(req,res){
 	let dirpath = req.path.slice(1).replace(/%20/g,' ');
-	let prevpath = dirpath.split('/');
-	prevpath.pop();
-	let parentpath = prevpath.join('/');
-	let newpath = req.body.newname;
+	let parentpath = path.dirname(dirpath);
+	let extname = path.extname(dirpath);
+	
+	let newname = req.body.newname;
+	if (!newname){
+		newname = "newname";
+	}
+	
+	let newpath = path.join(parentpath,newname+extname);
+	let checkpath = newpath;
+	let creationpath = checkpath;
+	let creationname = newname;
+	let present = true;
+	let counter = -1;
+	while(present){
+		if(fs.pathExistsSync(checkpath)){
+			counter += 1;
+			creationname = newname + " (" + counter + ")";
+			checkpath = path.join(parentpath, creationname+extname);
+		} else {
+			creationpath = checkpath;
+			present = false;
+		}
+	}
 	let old;
-	fs.move(dirpath,newpath).then(function(){
+
+ 	fs.move(dirpath,creationpath).then(function(){
 		return Entry.findOne({path: dirpath})
 	}).then(function(found){
 		old = found;
-		let stats = fs.statSync(newpath)
+		let stats = fs.statSync(creationpath)
 		const form = {
 			isDir: false,
-			path: newpath,
-			name: newname+extname,
+			path: creationpath,
+			name: creationname+extname,
 			parent: parentpath,
 			size: found.size,
-			extension: found.extension,
+			extension: extname,
 			timeCreated: util.formatTime(stats.ctime),
 			dateCreated: util.formatDate(stats.ctime),
 			tags: found.tags
@@ -143,4 +164,4 @@ router.put('/*', function(req,res){
 		res.status(500);
 		res.end("An Error Occured While Updating The File");
 	});
-})
+});
