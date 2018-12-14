@@ -421,6 +421,7 @@ tbody tr:hover {
     margin-top: 5px;
     /* text-transform: uppercase; */
     letter-spacing: 1px;
+    width: fit-content;
 }
 
 .tags i:hover,

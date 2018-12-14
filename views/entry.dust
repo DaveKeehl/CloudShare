@@ -54,7 +54,7 @@
 					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
 					<input class="renameFile" data-toggle="modal" data-target="#renameFileModal">
 				</form>
-				<button data-path="{path}" onclick="test()">my button</button>
+				<!-- <button data-path="{path}" onclick="test()">my button</button> -->
 			</td>
 		<!-- FILE IS A DIRECTORY -->
 		{:else}
@@ -69,11 +69,11 @@
 			<td class="file-actions">
 				<form method="POST">
 					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">
-					<input class="getDirectoryLink" type="submit" value="" formaction="">
+					<input class="getDirectoryLink" formaction="" data-clipboard-text="{path}">
 					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
 					<input class="renameDirectory" data-toggle="modal" data-target="#renameDirectoryModal">
 				</form>
-				<button data-path="{path}" onclick="test()">my button</button>
+				<!-- <button data-path="{path}" onclick="test()">my button</button> -->
 			</td>
 		{/eq}
 		{> modals_right /}

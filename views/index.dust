@@ -25,7 +25,6 @@
 
         <!-- Stylesheets -->
 
-
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -35,9 +34,8 @@
         <meta name="msapplication-TileColor" content="#00aba9">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body onload="css()">
 
-    <body>
+    <body onload="css()">
 
         <aside id="left" class="column">
 
@@ -50,10 +48,9 @@
             </header>
 
             <div class="bottom">
-
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-palette"></i>Choose theme
+                        <i class="fas fa-palette"></i>Choose theme
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button class="default-theme dropdown-item" id="theme1">Theme 1</button>
@@ -62,32 +59,30 @@
                         <button class="last-theme dropdown-item" id="theme4">Theme 4</button>
                     </div>
                 </div>
-
                 <button class="new-folder" data-toggle="modal" data-target="#mkdirModal">
                     <i class="fas fa-folder-plus"></i>Create new folder
                 </button>
-
                 <button class="upload-file" data-toggle="modal" data-target="#uploadModal">
                     <i class="fas fa-cloud-upload-alt"></i>Upload new file
                 </button>
-
                 {> modals_left /}
-
             </div>
+
         </aside>
+
         <main id="right" class="column">
+
             <header class="top-right">
                 <div class="padding-side-50">
                     <nav class="navbar" aria-label="breadcrumb">
-                        <p class="breadcrumb">
-                            {path}
-                        </p>
+                        <p class="breadcrumb">{path}</p>
                         <form class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
                         </form>
                     </nav>
                 </div>
             </header>
+
             <div class="bottom">
                 <table>
                     <thead>
@@ -103,18 +98,54 @@
                     </tbody>
                 </table>
             </div>
+
         </main>
 
         <!-- Optional JavaScript -->
         <script src="/scripts/CSS.js"></script>
         <script src="/js/modal-js.js"></script>
         <script src="/js/utils.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+
         <script>
+
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            $('.getDirectoryLink').tooltip({
+                trigger: 'click',
+                placement: 'bottom'
+            });
+
+            function setTooltip(message) {
+                $('.getDirectoryLink').tooltip('hide')
+                .attr('data-original-title', message)
+                .tooltip('show');
+            }
+
+            function hideTooltip() {
+                setTimeout(function() {
+                    $('.getDirectoryLink').tooltip('hide');
+                }, 1000);
+            }
+
+            var clipboard = new ClipboardJS('.getDirectoryLink');
+
+            clipboard.on('success', function(e) {
+                setTooltip('Copied!');
+                hideTooltip();
+            });
+
+            clipboard.on('error', function(e) {
+                setTooltip('Failed!');
+                hideTooltip();
+            });
 
             $("#uploadModal input").hover(
                 function() {
