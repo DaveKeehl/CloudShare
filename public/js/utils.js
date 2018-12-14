@@ -20,16 +20,17 @@ const deleteDirectoryPath = function() {
 const renameFilePath = function() {
     const eventPath = event.target.dataset.path;
     const filePath = "/file/" + eventPath + "?_method=PUT";
-    const deleteButton = document.getElementById("renameFileButton");
-    deleteButton.formAction = filePath;
+    console.log(eventPath);
+    const renameButton = document.getElementById("renameFileButton");
+    renameButton.formAction = filePath;
 };
 
 const renameDirectoryPath = function() {
     const eventPath = event.target.dataset.path;
     const directoryPath = "/dir/" + eventPath + "?_method=PUT";
     console.log(directoryPath);
-    const deleteButton = document.getElementById("renameDirectoryButton");
-    deleteButton.formAction = directoryPath;
+    const renameButton = document.getElementById("renameDirectoryButton");
+    renameButton.formAction = directoryPath;
 };
 
 const taggingPath = function() {

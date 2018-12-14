@@ -52,7 +52,7 @@
 					<input data-path="{path}" class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
 					<input data-path="{path}" class="getLink" data-clipboard-text="" onclick="getFileLink()">
 					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
-					<input class="renameFile" data-toggle="modal" data-target="#renameFileModal">
+					<input class="renameFile" data-path="{path}" data-toggle="modal" data-target="#renameFileModal" onclick="renameFilePath()">
 				</form>
 				<!-- <button data-path="{path}" onclick="test()">my button</button> -->
 			</td>
@@ -71,7 +71,7 @@
 					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">
 					<input data-path="{path}" class="getDirectoryLink" data-clipboard-text="" onclick="getDirectoryLink()">
 					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
-					<input class="renameDirectory" data-toggle="modal" data-target="#renameDirectoryModal">
+					<input class="renameDirectory" data-path="{path}" data-toggle="modal" data-target="#renameDirectoryModal" onclick="renameDirectoryPath()">
 				</form>
 				<!-- <button data-path="{path}" onclick="test()">my button</button> -->
 			</td>
