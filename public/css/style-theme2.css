@@ -30,7 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
-    background-color:#19582E;
+    background-color: #19582E;
     text-align: center;
     width: 300px;
 }
@@ -229,7 +229,8 @@ button.dropdown-item:hover {
 }
 
 button.dropdown-item:active {
-    /* background-color: #333 !important; */
+    color: #19582E;
+    background-color: #ccc !important;
 }
 
 .dropdown-toggle::after {
@@ -239,9 +240,11 @@ button.dropdown-item:active {
 
 /********* MODAL WINDOW *********/
 
-.modal-body {
+.modal-body,
+.modal-header {
     border-radius: .3rem .3rem 0 0;
     padding: 0;
+    text-align: center;
 }
 
 .modal-body input {
@@ -254,7 +257,8 @@ button.dropdown-item:active {
     border-radius: .3rem .3rem 0 0;
 }
 
-.modal-body p {
+.modal-body p,
+.modal-header p {
     padding: 20px 0;
     font-size: 20px;
     margin-bottom: 0;
@@ -264,43 +268,52 @@ button.dropdown-item:active {
     justify-content: center;
 }
 
-.btn-secondary {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+#tagsModal .row button {
+    border-radius: 0 .3rem .3rem 0;
 }
 
-/********* DRAG AND DROP UPLOAD SECTION *********/
-
-.uploadMultipleContainer {
-    height: calc(100vh - 335px);
+#uploadModal .modal-content {
+    position: relative;
+    z-index: 0;
 }
 
-.uploadMultiple {
-    margin: 0 30px;
-    height: 100%;
-    border-radius: 10px;
-    border: 3px dashed rgba(255, 255, 255, 0.25);
-    padding: calc((100vh - 335px)/2.75) 0;
+#uploadModal label {
     cursor: pointer;
+    margin-bottom: 0;
+    width: 100%;
+    padding-bottom: 20px;
     transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
 }
 
-.uploadMultiple:hover {
-    background-color: #252525;
+#uploadModal label i {
+    font-size: 40px;
+    margin-right: 0;
+    border-radius: .3rem;
+    color: #333;
 }
 
-.uploadMultiple i {
-    color: rgba(255, 255, 255, 0.25) !important;
-    font-size: 40px !important;
-    margin-right: 0 !important;
-    margin-bottom: 20px;
+#uploadModal label p {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 0;
+    color: #333;
 }
 
-.uploadMultiple p {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 25px;
-    font-weight: 400;
+#uploadModal input {
+    width: 100%;
+    height: 120px;
+    margin-bottom: -120px;
+    opacity: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.uploadFileHover {
+    background-color: #eaeaea;
+    transition: all 0.2s ease;
 }
 
 /********* BREADCRUMBS *********/
@@ -310,19 +323,6 @@ button.dropdown-item:active {
     padding: 0;
     background-color: transparent;
     font-size: 20px;
-}
-
-.breadcrumb-item.active {
-    color: #19582E;
-    font-weight: bold;
-}
-
-.breadcrumb-item+.breadcrumb-item::before {
-    display: inline-block;
-    padding-right: .5rem;
-    color: #6c757d;
-    content: "/";
-    font-weight: normal;
 }
 
 /********* SEARCHBAR *********/
@@ -426,6 +426,17 @@ tbody tr:hover {
     color: #19582E;
 }
 
+.tags i:hover,
+.tags p:hover {
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.tags i:active,
+.tags p:active {
+    opacity: 0.5;
+}
+
 .fileName {
     color: #333;
     background-color: transparent;
@@ -443,10 +454,6 @@ tbody tr:hover {
 
 .file-actions form {
     display: flex;
-}
-
-.modal-body {
-    text-align: center;
 }
 
 .file-actions input {
@@ -476,7 +483,15 @@ tbody tr:hover {
     background-image: url(/img/DeleteFileGreen.svg);
 }
 
+.deleteDirectory {
+    background-image: url(/img/DeleteFileGreen.svg);
+}
+
 .getLink {
+    background-image: url(/img/GetLinkGreen.svg);
+}
+
+.getDirectoryLink {
     background-image: url(/img/GetLinkGreen.svg);
 }
 
@@ -484,21 +499,13 @@ tbody tr:hover {
     background-image: url(/img/DownloadFileGreen.svg);
 }
 
+.downloadDirectory {
+    background-image: url(/img/DownloadFileGreen.svg);
+}
+
 .renameFile {
     background-image: url(/img/RenameFileGreen.svg);
     margin-right: 0 !important;
-}
-
-.deleteDirectory {
-    background-image: url(/img/DeleteFileGreen.svg);
-}
-
-.getDirectoryLink {
-    background-image: url(/img/GetLinkGreen.svg);
-}
-
-.downloadDirectory {
-    background-image: url(/img/DownloadFileGreen.svg);
 }
 
 .renameDirectory {

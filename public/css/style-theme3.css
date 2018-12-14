@@ -30,7 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;  /*makes sure that content is not cut off in a smaller browser window*/
-    background-color:#1D274E;
+    background-color: #1C274E;
     text-align: center;
     width: 300px;
 }
@@ -64,7 +64,7 @@ body {
 }
 
 .top-right {
-    border-bottom: 1px solid #1D274E;
+    border-bottom: 1px solid #1C274E;
 }
 
 #right .bottom {
@@ -103,7 +103,7 @@ ul {
 }
 
 i.fas {
-    color: #1D274E;
+    color: #1C274E;
     font-size: 20px;
     margin-right: 15px;
 }
@@ -163,7 +163,7 @@ button.new-folder,
 button.upload-file {
     cursor: pointer;
     background-color: white;
-    color: #1D274E;
+    color: #1C274E;
     font-size: 16px;
     font-weight: 500;
     height: 40px;
@@ -196,7 +196,7 @@ button.upload-file:visited {
 }
 
 .dropdown-menu.show {
-    box-shadow: 0px 5px 20px #1D274E;
+    box-shadow: 0px 5px 20px #1C274E;
     width: 80%;
     transform: translate3d(30px, 77px, 0px) !important;
     padding: 0;
@@ -229,7 +229,8 @@ button.dropdown-item:hover {
 }
 
 button.dropdown-item:active {
-    /* background-color: #333 !important; */
+    color: #1C274E;
+    background-color: #ccc !important;
 }
 
 .dropdown-toggle::after {
@@ -239,9 +240,11 @@ button.dropdown-item:active {
 
 /********* MODAL WINDOW *********/
 
-.modal-body {
+.modal-body,
+.modal-header {
     border-radius: .3rem .3rem 0 0;
     padding: 0;
+    text-align: center;
 }
 
 .modal-body input {
@@ -254,7 +257,8 @@ button.dropdown-item:active {
     border-radius: .3rem .3rem 0 0;
 }
 
-.modal-body p {
+.modal-body p,
+.modal-header p {
     padding: 20px 0;
     font-size: 20px;
     margin-bottom: 0;
@@ -264,43 +268,52 @@ button.dropdown-item:active {
     justify-content: center;
 }
 
-.btn-secondary {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+#tagsModal .row button {
+    border-radius: 0 .3rem .3rem 0;
 }
 
-/********* DRAG AND DROP UPLOAD SECTION *********/
-
-.uploadMultipleContainer {
-    height: calc(100vh - 335px);
+#uploadModal .modal-content {
+    position: relative;
+    z-index: 0;
 }
 
-.uploadMultiple {
-    margin: 0 30px;
-    height: 100%;
-    border-radius: 10px;
-    border: 3px dashed rgba(255, 255, 255, 0.25);
-    padding: calc((100vh - 335px)/2.75) 0;
+#uploadModal label {
     cursor: pointer;
+    margin-bottom: 0;
+    width: 100%;
+    padding-bottom: 20px;
     transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
 }
 
-.uploadMultiple:hover {
-    background-color: #252525;
+#uploadModal label i {
+    font-size: 40px;
+    margin-right: 0;
+    border-radius: .3rem;
+    color: #333;
 }
 
-.uploadMultiple i {
-    color: rgba(255, 255, 255, 0.25) !important;
-    font-size: 40px !important;
-    margin-right: 0 !important;
-    margin-bottom: 20px;
+#uploadModal label p {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 0;
+    color: #333;
 }
 
-.uploadMultiple p {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 25px;
-    font-weight: 400;
+#uploadModal input {
+    width: 100%;
+    height: 120px;
+    margin-bottom: -120px;
+    opacity: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.uploadFileHover {
+    background-color: #eaeaea;
+    transition: all 0.2s ease;
 }
 
 /********* BREADCRUMBS *********/
@@ -312,38 +325,25 @@ button.dropdown-item:active {
     font-size: 20px;
 }
 
-.breadcrumb-item.active {
-    color: #1D274E;
-    font-weight: bold;
-}
-
-.breadcrumb-item+.breadcrumb-item::before {
-    display: inline-block;
-    padding-right: .5rem;
-    color: #6c757d;
-    content: "/";
-    font-weight: normal;
-}
-
 /********* SEARCHBAR *********/
 
 .form-inline .form-control {
     height: 30px;
-    border-color: #1D274E;
+    border-color: #1C274E;
     width: 250px;
 }
 
 .form-inline .form-control::placeholder {
-    color: #1D274E;
+    color: #1C274E;
     opacity: 1; /* Firefox */
 }
 
 .form-inline .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #1D274E;
+    color: #1C274E;
 }
 
 .form-inline .form-control::-ms-input-placeholder { /* Microsoft Edge */
-    color: #1D274E;
+    color: #1C274E;
 }
 
 /********* TABLE *********/
@@ -423,7 +423,18 @@ tbody tr:hover {
     /* text-transform: uppercase; */
     letter-spacing: 1px;
     width: fit-content;
-    color: #1D274E;
+    color: #1C274E;
+}
+
+.tags i:hover,
+.tags p:hover {
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.tags i:active,
+.tags p:active {
+    opacity: 0.5;
 }
 
 .fileName {
@@ -443,10 +454,6 @@ tbody tr:hover {
 
 .file-actions form {
     display: flex;
-}
-
-.modal-body {
-    text-align: center;
 }
 
 .file-actions input {
@@ -476,7 +483,15 @@ tbody tr:hover {
     background-image: url(/img/DeleteFileBlue.svg);
 }
 
+.deleteDirectory {
+    background-image: url(/img/DeleteFileBlue.svg);
+}
+
 .getLink {
+    background-image: url(/img/GetLinkBlue.svg);
+}
+
+.getDirectoryLink {
     background-image: url(/img/GetLinkBlue.svg);
 }
 
@@ -484,21 +499,13 @@ tbody tr:hover {
     background-image: url(/img/DownloadFileBlue.svg);
 }
 
+.downloadDirectory {
+    background-image: url(/img/DownloadFileBlue.svg);
+}
+
 .renameFile {
     background-image: url(/img/RenameFileBlue.svg);
     margin-right: 0 !important;
-}
-
-.deleteDirectory {
-    background-image: url(/img/DeleteFileBlue.svg);
-}
-
-.getDirectoryLink {
-    background-image: url(/img/GetLinkBlue.svg);
-}
-
-.downloadDirectory {
-    background-image: url(/img/DownloadFileBlue.svg);
 }
 
 .renameDirectory {
