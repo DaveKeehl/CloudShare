@@ -57,7 +57,7 @@
             <div class="modal-content">
                 <form method="POST">
                     <div class="modal-body">
-                        <input type="text" name="folder_name" placeholder="Rename directory">
+                        <input type="text" name="dirname" placeholder="Rename directory">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
