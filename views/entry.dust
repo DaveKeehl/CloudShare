@@ -50,7 +50,7 @@
 			<td class="file-actions">
 				<form method="POST">
 					<input data-path="{path}" class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
-					<input class="getLink" data-clipboard-text="http://localhost:3000/file/{path}?_method=GET">
+					<input class="getLink" data-clipboard-text="">
 					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
 					<input class="renameFile" data-toggle="modal" data-target="#renameFileModal">
 				</form>
@@ -69,7 +69,7 @@
 			<td class="file-actions">
 				<form method="POST">
 					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">
-					<input class="getDirectoryLink" data-clipboard-text="http://localhost:3000/dir/download/{path}?_method=GET">
+					<input class="getDirectoryLink" data-clipboard-text="">
 					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
 					<input class="renameDirectory" data-toggle="modal" data-target="#renameDirectoryModal">
 				</form>
@@ -78,5 +78,11 @@
 		{/eq}
 		{> modals_right /}
 	</tr>
+	<script>
+		var linkFile = document.querySelector(".getLink");
+		linkFile.dataset.clipboardText=window.location.origin+"/file/{path}?_method=GET";
+		var linkDirectory = document.querySelector(".getDirectoryLink");
+		linkDirectory.dataset.clipboardText=window.location.origin+"/dir/download/{path}?_method=GET";
+	</script>
 	{/ list}
 </html>
