@@ -471,35 +471,35 @@ tbody tr:hover {
 }
 
 .deleteFile {
-    background-image: url(/img/DeleteFile.svg);
+    background-image: url(/img/DeleteFileGreen.svg);
 }
 
 .getLink {
-    background-image: url(/img/GetLink.svg);
+    background-image: url(/img/GetLinkGreen.svg);
 }
 
 .downloadFile {
-    background-image: url(/img/DownloadFile.svg);
+    background-image: url(/img/DownloadFileGreen.svg);
 }
 
 .renameFile {
-    background-image: url(/img/RenameFile.svg);
+    background-image: url(/img/RenameFileGreen.svg);
     margin-right: 0 !important;
 }
 
 .deleteDirectory {
-    background-image: url(/img/DeleteFile.svg);
+    background-image: url(/img/DeleteFileGreen.svg);
 }
 
 .getDirectoryLink {
-    background-image: url(/img/GetLink.svg);
+    background-image: url(/img/GetLinkGreen.svg);
 }
 
 .downloadDirectory {
-    background-image: url(/img/DownloadFile.svg);
+    background-image: url(/img/DownloadFileGreen.svg);
 }
 
 .renameDirectory {
-    background-image: url(/img/RenameFile.svg);
+    background-image: url(/img/RenameFileGreen.svg);
     margin-right: 0 !important;
 }
