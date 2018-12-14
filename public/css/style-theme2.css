@@ -420,8 +420,10 @@ tbody tr:hover {
     font-weight: 600;
     opacity: 0.75;
     margin-top: 5px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 1px;
+    width: fit-content;
+    color: #19582E;
 }
 
 .fileName {
