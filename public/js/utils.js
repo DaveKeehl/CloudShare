@@ -53,17 +53,12 @@ const taggingPath = function() {
 
 const getFileLink=function(){
     const eventPath = event.target.dataset.path;
-    const filePath = window.location.origin+"/file/"+eventPath+"?_method=GET";
+    const filePath = window.location.origin+"/file/"+eventPath;
     event.target.dataset.clipboardText=filePath;
 }
 
 const getDirectoryLink=function(){
     const eventPath = event.target.dataset.path;
-    const directoryPath = window.location.origin+"/dir/download/"+eventPath+"?_method=GET";
+    const directoryPath = window.location.origin+"/dir/download/"+eventPath;
     event.target.dataset.clipboardText=directoryPath;
 }
-
-
-
-
-
