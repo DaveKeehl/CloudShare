@@ -4,13 +4,13 @@
     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="deleteFile" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST">
+                <form onsubmit="deleteFileTrigger(event);">
                     <div class="modal-body">
                         <p>Do you really want to delete this file?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-danger" formaction="" id="deleteFileButton">Yes</button>
+                        <button type="submit" data-path="{path}" class="btn btn-danger" data-dismiss="modal">Yes</button>
                     </div>
                 </form>
             </div>
@@ -21,13 +21,13 @@
     <div class="modal fade" id="deleteDirectoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteDirectory" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST">
+                <form onsubmit="deleteDirTrigger(event);">
                     <div class="modal-body">
-                        <p>Do you really want to delete {eve}?</p>
+                        <p>Do you really want to delete this directory?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-danger" id="deleteDirectoryButton">Yes</button>
+                        <button type="submit" data-path="{path}" class="btn btn-danger" data-dismiss="modal">Yes</button>
                     </div>
                 </form>
             </div>

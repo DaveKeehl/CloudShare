@@ -1,5 +1,5 @@
 <html>
-     <!-- Extension not find -> Default -->
+    <!-- Extension not find -> Default -->
     <!-- TEXT FILES -->
 
     {@eq key=extension value=".txt" type="string"}
@@ -78,5 +78,6 @@
     {@eq key=extension value="" type="string"}
         <img src="/img/file-noExtension.svg">
     {/eq}
-
+    
 </html>
+

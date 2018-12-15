@@ -1,5 +1,5 @@
 
-const css= () => {
+const css = () => {
     if (typeof(Storage) !== "undefined") {
         if (localStorage.getItem("css") == null){
             localStorage.setItem("css", "style-theme1.css");

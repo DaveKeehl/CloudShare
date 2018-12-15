@@ -1,53 +1,59 @@
-function deleteDirTrigger = (event) => {
+let deleteDirTrigger = (event,path) => {
+    console.log("Delete Directory Trigger!");
+    console.log(event);
+    console.log(path);
     (withParameters ((params) => {
-        deleteDir(params);
+        deleteDir(params,path);
     }))(event);
 }
 
-function renameDirTrigger = (event) => {
+let renameDirTrigger = (event,path) => {
     (withParameters ((params) => {
-        renameDir(params);
+        renameDir(params,path);
     }))(event);
 }
 
-function createDirTrigger = (event) => {
+function createDirTrigger (event,path){
+    console.log("Create Directory Trigger!");
+    console.log(event);
+    console.log(path);
     (withParameters ((params) => {
-        createDir(params);
+        createDir(params,path);
     }))(event);
 }
 
-function deleteFileTrigger = (event) => {
+let deleteFileTrigger = (event,path) => {
     (withParameters ((params) => {
-        deleteFile(params);
+        deleteFile(params,path);
     }))(event);
 }
 
-function renameFileTrigger = (event) => {
+let renameFileTrigger = (event,path) => {
     (withParameters ((params) => {
-        renameFile(params);
+        renameFile(params,path);
     }))(event);
 }
 
-function createFileTrigger = (event) => {
+let createFileTrigger = (event) => {
     (withParameters ((params) => {
         createFile(params);
     }))(event);
 }
 
-function deleteTagsTrigger = (event) => {
+let deleteTagsTrigger = (event,path) => {
     (withParameters ((params) => {
-        deleteTags(params);
+        deleteTags(params,path);
     }))(event);
 }
 
-function clearTagsTrigger = (event) => {
+let clearTagsTrigger = (event) => {
     (withParameters ((params) => {
-        clearTags(params);
+        clearTags(params,path);
     }))(event);
 }
 
-function createTagsTrigger = (event) =>{
+let createTagsTrigger = (event) =>{
     (withParameters ((params) => {
-        createTags(params);
+        createTags(params,path);
     }))(event);
 }
