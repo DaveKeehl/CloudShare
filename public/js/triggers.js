@@ -1,7 +1,10 @@
-let deleteDirTrigger = (event,path) => {
-    console.log("Delete Directory Trigger!");
-    console.log(event);
-    console.log(path);
+function createDirTrigger (event,path){
+    (withParameters ((params) => {
+        createDir(params,path);
+    }))(event);
+}
+
+let deleteDirTrigger = (event) => {
     (withParameters ((params) => {
         deleteDir(params,path);
     }))(event);
@@ -13,16 +16,15 @@ let renameDirTrigger = (event,path) => {
     }))(event);
 }
 
-function createDirTrigger (event,path){
-    console.log("Create Directory Trigger!");
-    console.log(event);
-    console.log(path);
+/////////////////////////////////////////
+
+let createFileTrigger = (event,path) => {
     (withParameters ((params) => {
-        createDir(params,path);
+        createFile(params,path);
     }))(event);
 }
 
-let deleteFileTrigger = (event,path) => {
+let deleteFileTrigger = (event) => {
     (withParameters ((params) => {
         deleteFile(params,path);
     }))(event);
@@ -34,11 +36,7 @@ let renameFileTrigger = (event,path) => {
     }))(event);
 }
 
-let createFileTrigger = (event) => {
-    (withParameters ((params) => {
-        createFile(params);
-    }))(event);
-}
+/////////////////////////////////////////
 
 let deleteTagsTrigger = (event,path) => {
     (withParameters ((params) => {

@@ -17,33 +17,33 @@ function init() {
     });
 
     socket.on('entry.deleted', function(event) {
-        css();
         refresh();
+        css();
     });
 
     socket.on('entry.created', function(event) {
-        css();
         refresh();
+        css();
     });
 
     socket.on('entry.renamed', function(event) {
-        css();
         refresh();
+        css();
     });
 
     socket.on('tags.created', function(event) {
-        css();
         refresh();
+        css();
     });
 
     socket.on('tags.deleted', function(event) {
-        css();
         refresh();
+        css();
     });
 
     socket.on('tags.cleared', function(event) {
-        css();
         refresh();
+        css();
     });
 
     document.getElementById("theme1").onclick = () => {
@@ -89,30 +89,30 @@ function createDir(params,path){
     doJSONRequest('POST', '/dir/' + path, {}, params);
 }
 
-// function renameDir(params){
-//     doJSONRequest('PUT', '/dir/' + url, {}, params);
-// }
+function renameDir(params,path){
+    doJSONRequest('PUT', '/dir/' + url, {}, params);
+}
 
-// function deleteFile(params){
-//     doJSONRequest('DELETE', '/file/' + url, {}, params);
-// }
+function deleteFile(params,path){
+    doJSONRequest('DELETE', '/file/' + url, {}, params);
+}
 
 function createFile(params,path){
     doFormRequest('POST', '/file/' + path, {}, params);
 }
 
-// function renameFile(params){
-//     doJSONRequest('PUT', '/file/' + url, {}, params);
-// }
+function renameFile(params,path){
+    doJSONRequest('PUT', '/file/' + url, {}, params);
+}
 
-// function deleteTags(params){
-//     doJSONRequest('DELETE', '/tags/' + url, {}, params);
-// }
+function deleteTags(params,path){
+    doJSONRequest('DELETE', '/tags/' + url, {}, params);
+}
 
-// function createTags(params){
-//     doJSONRequest('POST', '/tags/' + url, {}, params);
-// }
+function createTags(params,path){
+    doJSONRequest('POST', '/tags/' + url, {}, params);
+}
 
-// function clearTags(params){
-//     doJSONRequest('PUT', '/tags/' + url, {}, params);
-// }
+function clearTags(params,path){
+    doJSONRequest('PUT', '/tags/' + url, {}, params);
+}
