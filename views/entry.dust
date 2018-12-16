@@ -33,11 +33,11 @@
 				<div>
 					<a href='/file/preview/{path}' target="_blank">{name}</a>
 					{@gt key=tags.length value=0}
-					<!-- HAS TAG -->
-					<p class="tags" data-toggle="modal" data-target="#tagsModal" onclick="taggingPath()" data-path="{path}">{tags}</p>
+						<!-- HAS TAG -->
+						<p class="tags" data-toggle="modal" data-target="#tagsModal" onclick="taggingPath()" data-path="{path}">{tags}</p>
 					{:else}
-					<!-- NO TAG -->
-					<p data-toggle="modal" data-target="#tagsModal"><i class="fas fa-plus-circle" onclick="taggingPath()" data-path="{path}"></i></p>
+						<!-- NO TAG -->
+						<p data-toggle="modal" data-target="#tagsModal"><i class="fas fa-plus-circle" onclick="taggingPath()" data-path="{path}"></i></p>
 					{/gt}
 				</div>
 			</td>
@@ -49,8 +49,8 @@
 			</td>
 			<td class="file-actions">
 				<form method="POST">
-					<input data-path="{path}" class="deleteFile" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
-					<input data-path="{path}" class="getLink" data-clipboard-text="" onclick="getFileLink()">
+					<input class="deleteFile" data-path="{path}" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
+					<input class="getLink" data-path="{path}" data-clipboard-text="" onclick="getFileLink()">
 					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
 					<input class="renameFile" data-path="{path}" data-toggle="modal" data-target="#renameFileModal" onclick="renameFilePath()">
 				</form>
@@ -76,6 +76,5 @@
 		{/eq}
 		{> modals_right /}
 	</tr>
-
 	{/ list}
 </html>

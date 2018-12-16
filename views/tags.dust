@@ -1,8 +1,0 @@
-<html>
-    <!-- HAS TAG -->
-    {@gt key=tags.length value=0}
-        <p class="tags">{tags}</p>
-    {:else}
-        <p><i class="fas fa-plus-circle"></i></p>
-    {/gt}
-</html>

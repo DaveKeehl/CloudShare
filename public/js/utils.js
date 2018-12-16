@@ -1,7 +1,3 @@
-const test = function() {
-    console.log(event.target.dataset.path);
-};
-
 const deleteFilePath = function() {
     const eventPath = event.target.dataset.path;
     const filePath = "/file/" + eventPath + "?_method=DELETE";
@@ -50,37 +46,32 @@ const taggingPath = function() {
 };
 
 
-const getFileLink=function(){
+const getFileLink = function() {
     const eventPath = event.target.dataset.path;
-    const filePath = window.location.origin+"/file/"+eventPath;
+    const filePath = window.location.origin + "/file/"+eventPath;
     event.target.dataset.clipboardText=filePath;
 }
 
-const getDirectoryLink=function(){
+const getDirectoryLink = function() {
     const eventPath = event.target.dataset.path;
-    const directoryPath = window.location.origin+"/dir/download/"+eventPath;
-    event.target.dataset.clipboardText=directoryPath;
+    const directoryPath = window.location.origin + "/dir/download/" + eventPath;
+    event.target.dataset.clipboardText = directoryPath;
 }
 
-const search=function(){
+const search=function() {
     var input = document.getElementById('myInput');
     var filter = input.value.toUpperCase();
     var body = document.getElementById('table');
     var tr = body.getElementsByTagName('tr');
-    for(i = 0; i < tr.length; i++){
+    for (i = 0; i < tr.length; i++) {
         var a = tr[i].getElementsByTagName('a')[0];
         var txtValue = a.textContent || a.innerText;
         var p = tr[i].querySelector('div');
         p = p && p.querySelector('p').innerText ? p.querySelector('p').innerText : p;
-        if((txtValue.toUpperCase().indexOf(filter) > - 1)||(typeof p === 'string' && p.toUpperCase().indexOf(filter) > - 1)){
+        if ((txtValue.toUpperCase().indexOf(filter) > - 1) || (typeof p === 'string' && p.toUpperCase().indexOf(filter) > - 1)) {
             tr[i].style.display = '';
         } else{
             tr[i].style.display = 'none';
         }
     }
 }
-
-
-
-
-
