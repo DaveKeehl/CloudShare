@@ -62,6 +62,24 @@ const getDirectoryLink=function(){
     event.target.dataset.clipboardText=directoryPath;
 }
 
+const search=function(){
+    var input = document.getElementById('myInput');
+    var filter = input.value.toUpperCase();
+    var body = document.getElementById('table');
+    var tr = body.getElementsByTagName('tr');
+    for(i = 0; i < tr.length; i++){
+        var a = tr[i].getElementsByTagName('a')[0];
+        var txtValue = a.textContent || a.innerText;
+        var p = tr[i].querySelector('div');
+        p = p && p.querySelector('p').innerText ? p.querySelector('p').innerText : p;
+        if((txtValue.toUpperCase().indexOf(filter) > - 1)||(typeof p === 'string' && p.toUpperCase().indexOf(filter) > - 1)){
+            tr[i].style.display = '';
+        } else{
+            tr[i].style.display = 'none';
+        }
+    }
+}
+
 
 
 
