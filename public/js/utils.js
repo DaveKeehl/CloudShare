@@ -61,4 +61,8 @@ const getDirectoryLink=function(){
     const eventPath = event.target.dataset.path;
     const directoryPath = window.location.origin+"/dir/download/"+eventPath;
     event.target.dataset.clipboardText=directoryPath;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> parent of 7158f31... change CSS.js

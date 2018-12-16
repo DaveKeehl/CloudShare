@@ -18,4 +18,26 @@ const css = () => {
     }
 }
 
+document.getElementById("theme1")
+    .onclick = () => {
+        localStorage.setItem("css", "style-theme1.css");
+    css();
+};
 
+document.getElementById("theme2")
+    .onclick = () => {
+        localStorage.setItem("css", "style-theme2.css");
+    css();
+};
+
+document.getElementById("theme3")
+    .onclick = () => {
+        localStorage.setItem("css", "style-theme3.css");
+    css();
+};
+
+document.getElementById("theme4")
+					.onclick = () => {
+    localStorage.setItem("css", "style-theme4.css");
+    css();s
+};
