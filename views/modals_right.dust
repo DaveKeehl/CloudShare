@@ -23,7 +23,7 @@
             <div class="modal-content">
                 <form method="POST">
                     <div class="modal-body">
-                        <p>Do you really want to delete {eve}?</p>
+                        <p>Do you really want to delete this directory?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
