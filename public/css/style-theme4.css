@@ -400,20 +400,20 @@ tbody tr:hover {
     letter-spacing: 3px;
 }
 
-.tags div {
+.file-data div {
     display: inline;
 }
 
-.tags img {
+.file-data img {
     float: left;
 }
 
-.tags i {
+.file-data i {
     margin-right: 0 !important;
     font-size: 9px !important;
 }
 
-.tags p {
+.file-data p {
     display: -webkit-box;
     margin-bottom: 0;
     font-size: 10px;
@@ -426,14 +426,14 @@ tbody tr:hover {
     color: #5A151C;
 }
 
-.tags i:hover,
-.tags p:hover {
+.file-data i:hover,
+.file-data p:hover {
     cursor: pointer;
     opacity: 0.75;
 }
 
-.tags i:active,
-.tags p:active {
+.file-data i:active,
+.file-data p:active {
     opacity: 0.5;
 }
 
