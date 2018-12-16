@@ -35,7 +35,7 @@
         <meta name="theme-color" content="#ffffff">
     </head>
 
-    <body onload="init()" style="display:none">
+    <body onload="css()" style="display:none">
 
         <aside id="left" class="column">
 
@@ -102,17 +102,9 @@
         </main>
 
         <!-- Optional JavaScript -->
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/dustjs-linkedin/dust-core.min.js"></script>
-        <script src="/dustjs-linkedin/dust-helpers.min.js"></script>
-        <script src="/js/views.js"></script>
-        <script src="/js/forms.js"></script>
-        <script src="/js/triggers.js"></script>
         <script src="/scripts/CSS.js"></script>
         <script src="/js/modal-js.js"></script>
         <script src="/js/utils.js"></script>
-        <script src="/js/fetch.js"></script>
-        <script src="/main.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

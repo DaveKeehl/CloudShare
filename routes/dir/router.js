@@ -23,7 +23,7 @@ router.get('/display/*', function(req,res){
 	let prevpath = dirpath.split('/');
 	prevpath.pop();
 	let previous = prevpath.join('/');
-	let name_query = req.body.name;
+	let name_query = req.query.name;
 	//For now, sorting is statically predefined
 	//to sorting first by whether entries are
 	//directories or files, and then by name
@@ -52,7 +52,7 @@ router.get('/display/*', function(req,res){
 			if(req.accepts('html')) {
 				res.render('index', {squery: false, previous: previous, path: dirpath, list: result});
 			} else {
-				res.type('application/json').json({squery: false, previous: previous, path: dirpath, list: result});
+				res.type('application/json').json(result);
 			}
 		}).catch(function(err){
 			res.status(500);
@@ -137,10 +137,10 @@ router.post('/*', function(req,res){
 		};
 		return new Entry(form).save();
 	}).then(function(saved) {
-		event.emit('entry.created');
+		// event.emit('entry.created');
 		if (req.accepts("html")) {
 			res.status(201);
-			res.end();
+			res.redirect("/dir/display/"+dirpath);
 		} else {
 			res.status(201).json(saved);
 		}
@@ -167,9 +167,9 @@ router.delete('/*', function(req,res){
 		return fs.remove(dirpath);
 	}).then(function(){
 		res.status(204);
-		event.emit('entry.deleted');
+		// event.emit('entry.deleted');
 		if (req.accepts("html")){
-			res.end();
+			res.redirect("/dir/display/"+previous);
 		} else {
 			res.status(201).json(deleted);
 		}
@@ -225,7 +225,7 @@ router.put('/*', function(req,res){
         });
 
         res.status(202);
-        res.end();
+        res.redirect("/dir/display/"+prevpath);
 	}).catch(function(err){
 		console.log(err);
 		res.status(500);

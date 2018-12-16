@@ -55,10 +55,10 @@ router.delete('/*', function(req, res) {
 	}).then(function(deleted){
 		return fs.remove(dirpath);
 	}).then(function(){
-		event.emit('entry.deleted');
+		// event.emit('entry.deleted');
 		if (req.accepts("html")) {
 			res.status(204);
-			res.end();
+			res.redirect("/dir/display/"+previous);
 		} else {
 			res.json(removed);
 		}
@@ -112,7 +112,7 @@ router.post('/*', function(req,res) {
 	});
 	res.status(201);
 	if (req.accepts("html")){
-		res.end();
+		res.redirect("/dir/display/"+dirpath);
 	} else {
 		res.status(201).json(added);
 	}
@@ -165,7 +165,7 @@ router.put('/*', function(req,res){
 		return Entry.deleteOne(old);
 	}).then(function(_deleted){
 		res.status(200);
-		res.end();
+		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		console.log(err);
 		res.status(500);

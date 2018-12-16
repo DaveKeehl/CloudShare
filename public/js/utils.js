@@ -20,7 +20,6 @@ const deleteDirectoryPath = function() {
 const renameFilePath = function() {
     const eventPath = event.target.dataset.path;
     const filePath = "/file/" + eventPath + "?_method=PUT";
-    console.log(eventPath);
     const renameButton = document.getElementById("renameFileButton");
     renameButton.formAction = filePath;
 };
@@ -61,8 +60,9 @@ const getDirectoryLink=function(){
     const eventPath = event.target.dataset.path;
     const directoryPath = window.location.origin+"/dir/download/"+eventPath;
     event.target.dataset.clipboardText=directoryPath;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> parent of 7158f31... change CSS.js
+
+
+
+
+

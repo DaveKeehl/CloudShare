@@ -14,18 +14,6 @@ const io = require('socket.io')(server);
 io.on('connection', function(socket) {
   console.log('client connected');
 
-  // socket.on('entry.deleted', function(event) {
-  //   socket.broadcast.emit('entry.deleted', event);
-  // });
-
-  // socket.on('entry.created', function(event) {
-  //   socket.broadcast.emit('entry.created', event);
-  // });
-
-  // socket.on('entry.deleted', function(event) {
-  //   socket.broadcast.emit('entry.deleted', event);
-  // });
-
   socket.on('disconnect', function() {
     console.log('client disconnected');
 
