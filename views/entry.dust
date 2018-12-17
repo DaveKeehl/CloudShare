@@ -47,6 +47,7 @@
 			<td>
 				{dateCreated}
 			</td>
+			<!-- ACTIONS AVAILABLE FOR A FILE -->
 			<td class="file-actions">
 				<form method="POST">
 					<input class="deleteFile" data-path="{path}" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
@@ -65,6 +66,7 @@
 			<td>
 				{dateCreated}
 			</td>
+			<!-- ACTIONS AVAILABLE FOR A DIRECTORY -->
 			<td class="file-actions">
 				<form method="POST">
 					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">

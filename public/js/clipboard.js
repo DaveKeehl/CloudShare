@@ -1,3 +1,5 @@
+//Functions to allow the acquisition of the link of a specific file, and its effects visible on the web page.
+
 $('.getDirectoryLink').tooltip({
     trigger: 'click',
     placement: 'bottom'

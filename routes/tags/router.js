@@ -51,7 +51,6 @@ router.post('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(201);
-		// event.emit('tags.created');
 		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);
@@ -94,7 +93,6 @@ router.delete('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(204);
-		//event.emit('tags.deleted');
 		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);
@@ -125,7 +123,6 @@ router.put('/*', function(req, res){
 		return new Entry(form).save();
 	}).then(function(saved){
 		res.status(205);
-		//event.emit('tags.cleared');
 		res.redirect("/dir/display/"+parentpath);
 	}).catch(function(err){
 		res.status(500);

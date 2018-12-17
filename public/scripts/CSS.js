@@ -1,3 +1,6 @@
+//This function allows you to read the last value of the css that has been saved in the local storage, 
+//and then loads the css chosen among the available themes.
+
 const css= () => {
     if (typeof(Storage) !== "undefined") {
         if (localStorage.getItem("css") == null) {
@@ -17,6 +20,7 @@ const css= () => {
     }
 }
 
+//Functions to change the css through the appropriate buttons
 document.getElementById("theme1")
     .onclick = () => {
         localStorage.setItem("css", "style-theme1.css");

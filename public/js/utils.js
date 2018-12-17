@@ -1,3 +1,5 @@
+
+//The function delete the file.
 const deleteFilePath = function() {
     const eventPath = event.target.dataset.path;
     const filePath = "/file/" + eventPath + "?_method=DELETE";
@@ -5,6 +7,7 @@ const deleteFilePath = function() {
     deleteButton.formAction = filePath;
 };
 
+//The function delete the directory.
 const deleteDirectoryPath = function() {
     const eventPath = event.target.dataset.path;
     const directoryPath = "/dir/" + eventPath + "?_method=DELETE";
@@ -13,6 +16,7 @@ const deleteDirectoryPath = function() {
     deleteButton.formAction = directoryPath;
 };
 
+//The function rename the file name.
 const renameFilePath = function() {
     const eventPath = event.target.dataset.path;
     const filePath = "/file/" + eventPath + "?_method=PUT";
@@ -20,6 +24,7 @@ const renameFilePath = function() {
     renameButton.formAction = filePath;
 };
 
+//The function rename the directory name.
 const renameDirectoryPath = function() {
     const eventPath = event.target.dataset.path;
     const directoryPath = "/dir/" + eventPath + "?_method=PUT";
@@ -28,6 +33,7 @@ const renameDirectoryPath = function() {
     renameButton.formAction = directoryPath;
 };
 
+//The function manages the tags.
 const taggingPath = function() {
     const eventPath = event.target.dataset.path;
     console.log("eventPath:" + eventPath);
@@ -45,19 +51,22 @@ const taggingPath = function() {
     clearTagsButton.formAction = clearTagPath;
 };
 
-
+//The function copied the link of the file and allows you to download it.
 const getFileLink = function() {
     const eventPath = event.target.dataset.path;
     const filePath = window.location.origin + "/file/"+eventPath;
     event.target.dataset.clipboardText=filePath;
 }
 
+//The function copied the link of the zip of the created directory and allows you to download it.
 const getDirectoryLink = function() {
     const eventPath = event.target.dataset.path;
     const directoryPath = window.location.origin + "/dir/download/" + eventPath;
     event.target.dataset.clipboardText = directoryPath;
 }
 
+
+//The function search  looks for elements that contain the value passed as input in the name or between the tags.
 const search=function() {
     var input = document.getElementById('myInput');
     var filter = input.value.toUpperCase();

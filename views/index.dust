@@ -23,8 +23,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-        <!-- Stylesheets -->
-
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -35,6 +33,7 @@
         <meta name="theme-color" content="#ffffff">
     </head>
 
+    <!-- The page is shown only once the css is loaded correctly -->
     <body onload="css()" style="display:none">
 
         <aside id="left" class="column">
@@ -47,6 +46,7 @@
                 </div>
             </header>
 
+            <!-- Button of left side -->
             <div class="bottom">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

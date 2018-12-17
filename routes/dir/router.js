@@ -167,7 +167,6 @@ router.delete('/*', function(req,res){
 		return fs.remove(dirpath);
 	}).then(function(){
 		res.status(204);
-		// event.emit('entry.deleted');
 		if (req.accepts("html")){
 			res.redirect("/dir/display/"+previous);
 		} else {
