@@ -1,0 +1,90 @@
+<html>
+
+    <!-- MODAL FOR DELETING FILE -->
+    <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="deleteFile" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-body">
+                        <p>Do you really want to delete this file?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" formaction="" id="deleteFileButton">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR DELETING DIRECTORY -->
+    <div class="modal fade" id="deleteDirectoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteDirectory" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-body">
+                        <p>Do you really want to delete this directory?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger" id="deleteDirectoryButton">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR RENAMING FILE -->
+    <div class="modal fade" id="renameFileModal" tabindex="-1" role="dialog" aria-labelledby="renameFile" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="text" name="newname" placeholder="Rename file">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" id="renameFileButton" formaction="">Rename</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR RENAMING DIRECTORY -->
+    <div class="modal fade" id="renameDirectoryModal" tabindex="-1" role="dialog" aria-labelledby="renameDirectory" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="text" name="dirname" placeholder="Rename directory">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger" id="renameDirectoryButton" formaction="">Rename</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR TAGS -->
+    <div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="renameDirectory" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-body">
+                        <input type="text" name="tags" placeholder="Insert tag here">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="addTag" class="btn btn-primary" formaction="/tags/{path}?_method=POST">Add</button>
+                        <button type="submit" id="deleteTag" class="btn btn-danger" formaction="/tags/{path}?_method=DELETE">Delete</button>
+                        <button type="submit" id="clearTags" class="btn btn-warning" formaction="/tags/{path}?_method=PUT">Clear</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</html

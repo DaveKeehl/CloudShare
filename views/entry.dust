@@ -1,0 +1,82 @@
+<html>
+	<!-- SELF LINK -->
+	<tr>
+		<td class="top-action">
+			<img src="/img/folder.svg">
+			<a href='/dir/display/{path}'>.</a>
+		</td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<!-- LINK TO PARENT -->
+	{@eq key=squery value=true type="boolean"}
+		{@ne key=previous value="" type="string"}
+			<tr>
+				<td class="top-action">
+					<img src="/img/folder.svg">
+					<a href='/dir/display/{previous}'>..</a>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		{/ne}
+	{/eq}
+	<!-- FILES -->
+	{# list}
+	<tr>
+		<!-- FILE IS NOT A DIRECTORY -->
+		{@eq key=isDir value=false type="boolean"}
+			<td class="file-data">
+				{> icons /}
+				<div>
+					<a href='/file/preview/{path}' target="_blank">{name}</a>
+					{@gt key=tags.length value=0}
+						<!-- HAS TAG -->
+						<p class="tags" data-toggle="modal" data-target="#tagsModal" onclick="taggingPath()" data-path="{path}">{tags}</p>
+					{:else}
+						<!-- NO TAG -->
+						<p data-toggle="modal" data-target="#tagsModal"><i class="fas fa-plus-circle" onclick="taggingPath()" data-path="{path}"></i></p>
+					{/gt}
+				</div>
+			</td>
+			<td>
+				{size}
+			</td>
+			<td>
+				{dateCreated}
+			</td>
+			<!-- ACTIONS AVAILABLE FOR A FILE -->
+			<td class="file-actions">
+				<form method="POST">
+					<input class="deleteFile" data-path="{path}" data-toggle="modal" data-target="#deleteFileModal" onclick="deleteFilePath()">
+					<input class="getLink" data-path="{path}" data-clipboard-text="" onclick="getFileLink()">
+					<input class="downloadFile" type="submit" value="" formaction="/file/{path}?_method=GET">
+					<input class="renameFile" data-path="{path}" data-toggle="modal" data-target="#renameFileModal" onclick="renameFilePath()">
+				</form>
+			</td>
+		<!-- FILE IS A DIRECTORY -->
+		{:else}
+			<td>
+				<img src="/img/folder.svg">
+				<a href='/dir/display/{path}'>{name}</a>
+			</td>
+			<td></td>
+			<td>
+				{dateCreated}
+			</td>
+			<!-- ACTIONS AVAILABLE FOR A DIRECTORY -->
+			<td class="file-actions">
+				<form method="POST">
+					<input data-path="{path}" class="deleteDirectory" data-toggle="modal" data-target="#deleteDirectoryModal" onclick="deleteDirectoryPath()">
+					<input data-path="{path}" class="getDirectoryLink" data-clipboard-text="" onclick="getDirectoryLink()">
+					<input class="downloadDirectory"type="submit" value="" formaction="/dir/download/{path}?_method=GET">
+					<input class="renameDirectory" data-path="{path}" data-toggle="modal" data-target="#renameDirectoryModal" onclick="renameDirectoryPath()">
+				</form>
+			</td>
+		{/eq}
+		{> modals_right /}
+	</tr>
+	{/ list}
+</html>

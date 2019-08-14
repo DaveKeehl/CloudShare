@@ -3,7 +3,7 @@
  */
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 
 const dirEntries = fs.readdirSync(__dirname);
 const base = __dirname + '/';
